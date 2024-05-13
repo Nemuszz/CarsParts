@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Hello, world!</title>
 </head>
-<body>
+<body class="bg-gray-300">
 <nav class="bg-gray-800 p-4 ">
     <div class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
@@ -41,6 +41,8 @@
         </button>
     </div>
 </div>
+
+
 
 
 
