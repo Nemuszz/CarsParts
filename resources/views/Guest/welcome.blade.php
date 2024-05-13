@@ -24,12 +24,12 @@
 <!-- Navigation -->
 <nav class="bg-gray-800 text-white py-4">
     <div class="container mx-auto flex justify-between items-center">
-        <a href="#" class="text-xl font-bold">Secondhand Cars</a>
+        <a href="#" class="text-xl font-bold">Cars&Parts</a>
         <ul class="flex space-x-4">
             <li><a href="#" class="hover:text-gray-300">Home</a></li>
             <li><a href="#" class="hover:text-gray-300">Cars</a></li>
-            <li><a href="#" class="hover:text-gray-300">About</a></li>
-            <li><a href="#" class="hover:text-gray-300">Contact</a></li>
+            <li><a href="#" class="hover:text-gray-300">Parts</a></li>
+            <li><a href="#" class="hover:text-gray-300">Sign up</a></li>
         </ul>
     </div>
 </nav>
@@ -84,17 +84,11 @@
             </div>
             <div class="flex flex-col space-y-2 mx-4">
                 <label class="text-gray-400">Price</label>
-                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                    <option value="">Select Price</option>
-                    <option value="10000-20000">$10,000 - $20,000</option>
-                    <option value="20000-30000">$20,000 - $30,000</option>
-                    <option value="30000-40000">$30,000 - $40,000</option>
-                    <!-- Add more options for price -->
-                </select>
+                <input >
             </div>
             <div class="flex flex-col space-y-2 mx-4">
                 <label class="text-gray-400 invisible">Condition</label>
-                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Search</button>
+                <button class="px-4 py-2 bg-gray-500 text-white rounded-lg focus:outline-none focus:bg-blue-600"><a href="#">Search</a></button>
             </div>
         </div>
     </div>
@@ -127,7 +121,7 @@
             <p class="text-gray-600">aipiscing elit.</p>
 
             <!-- View Details Button -->
-            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
+            <a href="#" class="block bg-red-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
                 Details</a>
         </div>
 
