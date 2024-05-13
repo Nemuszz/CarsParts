@@ -26,10 +26,10 @@
     <div class="container mx-auto flex justify-between items-center">
         <a href="#" class="text-xl font-bold">Secondhand Cars</a>
         <ul class="flex space-x-4">
-            <li><a href="#" class="hover:text-gray-300">About</a></li>
+            <li><a href="#" class="hover:text-gray-300">Home</a></li>
             <li><a href="#" class="hover:text-gray-300">Cars</a></li>
-            <li><a href="#" class="hover:text-gray-300">Parts</a></li>
-            <li><a href="#" class="hover:text-gray-300">Signup</a></li>
+            <li><a href="#" class="hover:text-gray-300">About</a></li>
+            <li><a href="#" class="hover:text-gray-300">Contact</a></li>
         </ul>
     </div>
 </nav>
@@ -39,42 +39,63 @@
     <div class="container mx-auto">
         <h1 class="text-4xl font-bold mb-4">Find Your Dream Car</h1>
         <p class="text-lg mb-8">Browse through our collection of high-quality secondhand cars</p>
-        <div class="flex items-center space-x-4">
-            <!-- Year Select Dropdown -->
-            <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                <option value="">Make</option>
-                <option value="Audi">Audi</option>
-                <option value="Bmw">Bmw</option>
-                <option value="Mercedes">Mercedes</option>
-                <!-- Add more options for years -->
-            </select>
-            <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                <option value="">Model</option>
-                <option value="Audi">Audi</option>
-                <option value="Bmw">Bmw</option>
-                <option value="Mercedes">Mercedes</option>
-                <!-- Add more options for years -->
-            </select>
-            <!-- Mileage Select Dropdown -->
-            <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                <option value="">Year</option>
-                <option value="2024">2024</option>
-                <option value="2023">2023</option>
-                <option value="2022">2022</option>
-                <!-- Add more options for mileage -->
-            </select>
-            <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                <option value="">Select Mileage</option>
-                <option value="0-5000">0-5000 miles</option>
-                <option value="5000-25000">5000-250000 miles</option>
-                <option value="25000-50000">25000-50000 miles</option>
-                <option value="25000-50000">50000-100000 miles</option>
-                <!-- Add more options for mileage -->
-            </select>
-            <input type="number" placeholder="Price till in euro" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-black focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-
-            <!-- Search Button -->
-            <button class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Search</button>
+        <div class="flex justify-center flex-wrap">
+            <!-- Year, Mileage, Make -->
+            <div class="flex flex-col space-y-2 mx-4">
+                <label class="text-gray-400">Year</label>
+                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                    <option value="">Select Year</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <!-- Add more options for years -->
+                </select>
+            </div>
+            <div class="flex flex-col space-y-2 mx-4">
+                <label class="text-gray-400">Mileage</label>
+                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                    <option value="">Select Mileage</option>
+                    <option value="0-5000">0-5000 miles</option>
+                    <option value="5000-10000">5000-10000 miles</option>
+                    <option value="10000-20000">10000-20000 miles</option>
+                    <!-- Add more options for mileage -->
+                </select>
+            </div>
+            <div class="flex flex-col space-y-2 mx-4">
+                <label class="text-gray-400">Make</label>
+                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                    <option value="">Select Make</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Ford">Ford</option>
+                    <!-- Add more options for make -->
+                </select>
+            </div>
+            <!-- Model, Price, Search Button -->
+            <div class="flex flex-col space-y-2 mx-4">
+                <label class="text-gray-400">Model</label>
+                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                    <option value="">Select Model</option>
+                    <option value="Corolla">Corolla</option>
+                    <option value="Civic">Civic</option>
+                    <option value="F-150">F-150</option>
+                    <!-- Add more options for model -->
+                </select>
+            </div>
+            <div class="flex flex-col space-y-2 mx-4">
+                <label class="text-gray-400">Price</label>
+                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                    <option value="">Select Price</option>
+                    <option value="10000-20000">$10,000 - $20,000</option>
+                    <option value="20000-30000">$20,000 - $30,000</option>
+                    <option value="30000-40000">$30,000 - $40,000</option>
+                    <!-- Add more options for price -->
+                </select>
+            </div>
+            <div class="flex flex-col space-y-2 mx-4">
+                <label class="text-gray-400 invisible">Condition</label>
+                <button class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Search</button>
+            </div>
         </div>
     </div>
 </header>
