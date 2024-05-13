@@ -3,5 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Guest/welcome');
+});
+
+Route::get('/proba', function () {
+    return view('Guest/proba');
 });
