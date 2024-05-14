@@ -37,7 +37,7 @@
 <!-- Hero Section -->
 <header class="bg-gray-900 text-white py-20 px-8">
     <div class="container mx-auto">
-        <h1 class="text-4xl font-bold mb-4">Find Your Dream Car</h1>
+        <h1 class="text-4xl font-bold mb-6">Find Your Dream Car</h1>
         <p class="text-lg mb-8">Browse through our collection of high-quality secondhand cars</p>
         <div class="flex justify-center flex-wrap">
             <!-- Year, Mileage, Make -->
@@ -84,7 +84,7 @@
             </div>
             <div class="flex flex-col space-y-2 mx-4">
                 <label class="text-gray-400">Price</label>
-                <input >
+                <input placeholder="Up till price                      $" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
             </div>
             <div class="flex flex-col space-y-2 mx-4">
                 <label class="text-gray-400 invisible">Condition</label>
@@ -93,6 +93,11 @@
         </div>
     </div>
 </header>
+
+
+
+
+
 
 <!-- Car Listings -->
 <section class="container mx-auto my-12">
@@ -114,14 +119,38 @@
         <!-- Car Card 2 -->
         <div class="bg-white rounded shadow-md p-4 car-card">
             <!-- Car Image -->
-            <img src="car2.jpg" alt="Car 2" class="w-full h-48 object-cover mb-4 rounded">
+            <img src="car.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
 
             <!-- Car Details -->
             <h2 class="text-xl font-bold mb-2">Car Title</h2>
-            <p class="text-gray-600">aipiscing elit.</p>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
             <!-- View Details Button -->
-            <a href="#" class="block bg-red-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
+            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
+                Details</a>
+        </div>
+        <div class="bg-white rounded shadow-md p-4 car-card">
+            <!-- Car Image -->
+            <img src="car1.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+
+            <!-- Car Details -->
+            <h2 class="text-xl font-bold mb-2">Car Title</h2>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <!-- View Details Button -->
+            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
+                Details</a>
+        </div>
+        <div class="bg-white rounded shadow-md p-4 car-card">
+            <!-- Car Image -->
+            <img src="car1.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+
+            <!-- Car Details -->
+            <h2 class="text-xl font-bold mb-2">Car Title</h2>
+            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <!-- View Details Button -->
+            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
                 Details</a>
         </div>
 
