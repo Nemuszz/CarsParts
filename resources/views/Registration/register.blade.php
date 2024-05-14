@@ -12,6 +12,9 @@
     <h2 class="text-2xl font-semibold mb-4">Register</h2>
     <form action="{{route('user.register')}}" method="POST">
         {{csrf_field()}}
+        @if(isset($error))
+            <p>Invalid details</p>
+        @endif
         <div class="mb-6">
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <input type="text" id="name" name="name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-lg px-4 py-3">

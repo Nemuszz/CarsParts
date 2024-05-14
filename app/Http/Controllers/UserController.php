@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -12,16 +17,45 @@ class UserController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string|min:6',
         ]);
-        dd($request->all());
+
+       $credentials = $request->only('email', 'password');
+       if (Auth::attempt($credentials)) {
+           return redirect()->intended('/');
+       }
+       return redirect("login")->with('error', 'Invalid Email or Password');
+
+
+
     }
     public function register(Request $request)
     {
+
         $request->validate([
-            'name' => 'required|string|min:6|max:22',
+            'name' => 'required|string|min:5|max:20',
             'email' => 'required|string|email',
-            'password' => 'required|string|confirmed|min:6',
-            'password_confirmation' => 'required|string|min:6',
+            'password' => 'required|string|min:6',
+            'confirm_password' => 'required|string|min:6|same:password',
 
         ]);
+             $user = User::create([
+                'name'=> $request->name,
+                'email'=> $request->email,
+                'password'=> Hash::make($request->password),
+            ]);
+             if (!$user){
+                 return Redirect::to('/login')->with('error','Register details are not valid');
+             }
+
+
+        return Redirect::to('/login');
+
     }
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return Redirect::to('/login');
+    }
+
+
+
 }

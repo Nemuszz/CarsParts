@@ -28,7 +28,14 @@
             <li><a href="/" class="hover:text-gray-300">Home</a></li>
             <li><a href="/cars" class="hover:text-gray-300">Cars</a></li>
             <li><a href="/parts" class="hover:text-gray-300">Parts</a></li>
-            <li><a href="/register" class="hover:text-gray-300">Sign up</a></li>
+            @if(auth()->user())
+                <li><a href="/user/logout" class="hover:text-gray-300">Logout</a></li>
+
+            @else
+                <li><a href="/register" class="hover:text-gray-300">Sign up</a></li>
+            @endif
+
+
         </ul>
     </div>
 </nav>
