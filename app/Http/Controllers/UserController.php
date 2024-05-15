@@ -57,7 +57,8 @@ class UserController extends Controller
     }
 
     public function profile(){
-        return view('Pages/Profile');
+        $profileinfo = Auth::user();
+        return view('Pages/Profile', compact('profileinfo'));
     }
 
 
