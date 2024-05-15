@@ -15,6 +15,9 @@
         .car-card:hover {
             transform: scale(1.05);
         }
+        .display {
+            display: none;
+        }
     </style>
 </head>
 
@@ -29,8 +32,22 @@
             <li><a href="/cars" class="hover:text-gray-300">Cars</a></li>
             <li><a href="/parts" class="hover:text-gray-300">Parts</a></li>
             @if(auth()->user())
-                <li><a href="/user/logout" class="hover:text-gray-300">Logout</a></li>
+                <li>
+                <div  class="relative inline-block text-left">
+                    <div>
+                        <a id="drop_btn" class="hover:text-gray-300">
+                            {{auth()->user()->name}}
+                        </a>
+                    </div>
 
+                    <div id="drop_menu" class="absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <a href="/user/profile/{user}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                            <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Logout</a>
+                        </div>
+                    </div>
+                </div>
+                </li>
             @else
                 <li><a href="/register" class="hover:text-gray-300">Sign up</a></li>
             @endif
@@ -39,5 +56,6 @@
         </ul>
     </div>
 </nav>
-<body>
+
+
 

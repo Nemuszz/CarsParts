@@ -56,6 +56,10 @@ class UserController extends Controller
         return Redirect::to('/login');
     }
 
+    public function profile(){
+        return view('Pages/Profile');
+    }
+
 
 
 }
