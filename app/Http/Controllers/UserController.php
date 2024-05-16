@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -56,37 +57,33 @@ class UserController extends Controller
         return Redirect::to('/login');
     }
 
-    public function profile(){
-        $profileinfo = Auth::user();
-        return view('Pages/Profile', compact('profileinfo'));
+    public function profile($id){
+        $user = User::findOrFail($id);
+
+        return view('Pages/Profile', ['user' => $user]);
     }
-    public function edit(Request $request){
+    public function edit(Request $request, $id){
 
-        $user = auth()->user();
-
-
-        $request->validate([
-            'name' => 'required|string|min:5|max:20',
-            'email' => 'required|string|email',
-            'country' => 'required|string',
-            'city' => 'string',
-            'address' => 'string',
-            'postcode' => 'integer',
-            'phone' => 'integer',
-
-        ]);
-        $user->update([
-            'name'=> $request->name,
-            'email'=> $request->email,
-            'country'=> $request->country,
-            'city'=> $request->city,
-            'address'=> $request->address,
-            'postcode'=> $request->postcode,
-            'phone'=> $request->phone,
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'country' => 'string|max:255|nullable',
+            'city' => 'string|max:255|nullable',
+            'address' => 'string|max:255|nullable',
+            'phone' => 'integer|nullable',
+            'postcode' => 'integer|nullable',
 
         ]);
 
-        return Redirect::to('/profile');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $user = User::findOrFail($id);
+
+        $user->update($request->all());
+
+        return redirect()->route('user.profile', $user->id)->with('success', 'Profile updated successfully');
     }
 
 
