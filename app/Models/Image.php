@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
+
     public function car()
     {
         return $this->belongsTo(CarsModel::class);
