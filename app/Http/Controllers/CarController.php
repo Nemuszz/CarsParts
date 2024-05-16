@@ -10,9 +10,8 @@ class CarController extends Controller
 
 public function add(){
 
+return view('Pages/Cars');
 }
-
-
 
 
 
