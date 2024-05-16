@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,11 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::get('/logout', 'logout')->name('user.logout');
    Route::get('/profile/{id}', 'profile')->name('user.profile');
    Route::post('/profile/edit/{id}', 'edit')->name('user.edit');
+});
+
+
+Route::controller(CarController::class)->prefix('/car')->group(function () {
+    Route::get('/add', 'add')->name('car.add');
+
+
 });
