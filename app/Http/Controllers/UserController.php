@@ -60,7 +60,34 @@ class UserController extends Controller
         $profileinfo = Auth::user();
         return view('Pages/Profile', compact('profileinfo'));
     }
+    public function edit(Request $request){
 
+        $user = auth()->user();
+
+
+        $request->validate([
+            'name' => 'required|string|min:5|max:20',
+            'email' => 'required|string|email',
+            'country' => 'required|string',
+            'city' => 'string',
+            'address' => 'string',
+            'postcode' => 'integer',
+            'phone' => 'integer',
+
+        ]);
+        $user->update([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'country'=> $request->country,
+            'city'=> $request->city,
+            'address'=> $request->address,
+            'postcode'=> $request->postcode,
+            'phone'=> $request->phone,
+
+        ]);
+
+        return Redirect::to('/profile');
+    }
 
 
 }

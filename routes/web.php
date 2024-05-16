@@ -25,6 +25,5 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/register', 'register')->name('user.register');
    Route::get('/logout', 'logout')->name('user.logout');
    Route::get('/profile/{user}', 'profile')->name('user.profile');
+   Route::post('/profile/edit', 'edit')->name('user.edit');
 });
-
-
