@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CarsModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class CarController extends Controller
 {
@@ -16,20 +18,28 @@ class CarController extends Controller
 
     }
 
-    public function carsImageAdd(Request $request, CarsModel $car)
-    {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust validation rules as needed
+    public function insert(Request $request){
+        $validator = Validator::make($request->all(), [
+            'make' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'year' => 'integer',
+            'mileage' => 'integer',
+            'price' => 'integer',
+            'body_type' => 'string',
+            'fuel_type' => 'string',
+            'power' => 'integer',
+            'gear' => 'string',
+            'number_of_doors' => 'integer',
+            'description' => 'string',
+            'user_car_id' => 'integer',
         ]);
 
-        $path = $request->file('image')->store('car_images');
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
-        // Associate the image with the car
-        $car->images()->create([
-            'path' => $path,
-        ]);
+        CarsModel::create($request->all());
 
-        return redirect()->back()->with('success', 'Image uploaded successfully.');
-
+        return redirect()->route('user.profile',['id' => auth()->user()->id])->with('success', 'Car added successfully!');
     }
 }

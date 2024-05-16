@@ -32,6 +32,8 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
 
 Route::controller(CarController::class)->middleware(['auth'])->prefix('/car')->group(function () {
     Route::get('/add', 'add')->name('car.add');
-    Route::post('/{car}/images','carsImageAdd')->name('cars.images.store');
+    Route::post('/add/user_car', 'insert')->name('car.insert');
+
+
 
 });

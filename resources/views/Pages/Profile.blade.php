@@ -8,7 +8,7 @@
 
         </div>
         <nav class="flex-1 overflow-y-auto">
-            <a href="/user/profile/{user}" class="block p-4 hover:bg-gray-700">Profile</a>
+            <a href="{{route('user.profile', ['id'=> auth()->user()->id])}}" class="block p-4 hover:bg-gray-700">Profile</a>
             <a href="{{route('car.add')}}" class="block p-4 hover:bg-gray-700">Add car</a>
             <a href="#" class="block p-4 hover:bg-gray-700">Your car</a>
             <a href="#" class="block p-4 hover:bg-gray-700">Purchased parts</a>
