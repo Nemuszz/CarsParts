@@ -45,4 +45,14 @@ class CarController extends Controller
 
         return redirect()->route('user.profile',['id' => auth()->user()->id])->with('success', 'Car added successfully!');
     }
+
+
+    public function yours()
+    {
+
+
+
+        return view('Pages/your');
+
+    }
 }
