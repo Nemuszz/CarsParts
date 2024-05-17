@@ -32,6 +32,7 @@ class CarsModel extends Model
         'gear',
         'number_of_doors',
         'description',
+        'image'
     ];
 
 }

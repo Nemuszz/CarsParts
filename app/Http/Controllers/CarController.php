@@ -13,8 +13,10 @@ class CarController extends Controller
 
     public function add()
     {
+        $year = 2024;
 
-        return view('Pages/Cars');
+
+        return view('Pages/Cars',compact('year'));
 
     }
 
@@ -32,6 +34,7 @@ class CarController extends Controller
             'number_of_doors' => 'integer',
             'description' => 'string',
             'user_car_id' => 'integer',
+            'image' => 'image|mimetypes:image/jpeg,image/png,image/jpg|max:2048',
         ]);
 
         if ($validator->fails()) {

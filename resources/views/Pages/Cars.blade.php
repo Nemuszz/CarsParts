@@ -25,47 +25,86 @@
 
 
                 </div>
-                <form class="mt-8 space-y-6" action="{{route('car.insert')}}" method="POST">
+                <form class="mt-8 space-y-6 form-horizontal" action="{{route('car.insert')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="rounded-md shadow-sm -space-y-px">
-                        <div>
-                            <label for="image">Image:</label>
-                            <input type="file" name="image" id="image" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username" value="">
+                        <div id="imageInputs">
+                            <label for="images">Images:</label>
+                            <input required type="file" class="form-control" name="image" placeholder="image" multiple accept="image/*">
+                        </div>
+                        <button type="button" id="addImageInput">Add Image</button>
+                        <div class="flex flex-col space-y-2 mx-4">
+                            <label class="text-gray-400">Power</label>
+                        <select required name="make" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <option value="">Select Make</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Bmw">Bmw</option>
+                            <option value="Mercedes">Mercedes</option>
+                            <!-- Add more options for make -->
+                        </select>
                         </div>
                         <div>
-                            <label for="username" class="">Make</label>
-                            <input id="username" name="make" type="text"  required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username" value="">
-                        </div>
-                        <div>
-                            <label for="email-address" class="">Model</label>
-                            <input id="email-address" name="model" type="text"  required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" value="">
+                            <label for="model" class="">Model</label>
+                            <input id="model" name="model" type="text"  required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" value="">
                         </div>
                         <div>
                             <h3 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Description</h3>
                         </div>
-                        <div>
-                            <label for="country" class="">Year</label>
-                            <input id="country" name="year" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Country" value="">
+                        <div class="flex flex-col space-y-2 mx-4">
+                            <label class="text-gray-400">Year</label>
+                            <select required name="year" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                <option value="">Select Year</option>
+                                <option value="{{$year}}">{{$year}}</option>
+                                @for($i = 0; $i < 50 ;$i++)
+                                    <option value="{{$year-= 1}}">{{$year}}</option>
+                                @endfor
+
+                            </select>
                         </div>
                         <div>
-                            <label for="city" class="">mileage</label>
-                            <input id="city" name="mileage" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="City" value="">
+                            <label for="mileage" class="">Mileage</label>
+                            <input id="mileage" name="mileage" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Mileage" value="">
                         </div>
                         <div>
-                            <label for="address" class="">price</label>
-                            <input id="address" name="price" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Address" value="">
+                            <label for="price" class="">Price</label>
+                            <input id="price" name="price" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Price in euros" value="">
                         </div>
-                        <div>
-                            <label for="postcode" class="">Body type</label>
-                            <input id="postcode" name="body_type" type="text" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Postcode" value="">
+                        <div class="flex flex-col space-y-2 mx-4">
+                            <label class="text-gray-400">Body type</label>
+                        <select required name="body_type" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <option value="Hatchback">Hatchback</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="Station wagon">Station wagon</option>
+                            <option value="Convertible">Convertible</option>
+                        </select>
+                            <label class="text-gray-400">Fuel type</label>
+                            <select required name="fuel_type" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                <option value="Petrol">Petrol</option>
+                                <option value="Diesel">Diesel</option>
+                                <option value="Hybrid">Hybrid</option>
+
+                            </select>
                         </div>
-                        <div>
-                            <label for="phone" class="">Fuel_type</label>
-                            <input id="phone" name="fuel_type" type="text"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="">
-                        </div>
-                        <div>
-                            <label for="phone" class="">Power</label>
-                            <input id="phone" name="power" type="number"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="">
+                        <div class="flex flex-col space-y-2 mx-4">
+                            <label class="text-gray-400">Power</label>
+                            <select required name="power" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                <option value="34">25KW (34KS)</option>
+                                <option value="48">35KW (48KS)</option>
+                                <option value="60">44KW (60KS)</option>
+                                <option value="75">55KW (75KS)</option>
+                                <option value="90">66KW (90KS)</option>
+                                <option value="101">74KW (101KS)</option>
+                                <option value="109">80KW (109KS)</option>
+                                <option value="116">85KW (116KS)</option>
+                                <option value="131">96KW (131KS)</option>
+                                <option value="150">110KW (150KS)</option>
+                                <option value="170">125KW (170KS)</option>
+                                <option value="200">147KW (200KS)</option>
+                                <option value="250">184KW (250KS)</option>
+
+                            </select>
                         </div>
                         <div>
                             <label for="phone" class="">Gear</label>
@@ -80,8 +119,17 @@
                             <input id="phone" name="description" type="text"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="">
                         </div>
                         <input id="phone" name="user_car_id" type="number"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="{{auth()->user()->id}}">
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger text-red">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                     </div>
+
 
 
                     <div class="flex items-center justify-center">
@@ -96,4 +144,12 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#addImageInput').click(function() {
+            $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
+        });
+    });
+</script>
 @include('Layouts.footer')
