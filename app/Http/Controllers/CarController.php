@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Validator;
 class CarController extends Controller
 {
 
+    public function index()
+    {
+
+
+
+        return view('Guest/allCars');
+
+    }
+
 
     public function add()
     {

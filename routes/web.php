@@ -19,9 +19,10 @@ Route::get('/register', function () {
 Route::get('/login', function () {
     return view('Registration/login');
 });
-Route::get('/cars', function () {
-    return view('Guest/allCars');
-});
+
+
+Route::get('/cars',[CarController::class, 'index'])->name('cars');
+
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/login', 'login')->name('user.login');
@@ -47,6 +48,8 @@ Route::controller(AdminController::class)->middleware([AdminMiddleware::class])-
     Route::get('/page', 'adminHome')->name('admin.page');
     Route::get('/users', 'adminUsers')->name('admin.users');
     Route::get('/permalink/{car}','adminPermalink')->name('admin.permalink');
+    Route::get('/delete/{car}','adminDelete')->name('admin.delete');
+    Route::get('/check/{car}','adminCheck')->name('admin.check');
 
 
 });

@@ -35,4 +35,31 @@ class AdminController extends Controller
         return view('Admin/adminPermalink', compact( 'car','user'));
 
     }
+    public function adminDelete($car)
+    {
+
+
+        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar->delete();
+
+
+
+
+        return redirect(route('admin.page'))->with('success', 'Car deleted successfully!');
+
+    }
+    public function adminCheck($car)
+    {
+
+
+        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar->checked_out = 'checked';
+        $singleCar->save();
+
+
+
+
+        return redirect(route('admin.page'))->with('success', 'Car checked successfully!');
+
+    }
 }
