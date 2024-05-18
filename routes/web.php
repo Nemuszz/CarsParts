@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,6 +41,10 @@ Route::controller(CarController::class)->middleware(['auth'])->prefix('/car')->g
     Route::get('/your/change/{car}','changeCar')->name('car.change');
     Route::post('/your/update/{car}','update')->name('car.update');
 
+});
+
+Route::controller(AdminController::class)->middleware([AdminMiddleware::class])->prefix('/admin')->group(function () {
+Route::get('/page', 'adminHome')->name('admin.home');
 
 
 });
