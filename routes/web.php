@@ -46,6 +46,7 @@ Route::controller(CarController::class)->middleware(['auth'])->prefix('/car')->g
 Route::controller(AdminController::class)->middleware([AdminMiddleware::class])->prefix('/admin')->group(function () {
     Route::get('/page', 'adminHome')->name('admin.page');
     Route::get('/users', 'adminUsers')->name('admin.users');
+    Route::get('/permalink/{car}','adminPermalink')->name('admin.permalink');
 
 
 });

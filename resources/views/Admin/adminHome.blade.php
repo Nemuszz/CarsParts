@@ -26,6 +26,53 @@
 
                 </div>
                 <div class="w-15 mx-auto bg-white rounded-lg shadow-md p-8">
+        @foreach($cars as $car)
+
+                        <div>
+                            <a href="{{route('admin.permalink', ['car'=> $car])}}">
+                                <div class="mx-auto bg-white rounded-lg shadow-md p-8 mt-2">
+
+
+                                    <div class="flex">
+
+                                        <!-- Left side - Image of car -->
+                                        <div class="w-1/2">
+                                            <img  src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class="w-full bg-blue-500">
+                                        </div>
+
+                                        <!-- Right side - Info for car -->
+                                        <div class="w-1/2">
+                                            <h2 class="text-xl font-bold mb-4">Car Information</h2>
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div>
+                                                    <p><strong>Make:</strong> {{$car->make}}</p>
+                                                    <p><strong>Model:</strong> {{$car->model}}</p>
+                                                    <p><strong>Year:</strong> {{$car->year}}</p>
+                                                </div>
+                                                <div>
+                                                    <p><strong>Mileage:</strong> {{$car->mileage}}</p>
+                                                    <p><strong>Price:</strong> {{$car->price}}</p>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </a>
+
+
+
+
+                        </div>
+                    @endforeach
+
+
 
 
 
