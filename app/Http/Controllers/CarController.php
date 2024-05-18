@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarsModel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -47,12 +48,22 @@ class CarController extends Controller
     }
 
 
-    public function yours()
+    public function yours($id)
     {
+        $user = User::findOrFail($id);
+
+        $cars = CarsModel::where(['user_car_id' => $user->id])->get();
 
 
+        return view('Pages/your', compact('user', 'cars'));
 
-        return view('Pages/your');
+    }
+    public function permalink($car)
+    {
+        $car = CarsModel::where(['id' => $car])->first();
+
+
+        return view('Pages/permalink', compact( 'car'));
 
     }
 }
