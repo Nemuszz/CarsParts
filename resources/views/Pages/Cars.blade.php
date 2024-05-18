@@ -45,7 +45,7 @@
 
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400" for="car_model">Select Model:</label>
-                            <select  required name="model" id="car_model" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
+                            <select  required name="model" id="car_model" class=" min-w-36 px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
                                 <option value="">Change</option>
                             </select>
                             <div>
@@ -228,7 +228,9 @@
     const carBrandSelect = document.getElementById('car_brand');
     const carModelSelect = document.getElementById('car_model');
 
+
     carBrandSelect.addEventListener('change', function() {
+        // Check if carBrandSelect value is empty
         const selectedBrand = this.value;
         const models = modelsByBrand[selectedBrand] || [];
 

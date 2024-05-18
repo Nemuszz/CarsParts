@@ -15,10 +15,10 @@ class CarController extends Controller
     public function index()
     {
         $cars = CarsModel::where(['checked_out'=> 'checked'])->get();
+        $year = 2024;
 
 
-
-        return view('Guest/allCars', compact('cars'));
+        return view('Guest/allCars', compact('cars', 'year'));
 
     }
 
