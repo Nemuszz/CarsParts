@@ -64,65 +64,31 @@
 
 
 
+    <section class="container mx-auto my-12">
+        <!-- Car Listings -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            @foreach($cars as $car)
+                <a href="{{ route('car.permalink', $car) }}" class="flex items-stretch">
+                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full">
+                        <!-- Car Image -->
+                        <img src="{{ $car->image }}" alt="Car Image" class="w-full h-48 object-cover mb-4 rounded">
 
-<!-- Car Listings -->
-<section class="container mx-auto my-12">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <!-- Car Card 1 -->
-        <div class="bg-white rounded shadow-md p-4 car-card">
-            <!-- Car Image -->
-            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+                        <!-- Car Details -->
+                        <div>
+                            <h2 class="text-xl font-bold mb-2">{{ $car->make }} {{ $car->model }}</h2>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>{{ $car->year }}</span>
+                                <span><strong>{{ $car->price }} €</strong></span>
+                            </p>
 
-            <!-- Car Details -->
-            <h2 class="text-xl font-bold mb-2">Car Title</h2>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
 
-            <!-- View Details Button -->
-            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
-                Details</a>
+                    </div>
+                </a>
+            @endforeach
         </div>
+    </section>
 
-        <!-- Car Card 2 -->
-        <div class="bg-white rounded shadow-md p-4 car-card">
-            <!-- Car Image -->
-            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
-
-            <!-- Car Details -->
-            <h2 class="text-xl font-bold mb-2">Car Title</h2>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-            <!-- View Details Button -->
-            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
-                Details</a>
-        </div>
-        <div class="bg-white rounded shadow-md p-4 car-card">
-            <!-- Car Image -->
-            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
-
-            <!-- Car Details -->
-            <h2 class="text-xl font-bold mb-2">Car Title</h2>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-            <!-- View Details Button -->
-            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
-                Details</a>
-        </div>
-        <div class="bg-white rounded shadow-md p-4 car-card">
-            <!-- Car Image -->
-            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
-
-            <!-- Car Details -->
-            <h2 class="text-xl font-bold mb-2">Car Title</h2>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-            <!-- View Details Button -->
-            <a href="#" class="block bg-blue-500 text-white py-2 px-4 rounded mt-4 hover:bg-blue-600">View
-                Details</a>
-        </div>
-
-        <!-- Add more car cards here -->
-    </div>
-</section>
 </div>
 
 @include('Layouts.footer')
