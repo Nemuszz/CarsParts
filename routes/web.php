@@ -22,6 +22,7 @@ Route::get('/login', function () {
 
 
 Route::get('/cars',[CarController::class, 'index'])->name('cars');
+Route::get('/search',[CarController::class, 'search'])->name('search');
 
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {

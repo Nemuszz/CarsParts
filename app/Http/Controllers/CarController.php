@@ -21,6 +21,15 @@ class CarController extends Controller
         return view('Guest/allCars', compact('cars', 'year'));
 
     }
+    public function serch(Request $request)
+    {
+        $cars = CarsModel::where(['checked_out'=> 'checked'])->get();
+        $year = 2024;
+
+
+        return view('Guest/searchCars', compact('cars', 'year'));
+
+    }
 
 
     public function add()
