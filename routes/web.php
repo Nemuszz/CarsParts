@@ -37,6 +37,7 @@ Route::controller(CarController::class)->middleware(['auth'])->prefix('/car')->g
     Route::get('/your/permalink/{car}','permalink')->name('car.permalink');
     Route::get('/your/delete/{car}','delete')->name('car.delete');
     Route::get('/your/change/{car}','changeCar')->name('car.change');
+    Route::post('/your/update/{car}','update')->name('car.update');
 
 
 

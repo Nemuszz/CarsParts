@@ -99,6 +99,19 @@ class CarController extends Controller
 
 
     }
+    public function update(Request $request, $car)
+    {
+
+
+        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar->update($request->all());
+
+
+
+
+        return redirect()->back()->with('success', 'Car updated successfully!');
+
+    }
 
 
 }

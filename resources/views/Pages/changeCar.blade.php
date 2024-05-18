@@ -26,7 +26,7 @@
 
 
                 </div>
-                <form class="mt-8 space-y-6 form-horizontal" action="" method="POST" enctype="multipart/form-data">
+                <form class="mt-8 space-y-6 form-horizontal" action="{{route('car.update', $car)}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div id="imageInputs">
@@ -37,7 +37,7 @@
 
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
-                            <select required  id='car_brand' name="make" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <select required  id='car_make' name="make" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                 @foreach (carMake() as $label => $value)
                                     <option value="{{ $value }}" {{ $car->make == $value ? 'selected' : '' }}>{{ $label }}</option>
                                 @endforeach
@@ -97,7 +97,7 @@
                             </select>
 
                             <label class="text-black-400">Gear</label>
-                            <select required name="power" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <select required name="gear" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                 @foreach (carGears() as $label => $value)
                                     <option value="{{ $value }}" {{ $car->gear == $value ? 'selected' : '' }}>{{ $label }}</option>
                                 @endforeach
@@ -216,8 +216,7 @@
         'Volkswagen': ['Arteon', 'Atlas', 'Beetle', 'Golf', 'ID.3', 'ID.4', 'Jetta', 'Passat', 'Tiguan', 'Touareg', 'Transporter'],
         'Volvo': ['S60', 'S90', 'V60', 'V90', 'XC40', 'XC60', 'XC90']
     }
-
-    const carBrandSelect = document.getElementById('car_brand');
+    const carBrandSelect = document.getElementById('car_make');
     const carModelSelect = document.getElementById('car_model');
 
     carBrandSelect.addEventListener('change', function() {
@@ -235,6 +234,7 @@
             carModelSelect.appendChild(option);
         });
     });
+
 </script>
 
 @include('Layouts.footer')

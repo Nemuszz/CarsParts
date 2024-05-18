@@ -143,7 +143,7 @@ if (!function_exists('carModel')) {
     function carModel()
     {
         return [
-            'Abarth'=> '124 Spider', '595', '695',
+            'Abarth'=> ['124 Spider', '595', '695',],
         'Acura'=> ['ILX', 'MDX', 'NSX', 'RDX', 'RLX', 'TLX'],
         'Alfa Romeo'=> ['4C', 'Giulia', 'Stelvio'],
         'Aston Martin'=> ['DB11', 'DBS Superleggera', 'DBX', 'Rapide', 'Vantage'],
