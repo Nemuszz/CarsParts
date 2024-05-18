@@ -60,10 +60,13 @@ class CarController extends Controller
     }
     public function permalink($car)
     {
+
         $car = CarsModel::where(['id' => $car])->first();
+        $user = User::where(['id' => $car->user_car_id])->first();
 
 
-        return view('Pages/permalink', compact( 'car'));
+
+        return view('Pages/permalink', compact( 'car','user'));
 
     }
 }
