@@ -5,7 +5,9 @@
         <!-- 2/3 of flex -->
         <div class="w-2/3  p-4">
             <h2 class="text-2xl  mb-4"><strong>{{$car->make}} {{$car->model}} {{$car->body_type}}</strong><span class=" text-xl text-gray-500"> {{$car->year}}.year</span></h2>
-            <div class="bg-gray-300 placeholder-image mb-4"></div>
+            <div class="bg-gray-300 placeholder-image mb-4">
+                <img src="{{$car->image}}" alt="Image">
+            </div>
             <div class="flex mb-3 ">
                 <div class="image-box" >1</div>
                 <div class="image-box">2</div>
