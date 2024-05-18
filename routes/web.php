@@ -18,7 +18,7 @@ Route::get('/login', function () {
     return view('Registration/login');
 });
 Route::get('/cars', function () {
-    return view('Guest/proba');
+    return view('Guest/allCars');
 });
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {
@@ -35,6 +35,8 @@ Route::controller(CarController::class)->middleware(['auth'])->prefix('/car')->g
     Route::post('/add/user_car', 'insert')->name('car.insert');
     Route::get('/your/{id}','yours')->name('car.yours');
     Route::get('/your/permalink/{car}','permalink')->name('car.permalink');
+    Route::get('/your/delete/{car}','delete')->name('car.delete');
+    Route::get('/your/change/{car}','changeCar')->name('car.change');
 
 
 

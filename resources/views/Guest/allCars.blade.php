@@ -1,8 +1,8 @@
 
 @include('Layouts.nav')
-<!-- Hero Section -->
+<div class=" mx-auto max-w-screen-xl">
 <header class="bg-gray-900 text-white py-20 px-8">
-    <div class="container mx-auto">
+    <div class="container mx-auto text-center">
         <h1 class="text-4xl font-bold mb-6">Find Your Dream Car</h1>
         <p class="text-lg mb-8">Browse through our collection of high-quality secondhand cars</p>
         <div class="flex justify-center flex-wrap">
@@ -71,7 +71,7 @@
         <!-- Car Card 1 -->
         <div class="bg-white rounded shadow-md p-4 car-card">
             <!-- Car Image -->
-            <img src="car1.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
 
             <!-- Car Details -->
             <h2 class="text-xl font-bold mb-2">Car Title</h2>
@@ -85,7 +85,7 @@
         <!-- Car Card 2 -->
         <div class="bg-white rounded shadow-md p-4 car-card">
             <!-- Car Image -->
-            <img src="car.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
 
             <!-- Car Details -->
             <h2 class="text-xl font-bold mb-2">Car Title</h2>
@@ -97,7 +97,7 @@
         </div>
         <div class="bg-white rounded shadow-md p-4 car-card">
             <!-- Car Image -->
-            <img src="car1.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
 
             <!-- Car Details -->
             <h2 class="text-xl font-bold mb-2">Car Title</h2>
@@ -109,7 +109,7 @@
         </div>
         <div class="bg-white rounded shadow-md p-4 car-card">
             <!-- Car Image -->
-            <img src="car1.jpg" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
+            <img src="" alt="Car 1" class="w-full h-48 object-cover mb-4 rounded">
 
             <!-- Car Details -->
             <h2 class="text-xl font-bold mb-2">Car Title</h2>
@@ -123,6 +123,7 @@
         <!-- Add more car cards here -->
     </div>
 </section>
+</div>
 
 @include('Layouts.footer')
 

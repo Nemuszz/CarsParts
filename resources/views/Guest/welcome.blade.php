@@ -1,4 +1,5 @@
 @include('Layouts.nav')
+<div class=" mx-auto max-w-screen-xl">
 <section class="py-12">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold mb-4">Home</h2>
@@ -27,6 +28,7 @@
 <p class="mb-8">At Second Hand Cars, we're committed to providing the highest quality parts and exceptional customer service. Visit our parts department today and discover why drivers trust us for all their automotive needs!</p>
 </div>
 </section>
+</div>
 @include('Layouts.footer')
 
 

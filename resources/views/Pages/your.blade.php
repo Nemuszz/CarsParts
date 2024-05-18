@@ -31,12 +31,12 @@
                     <a href="{{route('car.permalink', ['car'=> $car])}}">
             <div class="mx-auto bg-white rounded-lg shadow-md p-8 mt-2">
 
-                <!-- Right side - Info for car -->
+
                 <div class="flex">
 
                     <!-- Left side - Image of car -->
                     <div class="w-1/2">
-                        <img src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class="w-full">
+                        <img  src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class="w-full bg-blue-500">
                     </div>
 
                     <!-- Right side - Info for car -->
@@ -51,20 +51,39 @@
                             <div>
                                 <p><strong>Mileage:</strong> {{$car->mileage}}</p>
                                 <p><strong>Price:</strong> {{$car->price}}</p>
-                                <!-- Add more car information as needed -->
+
                             </div>
+
                         </div>
                     </div>
+
                 </div>
+
+
             </div>
+                        <div class="mx-auto bg-white shadow-md p-2 flex justify-center">
+                            <div class="w-1/2 bg-blue-200 rounded-l-lg">
+                                <a href="{{route('car.change', $car)}}" class="block w-full h-full py-2 text-blue-900 font-semibold text-center hover:bg-blue-300 transition duration-300">Insert</a>
+                            </div>
+                            <div class="w-1/2 bg-red-500 rounded-r-lg">
+                                <a href="{{route('car.delete', $car)}}" class="block w-full h-full py-2 text-white font-semibold text-center hover:bg-red-600 transition duration-300">Delete</a>
+                            </div>
+                        </div>
+
                     </a>
+
+
+
+
                 </div>
+
 
             @endforeach
         </div>
 
     </div>
     </div>
+
     <!-- Main Content -->
 
 

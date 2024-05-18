@@ -6,6 +6,7 @@ use App\Models\CarsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class CarController extends Controller
@@ -69,4 +70,35 @@ class CarController extends Controller
         return view('Pages/permalink', compact( 'car','user'));
 
     }
+    public function delete($car)
+    {
+
+
+        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar->delete();
+
+
+
+
+        return redirect()->back()->with('success', 'Car deleted successfully!');
+
+    }
+    public function changeCar($car)
+    {
+
+
+        $car = CarsModel::where(['id' => $car])->first();
+        $user = User::where(['id' => $car->user_car_id])->first();
+
+        $year = 2024;
+
+        return view('Pages/changeCar', compact( 'car','user', 'year'));
+
+
+
+
+
+    }
+
+
 }
