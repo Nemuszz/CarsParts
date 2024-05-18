@@ -23,8 +23,8 @@
 
 <body class="bg-gray-100 text-gray-900">
 
-<!-- Navigation -->
-<nav class="bg-gray-800 text-white py-4">
+<div class=" bg-gray-800 text-white py-4">
+<nav class=" mx-auto max-w-screen-xl bg-gray-800 text-white py-1">
     <div class="container mx-auto flex justify-between items-center">
         <a href="#" class="text-xl font-bold">Cars&Parts</a>
         <ul class="flex space-x-4">
@@ -56,6 +56,7 @@
         </ul>
     </div>
 </nav>
+</div>
 
 
 

@@ -1,4 +1,5 @@
-<footer class="bg-gray-900 text-white py-8">
+<div class=" bg-gray-900 text-white py-4">
+<footer class=" mx-auto max-w-screen-xl bg-gray-900 text-white py-8">
     <div class="container mx-auto flex flex-wrap justify-center items-center">
         <div class="w-full md:w-1/2 mb-6 md:mb-0 text-center md:text-left">
             <a href="/" class="text-2xl font-bold">Cars&Parts</a>
@@ -21,6 +22,7 @@
         <p>&copy; 2024 Second Hand Cars. All rights reserved.</p>
     </div>
 </footer>
+</div>
 
 
 
