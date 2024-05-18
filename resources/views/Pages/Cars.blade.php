@@ -146,9 +146,10 @@
                             Add your car
                         </button>
                     </div>
-
-
+                        </div>
+                        </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -160,11 +161,6 @@
             $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
         });
     });
-
-
-
-
-
 
     const modelsByBrand = {
         'Abarth': ['124 Spider', '595', '695'],
