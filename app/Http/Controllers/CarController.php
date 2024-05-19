@@ -134,10 +134,11 @@ class CarController extends Controller
 
         $car = CarsModel::where(['id' => $car])->first();
         $user = User::where(['id' => $car->user_car_id])->first();
+        $images = Image::where(['car_id' => $car->id])->get();
 
 
 
-        return view('Pages/permalink', compact( 'car','user'));
+        return view('Pages/permalink', compact( 'car','user', 'images'));
 
     }
     public function delete($car)

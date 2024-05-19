@@ -5,17 +5,36 @@
         <!-- 2/3 of flex -->
         <div class="w-2/3  p-4">
             <h2 class="text-2xl  mb-4"><strong>{{$car->make}} {{$car->model}} {{$car->body_type}}</strong><span class=" text-xl text-gray-500"> {{$car->year}}.year</span></h2>
-            <div class="bg-gray-300 placeholder-image mb-4">
-                <img src="{{$car->image}}" alt="Image">
+            <div class="swiper-container overflow-hidden parent-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Nested Swiper Container -->
+                    <div class="swiper-slide">
+                        <div class="swiper-container child-swiper">
+                            <div class="swiper-wrapper">
+                                <!-- Images Slider -->
+                                @foreach($images as $image)
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset('images/' . $image->path) }}" alt="Car Image">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- Add Navigation Buttons -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                            <!-- Disable Autoplay -->
+                            <div class="swiper-autoplay-stop">Stop Autoplay</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="flex mb-3 ">
-                <div class="image-box" >1</div>
-                <div class="image-box">2</div>
-                <div class="image-box">3</div>
-                <div class="image-box">4</div>
-                <div class="image-box">5</div>
-                <div class="image-box">6</div>
 
+
+            <div class="flex mb-3 ">
+                @foreach($images as $image)
+
+                <div class="image-box" ><img src="{{ asset('images/' . $image->path) }}" alt="Car Image"></div>
+
+                @endforeach
             </div>
             <div class="  rounded-lg shadow-md p-8 bg-gray-200">
 
@@ -141,7 +160,53 @@
 </div>
 <!-- Main Content -->
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+<!-- Initialize Parent Swiper -->
+<script>
+    var parentSwiper = new Swiper('.parent-swiper', {
+        loop: true,
+        autoplay: false,
+    });
 
+    // Initialize Child Swiper
+    var childSwiper = new Swiper('.child-swiper', {
+        loop: true,
+        autoplay: false,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    // Stop Autoplay on Click
+    document.querySelector('.swiper-autoplay-stop').addEventListener('click', function () {
+        childSwiper.autoplay.stop();
+    });
+</script>
+
+<!-- CSS to position navigation buttons -->
+<style>
+    .swiper-button-prev, .swiper-button-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+</style>
 
 @include('Layouts.footer')

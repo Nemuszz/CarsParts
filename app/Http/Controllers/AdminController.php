@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CarsModel;
 use App\Models\ContactUsModel;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -50,10 +51,11 @@ class AdminController extends Controller
 
         $car = CarsModel::where(['id' => $car])->first();
         $user = User::where(['id' => $car->user_car_id])->first();
+        $images = Image::where(['car_id' => $car->id])->get();
 
 
 
-        return view('Admin/adminPermalink', compact( 'car','user'));
+        return view('Admin/adminPermalink', compact( 'car','user','images'));
 
     }
     public function adminDelete($car)
