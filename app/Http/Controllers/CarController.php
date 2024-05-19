@@ -48,7 +48,23 @@ class CarController extends Controller
 
         $cars = $query->get();
 
-        return view('Guest/searchCars', compact('cars', 'request'));
+        $userCities = [];
+
+        // Loop through each car to fetch the city of the corresponding user
+        foreach ($cars as $car) {
+            // Retrieve the user associated with the car
+            $user = User::find($car->user_car_id);
+
+            // If user found, get the city and store it in the array
+            if ($user) {
+                $userCities[$car->id] = $user->city;
+            } else {
+                // If user not found, store a placeholder value
+                $userCities[$car->id] = 'Unknown';
+            }
+        }
+
+        return view('Guest/searchCars', compact('cars', 'request','userCities'));
 
     }
 

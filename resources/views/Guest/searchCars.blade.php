@@ -1,5 +1,8 @@
 @include('Layouts.nav')
-<div class=" mx-auto max-w-screen-xl">
+<style>
+
+</style>
+<div class=" mx-auto min-h-screen max-w-screen-xl">
     <header class="bg-gray-900 text-white py-20 px-8">
 
 
@@ -14,7 +17,7 @@
 
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Mileage</label>
-                        <select name="mileage" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                        <select id="mileage" name="mileage" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select Mileage</option>
                             @foreach(mileage() as $label => $value)
                                 <option value="{{ $value }}"{{$request->input('mileage') == $value ? 'selected': ''}}>{{ $label }}</option>
@@ -28,7 +31,7 @@
 
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Year</label>
-                        <select name="year" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                        <select id="year" name="year" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select Year</option>
                             @foreach(carYear() as $label => $value)
                                 <option value="{{ $value }}"{{$request->input('year') == $value ? 'selected': ''}}>{{ $label }}</option>
@@ -58,11 +61,17 @@
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Price</label>
-                        <input name="price" value="{{ old('price', $request->input('price')) }}" placeholder="Up till price                      $" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                        <input id='price' name="price" value="{{ old('price', $request->input('price')) }}" placeholder="Up till price                      $" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400 invisible">Condition</label>
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Search</button>
+
+                    </div>
+                    <div class="flex flex-col space-y-2 mx-4">
+                        <label class="text-gray-400 invisible">Condition</label>
+                        <button id="emptyField" class="px-4 py-2 bg-gray-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Empty</button>
+
                     </div>
                 </div>
             </div>
@@ -74,28 +83,42 @@
 
 
 
-    <section class="container mx-auto my-12">
+    <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            @foreach($cars as $car)
-                <a href="{{ route('car.permalink', $car) }}" class="flex items-stretch">
-                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full">
-                        <!-- Car Image -->
-                        <img src="{{ $car->image }}" alt="Car Image" class="w-full h-48 object-cover mb-4 rounded">
-
-                        <!-- Car Details -->
-                        <div>
-                            <h2 class="text-xl font-bold mb-2">{{ $car->make }} {{ $car->model }}</h2>
-                            <p class="text-gray-600 flex justify-between">
-                                <span>{{ $car->year }}</span>
-                                <span><strong>{{ $car->price }} €</strong></span>
-                            </p>
-
+        <div class="flex gap-8">
+            <div class=" w-full md:2/3">
+                @foreach($cars as $car)
+                    <a href="{{route('car.permalink', $car)}}">
+                    <div class="mx-auto bg-white rounded-lg shadow-md p-8 mt-2 flex flex-col md:flex-row relative justify-center">
+                        <!-- Left side - Image of car -->
+                        <div class=" w-80 md:w-1/2 md:h-52 mb-8 md:mr-8 md:mb-0 o">
+                            <img src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class=" w-80 h-52 bg-blue-500">
                         </div>
-
+                        <!-- Right side - Info for car -->
+                        <div class="w-full md:w-1/2">
+                            <h2 class="text-xl font-bold mb-8">{{ $car->make }} {{ $car->model }}</h2>
+                            <p class="text-xl font-bold mb-8">{{ $car->price }} €</p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p><strong>Year:</strong> {{ $car->year }}</p>
+                                    <p><strong>Body:</strong> {{ $car->body_type }}</p>
+                                </div>
+                                <div>
+                                    <p><strong>Fuel:</strong> {{ $car->fuel_type }}</p>
+                                    <p><strong>Mileage:</strong> {{ $car->mileage }}</p>
+                                </div>
+                            </div>
+                            <div class="absolute bottom-2 right-2">
+                                {{ $userCities[$car->id] ?? 'Unknown' }}
+                            </div>
+                        </div>
                     </div>
-                </a>
-            @endforeach
+                    </a>
+                @endforeach
+            </div>
+            <div class="hidden md:w-1/3 md:block  min-h-screen bg-blue-600">
+                Nemanja
+            </div>
         </div>
     </section>
 
@@ -172,7 +195,11 @@
     }
 
     const carBrandSelect = document.getElementById('car_brand');
+    const carMileage = document.getElementById('mileage');
     const carModelSelect = document.getElementById('car_model');
+    const carPrice = document.getElementById('price');
+    const carYear= document.getElementById('year');
+
 
     carBrandSelect.addEventListener('change', function() {
 
@@ -190,5 +217,15 @@
             carModelSelect.appendChild(option);
         });
     });
+
+    const emptyField = document.getElementById('emptyField')
+    emptyField.addEventListener('click', function (){
+        carBrandSelect.value = '';
+        carModelSelect.value = '';
+        carYear.value = '';
+        carMileage.value = '';
+        carPrice.value = '';
+
+    })
 </script>
 @include('Layouts.footer')
