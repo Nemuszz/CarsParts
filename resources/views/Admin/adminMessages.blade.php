@@ -5,7 +5,7 @@
         <!-- Navigation -->
         <div class="bg-gray-800 text-white flex justify-between items-center p-4">
             <span class="text-xl md:text-2xl font-semibold">Admin</span>
-            <nav class="hidden md:flex">
+            <nav class=" flex">
                 <a href="{{route('admin.page')}}" class="p-2 md:p-4 hover:bg-gray-700">Car requests</a>
                 <a href="{{route('admin.users')}}" class="p-2 md:p-4 hover:bg-gray-700">Users</a>
                 <a href="" class="p-2 md:p-4 hover:bg-gray-700">Orders</a>
@@ -14,6 +14,9 @@
         </div>
         <!-- Table -->
         <div class="flex-1">
+
+
+
             <div class="mx-auto bg-white rounded-lg shadow-md p-4 md:p-8">
                 <div>
                     <h2 class="mt-6 mb-4 text-center text-lg md:text-3xl font-extrabold text-gray-900 border-b-2 border-gray-300 pb-2">Messages</h2>
@@ -47,6 +50,12 @@
                     </table>
                 </div>
             </div>
+
+
+
+
+
+
         </div>
     </div>
 </div>
