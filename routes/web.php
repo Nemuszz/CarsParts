@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,14 +31,14 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/register', 'register')->name('user.register');
 
 });
-Route::controller(UserController::class)->middleware(['auth'])->prefix('/user')->group(function () {
+Route::controller(UserController::class)->middleware(AuthMiddleware::class)->prefix('/user')->group(function () {
     Route::get('/logout', 'logout')->name('user.logout');
     Route::get('/profile/{id}', 'profile')->name('user.profile');
     Route::post('/profile/edit/{id}', 'edit')->name('user.edit');
 });
 
 
-Route::controller(CarController::class)->middleware(['auth'])->prefix('/car')->group(function () {
+Route::controller(CarController::class)->middleware(AuthMiddleware::class)->prefix('/car')->group(function () {
     Route::get('/add', 'add')->name('car.add');
     Route::post('/add/user_car', 'insert')->name('car.insert');
     Route::get('/your/{id}','yours')->name('car.yours');
