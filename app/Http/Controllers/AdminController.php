@@ -12,7 +12,27 @@ class AdminController extends Controller
     public function adminHome(){
         $cars = CarsModel::where(['checked_out' => 'unchecked'])->get();
 
-        return view('Admin/adminHome', compact('cars') );
+        $userCities = [];
+
+        // Loop through each car to fetch the city of the corresponding user
+        foreach ($cars as $car) {
+            // Retrieve the user associated with the car
+            $user = User::find($car->user_car_id);
+
+            // If user found, get the city and store it in the array
+            if ($user) {
+                $userCities[$car->id] = $user->city;
+            } else {
+                // If user not found, store a placeholder value
+                $userCities[$car->id] = 'Unknown';
+            }
+        }
+
+
+
+
+
+        return view('Admin/adminHome', compact('cars', 'userCities') );
 
     }
     public function adminUsers()
