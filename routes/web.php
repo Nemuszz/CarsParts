@@ -35,6 +35,7 @@ Route::controller(UserController::class)->middleware(AuthMiddleware::class)->pre
     Route::get('/logout', 'logout')->name('user.logout');
     Route::get('/profile/{id}', 'profile')->name('user.profile');
     Route::post('/profile/edit/{id}', 'edit')->name('user.edit');
+    Route::get('/contact/{id}', 'contact')->name('user.contact');
 });
 
 

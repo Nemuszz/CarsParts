@@ -85,6 +85,13 @@ class UserController extends Controller
 
         return redirect()->route('user.profile', $user->id)->with('success', 'Profile updated successfully');
     }
+    public function contact($id)
+    {
 
+        $user = User::findOrFail($id);
+        dd($user);
+
+        return view('Pages/Contact', );
+    }
 
 }
