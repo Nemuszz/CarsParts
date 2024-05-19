@@ -1,6 +1,6 @@
 @include('Layouts.nav')
 <div class=" mx-auto max-w-screen-xl bg-white p-8 rounded-lg shadow-md">
-    <div class="flex h-auto">
+    <div class="flex min-h-screen h-auto">
         <!-- Sidebar -->
         <div class="bg-gray-800 text-white w-64 h-50 flex flex-col">
             <div class="p-4 flex justify-between items-center">
