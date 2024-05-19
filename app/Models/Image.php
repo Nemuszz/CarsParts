@@ -13,4 +13,10 @@ class Image extends Model
     {
         return $this->belongsTo(CarsModel::class);
     }
+    protected $table = 'images';
+
+    protected $fillable = [
+        'car_id',
+        'path'
+    ];
 }

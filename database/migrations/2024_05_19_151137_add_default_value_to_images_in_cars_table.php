@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cars', function (Blueprint $table) {
-            $table->string('images');
+            $table ->string('images')->default('default_image.jpg');
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('car', function (Blueprint $table) {
+        Schema::table('cars', function (Blueprint $table) {
             //
         });
     }

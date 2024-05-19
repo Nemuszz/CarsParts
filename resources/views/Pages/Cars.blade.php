@@ -30,7 +30,8 @@
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div id="imageInputs">
                             <label for="images">Images:</label>
-                            <input required type="file" class="form-control" name="image" placeholder="image" multiple accept="image/*">
+
+                            <input required type="file" name="images[]" class="imageInput" accept="image/*">
                         </div>
                         <button type="button" id="addImageInput">Add Image</button>
                         <div class="flex flex-col space-y-2 mx-4">

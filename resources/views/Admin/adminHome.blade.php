@@ -30,7 +30,7 @@
                                     <div class="flex flex-col md:flex-row">
                                         <!-- Left side - Image of car -->
                                         <div class="w-full md:w-1/2 md:text-center">
-                                            <img src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class="w-80 h-52 bg-blue-500">
+                                            <img src="{{ route('car.yours', ['id' => $car->id]) }}" alt="Car Image" class="w-80 h-52 bg-blue-500">
                                         </div>
                                         <div class="w-8">
 

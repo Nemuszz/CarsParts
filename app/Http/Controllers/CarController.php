@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarsModel;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -92,18 +93,31 @@ class CarController extends Controller
             'number_of_doors' => 'integer',
             'description' => 'string',
             'user_car_id' => 'integer',
-            'image' => 'image|mimetypes:image/jpeg,image/png,image/jpg|max:2048',
+            'images' => 'required|array|min:1',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        CarsModel::create($request->all());
+        $carData = $request->except('images');
+        $car = CarsModel::create($carData);
 
-        return redirect()->route('user.profile',['id' => auth()->user()->id])->with('success', 'Car added successfully!');
+        if ($request->hasFile('images')) {
+
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images'), $imageName);
+                $imageModel = new Image();
+                $imageModel->path = $imageName;
+                $imageModel->car_id = $car->id;
+                $imageModel->save();
+            }
+        }
+
+        return redirect()->route('user.profile', ['id' => auth()->user()->id])->with('success', 'Car added successfully!');
     }
-
 
     public function yours($id)
     {
