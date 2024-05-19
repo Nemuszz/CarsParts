@@ -28,9 +28,12 @@ Route::get('/search',[CarController::class, 'search'])->name('search');
 Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/login', 'login')->name('user.login');
    Route::post('/register', 'register')->name('user.register');
-   Route::get('/logout', 'logout')->name('user.logout');
-   Route::get('/profile/{id}', 'profile')->name('user.profile');
-   Route::post('/profile/edit/{id}', 'edit')->name('user.edit');
+
+});
+Route::controller(UserController::class)->middleware(['auth'])->prefix('/user')->group(function () {
+    Route::get('/logout', 'logout')->name('user.logout');
+    Route::get('/profile/{id}', 'profile')->name('user.profile');
+    Route::post('/profile/edit/{id}', 'edit')->name('user.edit');
 });
 
 
