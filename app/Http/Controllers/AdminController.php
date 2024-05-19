@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarsModel;
+use App\Models\ContactUsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -61,5 +62,12 @@ class AdminController extends Controller
 
         return redirect(route('admin.page'))->with('success', 'Car checked successfully!');
 
+    }
+    public function adminMessages()
+    {
+        $number = 0;
+        $messages = ContactUsModel::all();
+
+        return view('Admin/adminMessages',compact('messages','number') );
     }
 }

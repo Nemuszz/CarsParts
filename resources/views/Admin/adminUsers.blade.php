@@ -11,7 +11,7 @@
                 <a href="{{route('admin.page')}}" class="block p-4 hover:bg-gray-700">Car requests</a>
                 <a href="{{route('admin.users')}}" class="block p-4 hover:bg-gray-700">Users</a>
                 <a href="" class="block p-4 hover:bg-gray-700">Orders</a>
-                <a href="#" class="block p-4 hover:bg-gray-700">Messages</a>
+                <a href="{{route('admin.messages')}}" class="block p-4 hover:bg-gray-700">Messages</a>
 
             </nav>
 

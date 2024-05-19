@@ -57,6 +57,7 @@ Route::controller(AdminController::class)->middleware([AdminMiddleware::class])-
     Route::get('/permalink/{car}','adminPermalink')->name('admin.permalink');
     Route::get('/delete/{car}','adminDelete')->name('admin.delete');
     Route::get('/check/{car}','adminCheck')->name('admin.check');
+    Route::get('/messages','adminMessages')->name('admin.messages');
 
 
 });
