@@ -2,7 +2,7 @@
 @include('Layouts.nav')
 <div class=" mx-auto max-w-screen-xl">
 <header class="bg-gray-900 text-white py-20 px-8">
-    <form action="#" method="GET">
+    <form action="{{route('search')}}" method="GET">
     <div class="container mx-auto text-center">
         <h1 class="text-4xl font-bold mb-6">Find Your Dream Car</h1>
         <p class="text-lg mb-8">Browse through our collection of high-quality secondhand cars</p>
