@@ -7,31 +7,24 @@
         <h1 class="text-4xl font-bold mb-6">Find Your Dream Car</h1>
         <p class="text-lg mb-8">Browse through our collection of high-quality secondhand cars</p>
         <div class="flex justify-center flex-wrap">
-            <!-- Year, Mileage, Make -->
-            <div class="flex flex-col space-y-2 mx-4">
-                <label class="text-gray-400">Year</label>
-                <select class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
 
-                    <option value="">Select Year</option>
-                    <option value="{{$year}}">{{$year}}</option>
-                    @for($i = 0; $i < 50 ;$i++)
-                        <option value="{{$year-= 1}}">{{$year}}</option>
-                    @endfor
-                    <!-- Add more options for years -->
-                </select>
-            </div>
+                <div class="flex flex-col space-y-2 mx-4">
+                    <label class="text-gray-400">Year</label>
+                    <select name="year" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                        <option value="">Select Year</option>
+                        @foreach(carYear() as $label => $value)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                        <!-- Add more options for years -->
+                    </select>
+                </div>
             <div class="flex flex-col space-y-2 mx-4">
                 <label class="text-gray-400">Mileage</label>
                 <select name="mileage" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                     <option value="">Select Mileage</option>
-                    <option value="5000">5000 miles</option>
-                    <option value="25000">25000 miles</option>
-                    <option value="50000">50000 miles</option>
-                    <option value="100000">100000 miles</option>
-                    <option value="125000">125000 miles</option>
-                    <option value="150000">150000 miles</option>
-                    <option value="175000">175000 miles</option>
-                    <option value="200000">200000 miles</option>
+                    @foreach(mileage() as $label => $value)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
 
                     <!-- Add more options for mileage -->
                 </select>
@@ -65,6 +58,7 @@
             </div>
         </div>
     </div>
+
     </form>
 </header>
 

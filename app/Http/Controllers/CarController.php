@@ -24,9 +24,12 @@ class CarController extends Controller
     public function search(Request $request)
     {
 
-        $years = 2024;
+
 
         $query = CarsModel::where('checked_out', 'checked');
+        if ($request->filled('year')) {
+            $query->where('year', $request->year);
+        }
 
         if ($request->filled('make')) {
             $query->where('make', $request->make);
@@ -40,14 +43,12 @@ class CarController extends Controller
         if ($request->filled('price')) {
             $query->where('price','<', $request->price);
         }
-        if ($request->filled('year')) {
-            $query->where('year', $request->year);
-        }
+
 
 
         $cars = $query->get();
 
-        return view('Guest/searchCars', compact('cars', 'years', 'request'));
+        return view('Guest/searchCars', compact('cars', 'request'));
 
     }
 
