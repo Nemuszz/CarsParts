@@ -1,5 +1,5 @@
 @include('Layouts.nav')
-<div class="mx-auto max-w-screen-xl bg-white p-4 md:p-8 rounded-lg shadow-md">
+<div class="mx-auto max-w-screen-xl min-h-screen bg-white p-4 md:p-8 rounded-lg shadow-md">
     <!-- Main Content -->
     <div class="flex flex-col">
         <!-- Navigation -->
