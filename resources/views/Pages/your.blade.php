@@ -35,7 +35,7 @@
                 <div class="flex">
                     <!-- Left side - Image of car -->
                     <div class="w-1/2">
-                        <img  src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class="w-full bg-blue-500">
+                        <img  src="{{ route('car.yours', ['id' => $car->id]) }}" alt="Car Image" class="w-full bg-blue-500">
                     </div>
 
                     <!-- Right side - Info for car -->

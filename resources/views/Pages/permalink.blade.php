@@ -21,22 +21,21 @@
                             <!-- Add Navigation Buttons -->
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
-                            <!-- Disable Autoplay -->
-                            <div class="swiper-autoplay-stop">Stop Autoplay</div>
+
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="flex mb-3 ">
+            <div class="flex mb-3">
                 @foreach($images as $image)
-
-                <div class="image-box" ><img src="{{ asset('images/' . $image->path) }}" alt="Car Image"></div>
-
+                    <div class="image-box">
+                        <img src="{{ asset('images/' . $image->path) }}" alt="Car Image" class="w-full h-full object-cover">
+                    </div>
                 @endforeach
             </div>
-            <div class="  rounded-lg shadow-md p-8 bg-gray-200">
+            <div class=" rounded-lg shadow-md p-8 bg-gray-200">
 
                 <div class=" bg-white rounded-lg shadow-md p-8">
 
@@ -179,9 +178,22 @@
         },
     });
 
-    // Stop Autoplay on Click
-    document.querySelector('.swiper-autoplay-stop').addEventListener('click', function () {
-        childSwiper.autoplay.stop();
+
+</script>
+<script>
+    const swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    const imageBoxes = document.querySelectorAll('.image-box');
+    imageBoxes.forEach(imageBox => {
+        imageBox.addEventListener('click', () => {
+            const index = parseInt(imageBox.dataset.index);
+            swiper.slideTo(index);
+        });
     });
 </script>
 
@@ -206,6 +218,21 @@
 
     .swiper-button-next {
         right: 10px;
+    }
+    .image-box {
+        margin-top: 10px;
+        width: 90px;
+        height: 90px; /* Adjust the height as needed */
+        overflow: hidden;
+    }
+    .image-box:hover {
+        opacity: 0.7; /* Adjust opacity value as needed */
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 </style>
 
