@@ -25,6 +25,26 @@
                 </div>
 
             </div>
+            <div class="max-w-xl mx-auto mt-10 px-4 py-6 bg-white shadow-md rounded-lg">
+                <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
+                <form action="#" method="POST">
+                    <div class="mb-6">
+                    <p class="text-gray-600 text-sm">Your profile information will be automatically populated and sent along with your message.</p>
+                        <p class="text-gray-600 text-sm"><strong>You will receive our response via email.</strong></p>
+                    </div>
+                    <div class="mb-4">
+                        <label for="subject" class="block text-gray-700 font-medium">Subject</label>
+                        <input type="text" id="subject" name="subject" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-700 font-medium">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 px-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+                    </div>
+                    <div class="mt-6 flex justify-center">
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Submit</button>
+                    </div>
+                </form>
+            </div>
 
         </div>
 

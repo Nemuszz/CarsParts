@@ -89,9 +89,9 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($id);
-        dd($user);
 
-        return view('Pages/Contact', );
+
+        return view('Pages/Contact');
     }
 
 }
