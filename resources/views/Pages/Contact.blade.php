@@ -18,6 +18,11 @@
         </div>
 
         <div class="flex-1 p-10 h-auto">
+            @if(session('success'))
+                <div class="bg-green-200 text-green-800 p-4 mb-4 rounded" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
 
             <div class=" mx-auto bg-white rounded-lg shadow-md p-8 ">
                 <div>

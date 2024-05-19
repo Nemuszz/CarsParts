@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContactUsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,11 +106,19 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        dd($request->all());
+
         $user = User::findOrFail($id);
 
+        ContactUsModel::create([
+            'subject'=> $request->subject,
+            'message'=> $request->message,
+            'name'=> $user->name,
+            'email'=> $user->email,
+            'phone'=> $user->phone,
+        ]);
 
-        return redirect()->back()->with('success', 'Message sent successfully');
+
+        return redirect()->back()->with('success', 'Message sent successfully, thanks!');
     }
 
 }
