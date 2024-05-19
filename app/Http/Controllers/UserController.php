@@ -93,5 +93,23 @@ class UserController extends Controller
 
         return view('Pages/Contact');
     }
+    public function message(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'subject' => 'required|string|max:30',
+            'message' => 'required|string|max:225',
+
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        dd($request->all());
+        $user = User::findOrFail($id);
+
+
+        return redirect()->back()->with('success', 'Message sent successfully');
+    }
 
 }
