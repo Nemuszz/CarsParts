@@ -1,6 +1,6 @@
 @include('Layouts.nav')
 <div class=" mx-auto max-w-screen-xl bg-white p-8 rounded-lg shadow-md">
-    <div class="flex h-screen">
+    <div class="flex h-auto">
         <!-- Sidebar -->
         <div class="bg-gray-800 text-white w-64 h-50 flex flex-col">
             <div class="p-4 flex justify-between items-center">
@@ -17,7 +17,7 @@
 
         </div>
 
-        <div class="flex-1 p-10 ">
+        <div class="flex-1 p-10 h-auto">
 
             <div class=" mx-auto bg-white rounded-lg shadow-md p-8 ">
                 <div>
@@ -33,7 +33,6 @@
 
 
                 <div class="flex">
-
                     <!-- Left side - Image of car -->
                     <div class="w-1/2">
                         <img  src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class="w-full bg-blue-500">
