@@ -27,32 +27,31 @@
                         <div>
                             <a href="{{route('admin.permalink', ['car'=> $car])}}">
                                 <div class="mx-auto bg-white rounded-lg shadow-md p-8 mt-2">
-                                    <div class="flex flex-col md:flex-row">
-                                        <!-- Left side - Image of car -->
-                                        <div class="w-full md:w-1/2 md:text-center">
-                                            <img src="{{ route('car.yours', ['id' => $car->id]) }}" alt="Car Image" class="w-80 h-52 bg-blue-500">
+                                    <div class="flex">
+                                        <div class="w-1/2">
+                                            @if(isset($images[$car->id]))
+                                                <img class="max-h-25 rounded" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                                            @else
+                                                <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image">
+                                            @endif
                                         </div>
                                         <div class="w-8">
-
                                         </div>
                                         <!-- Right side - Info for car -->
-                                        <div class="w-full md:w-1/2 text-left relative" >
-                                            <h2 class="text-xl font-bold mb-8">{{$car->make}} {{$car->model}}</h2>
-                                            <p class="text-xl font-bold text-left mb-8">{{$car->price}} €</p>
-                                            <div class="grid grid-cols-2 gap-4">
+                                        <div class="w-full md:w-1/2 text-left relative">
+                                            <h2 class="text-lg font-bold mb-8">{{$car->make}} {{$car->model}}</h2>
+                                            <p class="text-lg font-bold text-left mb-12">{{$car->price}} €</p>
+                                            <div class="grid grid-cols-2 gap-2">
                                                 <div>
                                                     <p><strong>Year:</strong> {{$car->year}}</p>
                                                     <p><strong>Body:</strong> {{$car->body_type}}</p>
-
-
                                                 </div>
                                                 <div>
                                                     <p><strong>Fuel:</strong> {{$car->fuel_type}}</p>
                                                     <p><strong>Mileage:</strong> {{$car->mileage}}</p>
-
                                                 </div>
                                             </div>
-                                            <div class=" absolute bottom-0 right-0">
+                                            <div class="absolute bottom-0 right-0">
                                                 {{ $userCities[$car->id] ?? 'Unknown' }}
                                             </div>
                                         </div>

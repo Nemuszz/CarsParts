@@ -28,12 +28,20 @@ class AdminController extends Controller
                 $userCities[$car->id] = 'Unknown';
             }
         }
+        $images = [];
+
+        foreach ($cars as $car) {
+            $image = Image::where('car_id', $car->id)->first();
+            if ($image) {
+                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+            }
+        }
 
 
 
 
 
-        return view('Admin/adminHome', compact('cars', 'userCities') );
+        return view('Admin/adminHome', compact('cars', 'userCities','images') );
 
     }
     public function adminUsers()
