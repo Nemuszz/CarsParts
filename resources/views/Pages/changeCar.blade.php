@@ -37,7 +37,7 @@
 
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
-                            <select required  id='car_make' name="make" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <select required  id='car_make' name="make" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                 @foreach (carMake() as $label => $value)
                                     <option value="{{ $value }}" {{ $car->make == $value ? 'selected' : '' }}>{{ $label }}</option>
                                 @endforeach
@@ -46,72 +46,77 @@
 
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400" for="car_model">Select Model:</label>
-                            <select  required name="model" id="car_model" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
+                            <select  required name="model" id="car_model" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
                                 <option value="">Change</option>
-                            </select>
-                        <div>
-
-                            <h3 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Description</h3>
-                        </div>
-                        <div class="flex flex-col space-y-2 mx-4">
-                            <label class="text-black-400">Year</label>
-                            <select required name="year" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
-
-                                <option value="{{$year}}">{{$year}}</option>
-                                @for($i = 0; $i < 50 ;$i++)
-                                    <option @if($car->year == $year - 1) selected @endif value="{{$year-= 1}}">{{$year}}</option>
-                                @endfor
-
-                            </select>
-                        </div>
-                        <div class="flex flex-col space-y-2 mx-4">
-                            <label for="mileage" class="">Mileage</label>
-                            <input id="mileage" name="mileage" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Mileage" value="{{$car->mileage}}">
-                        </div>
-                        <div class="flex flex-col space-y-2 mx-4">
-                            <label for="price" class="">Price</label>
-                            <input id="price" name="price" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Price in euros" value="{{$car->price}}">
-                        </div>
-                        <div class="flex flex-col space-y-2 mx-4">
-                            <label class="text-black-400">Body type</label>
-                            <select required name="power" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                @foreach (bodyType() as $label => $value)
-                                    <option value="{{ $value }}" {{ $car->body_type == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-
-                            <label class="text-black-400">Fuel type</label>
-                            <select required name="power" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                @foreach (fuelType() as $label => $value)
-                                    <option value="{{ $value }}" {{ $car->fuel_type == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="flex flex-col space-y-2 mx-4">
-                            <label class="text-black-400">Power</label>
-
-                            <select required name="power" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                @foreach (carPowers() as $label => $value)
-                                    <option value="{{ $value }}" {{ $car->power == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-
-                            <label class="text-black-400">Gear</label>
-                            <select required name="gear" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                @foreach (carGears() as $label => $value)
-                                    <option value="{{ $value }}" {{ $car->gear == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-
-                            <label class="text-black-400">Number of doors</label>
-                            <select required name="number_of_doors" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                @foreach (doorNumber() as $label => $value)
-                                    <option value="{{ $value }}" {{ $car->number_of_doors == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                @foreach (carModel() as $label => $values)
+                                    @foreach(array($values) as $value) @endforeach
+                                    <option {{ $car->model == $value ? 'selected' : '' }}>{{ $label }}</option>
                                 @endforeach
                             </select>
                             <div>
-                                <label for="description" class="">Description</label>
-                                <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description"> {{$car->description}}</textarea>
+
+                                <h3 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Description</h3>
+                            </div>
+                            <div class="flex flex-col space-y-2 mx-4">
+                                <label class="text-black-400">Year</label>
+                                <select required name="year" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
+
+                                    <option value="{{$year}}">{{$year}}</option>
+                                    @for($i = 0; $i < 50 ;$i++)
+                                        <option @if($car->year == $year - 1) selected @endif value="{{$year-= 1}}">{{$year}}</option>
+                                    @endfor
+
+                                </select>
+                            </div>
+                            <div class="flex flex-col space-y-2 mx-4">
+                                <label for="mileage" class="">Mileage</label>
+                                <input id="mileage" name="mileage" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Mileage" value="{{$car->mileage}}">
+                            </div>
+                            <div class="flex flex-col space-y-2 mx-4">
+                                <label for="price" class="">Price</label>
+                                <input id="price" name="price" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Price in euros" value="{{$car->price}}">
+                            </div>
+                            <div class="flex flex-col space-y-2 mx-4">
+                                <label class="text-black-400">Body type</label>
+                                <select required name="power" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    @foreach (bodyType() as $label => $value)
+                                        <option value="{{ $value }}" {{ $car->body_type == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+
+                                <label class="text-black-400">Fuel type</label>
+                                <select required name="power" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    @foreach (fuelType() as $label => $value)
+                                        <option value="{{ $value }}" {{ $car->fuel_type == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="flex flex-col space-y-2 mx-4">
+                                <label class="text-black-400">Power</label>
+
+                                <select required name="power" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    @foreach (carPowers() as $label => $value)
+                                        <option value="{{ $value }}" {{ $car->power == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+
+                                <label class="text-black-400">Gear</label>
+                                <select required name="gear" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    @foreach (carGears() as $label => $value)
+                                        <option value="{{ $value }}" {{ $car->gear == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+
+                                <label class="text-black-400">Number of doors</label>
+                                <select required name="number_of_doors" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    @foreach (doorNumber() as $label => $value)
+                                        <option value="{{ $value }}" {{ $car->number_of_doors == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                                <div>
+                                    <label for="description" class="">Description</label>
+                                    <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description"> {{$car->description}}</textarea>
+                                </div>
                             </div>
                         </div>
                         <input  id="phone" name="user_car_id" type="hidden"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="{{auth()->user()->id}}">
@@ -134,7 +139,7 @@
                         </button>
                     </div>
 
-                    </div>
+
                 </form>
 
             </div>
@@ -148,11 +153,6 @@
             $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
         });
     });
-
-
-
-
-
 
     const modelsByBrand = {
         'Abarth': ['124 Spider', '595', '695'],
