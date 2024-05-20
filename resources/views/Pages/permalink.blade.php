@@ -1,4 +1,61 @@
 @include('Layouts.nav')
+<!-- CSS to position navigation buttons -->
+<style>
+
+    .image-box{
+        height: 100px;
+        border: 1px solid black;
+        width: 100px;
+        margin-left: 10px;
+
+    }
+</style>
+<style>
+    .swiper-button-prev, .swiper-button-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+    .image-box {
+        margin-top: 10px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .image-box:hover {
+        opacity: 0.7;
+    }
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain !important;
+    }
+    .swiper-wrapper, .swiper-slide {
+        height: auto !important;
+    }
+
+</style>
 <div class="mx-auto max-w-screen-xl bg-gray-400-100 p-8 rounded-lg shadow-md">
     <!-- 2/3 of flex -->
     <div class="flex">
@@ -179,62 +236,6 @@
     });
 </script>
 
-<!-- CSS to position navigation buttons -->
-<style>
 
-    .image-box{
-        height: 100px;
-        border: 1px solid black;
-        width: 100px;
-        margin-left: 10px;
-
-    }
-</style>
-<style>
-    .swiper-button-prev, .swiper-button-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 30px;
-        height: 30px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border-radius: 50%;
-        cursor: pointer;
-        z-index: 10;
-    }
-
-    .swiper-button-prev {
-        left: 10px;
-    }
-
-    .swiper-button-next {
-        right: 10px;
-    }
-    .image-box {
-        margin-top: 10px;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .image-box:hover {
-        opacity: 0.7;
-    }
-    .image-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .swiper-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain !important;
-    }
-    .swiper-wrapper, .swiper-slide {
-        height: auto !important;
-    }
-
-</style>
 
 @include('Layouts.footer')

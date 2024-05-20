@@ -1,4 +1,47 @@
 @include('Layouts.nav')
+<!-- CSS to position navigation buttons -->
+<style>
+    .swiper-button-prev, .swiper-button-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+    .image-box {
+        margin-top: 10px;
+        width: 100px;
+        height: 90px; /* Adjust the height as needed */
+        overflow: hidden;
+    }
+    .image-box:hover {
+        opacity: 0.7; /* Adjust opacity value as needed */
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
 <div class="mx-auto max-w-screen-xl bg-gray-400-100 p-8 rounded-lg shadow-md">
     <!-- 2/3 of flex -->
     <div class="flex">
@@ -189,47 +232,5 @@
     });
 </script>
 
-<!-- CSS to position navigation buttons -->
-<style>
-    .swiper-button-prev, .swiper-button-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 30px;
-        height: 30px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border-radius: 50%;
-        cursor: pointer;
-        z-index: 10;
-    }
 
-    .swiper-button-prev {
-        left: 10px;
-    }
-
-    .swiper-button-next {
-        right: 10px;
-    }
-    .image-box {
-        margin-top: 10px;
-        width: 100px;
-        height: 90px; /* Adjust the height as needed */
-        overflow: hidden;
-    }
-    .image-box:hover {
-        opacity: 0.7; /* Adjust opacity value as needed */
-    }
-
-    .image-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .swiper-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-</style>
 @include('Layouts.footer')
