@@ -55,6 +55,7 @@ class AdminController extends Controller
 
 
 
+
         return view('Admin/adminPermalink', compact( 'car','user','images'));
 
     }

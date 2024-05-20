@@ -26,8 +26,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="flex mb-3">
                 @foreach($images as $image)
                     <div class="image-box">

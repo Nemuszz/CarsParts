@@ -33,11 +33,17 @@
 
 
                 <div class="flex">
-                    <!-- Left side - Image of car -->
-                    <div class="w-1/2">
-                        <img  src="{{ route('car.yours', ['id' => $car->id]) }}" alt="Car Image" class="w-full bg-blue-500">
-                    </div>
 
+                    <div class="w-1/2">
+                        @if(isset($images[$car->id]))
+                            <img class="max-h-30 rounded " src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                        @else
+                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image">
+                        @endif
+                    </div>
+                    <div class="w-16">
+
+                    </div>
                     <!-- Right side - Info for car -->
                     <div class="w-1/2">
                         <h2 class="text-xl font-bold mb-4">Car Information</h2>

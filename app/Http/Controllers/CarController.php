@@ -122,12 +122,17 @@ class CarController extends Controller
     public function yours($id)
     {
         $user = User::findOrFail($id);
+        $cars = CarsModel::where('user_car_id', $user->id)->get();
+        $images = [];
 
-        $cars = CarsModel::where(['user_car_id' => $user->id])->get();
+        foreach ($cars as $car) {
+            $image = Image::where('car_id', $car->id)->first();
+            if ($image) {
+                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+            }
+        }
 
-
-        return view('Pages/your', compact('user', 'cars'));
-
+        return view('Pages/your', compact('user', 'cars', 'images'));
     }
     public function permalink($car)
     {
