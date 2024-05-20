@@ -34,11 +34,11 @@
 
                 <div class="flex">
 
-                    <div class="w-1/2">
+                    <div class="w-1/2 h-48">
                         @if(isset($images[$car->id]))
-                            <img class="max-h-30 rounded " src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                            <img class="h-full w-full object-cover rounded" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
                         @else
-                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image">
+                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
                         @endif
                     </div>
                     <div class="w-16">

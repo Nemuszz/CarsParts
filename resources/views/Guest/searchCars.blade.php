@@ -92,7 +92,7 @@
                     <div class="mx-auto bg-white rounded-lg shadow-md p-8 mt-2 flex flex-col md:flex-row relative justify-center">
                         <!-- Left side - Image of car -->
                         <div class=" w-80 md:w-1/2 md:h-52 mb-8 md:mr-8 md:mb-0 o">
-                            <img src="{{ route('car.yours', ['id' => $car->image]) }}" alt="Car Image" class=" w-80 h-52 bg-blue-500">
+                            <img src="{{ route('car.yours', ['id' => $car->id]) }}" alt="Car Image" class=" w-80 h-52 bg-blue-500">
                         </div>
                         <!-- Right side - Info for car -->
                         <div class="w-full md:w-1/2">
