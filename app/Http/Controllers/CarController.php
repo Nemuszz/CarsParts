@@ -17,9 +17,17 @@ class CarController extends Controller
     {
         $cars = CarsModel::where(['checked_out'=> 'checked'])->get();
         $year = 2024;
+        $images = [];
+
+        foreach ($cars as $car) {
+            $image = Image::where('car_id', $car->id)->first();
+            if ($image) {
+                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+            }
+        }
 
 
-        return view('Guest/allCars', compact('cars', 'year'));
+        return view('Guest/allCars', compact('cars', 'year','images'));
 
     }
     public function search(Request $request)

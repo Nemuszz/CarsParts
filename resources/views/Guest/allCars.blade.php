@@ -71,14 +71,18 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             @foreach($cars as $car)
                 <a href="{{ route('car.permalink', $car) }}" class="flex items-stretch">
-                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full">
+                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full ">
                         <!-- Car Image -->
-                        <img src="{{ $car->image }}" alt="Car Image" class="w-full h-48 object-cover mb-4 rounded">
+                        @if(isset($images[$car->id]))
+                            <img class="max-h-25 rounded mb-2 w-full h-full" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                        @else
+                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image">
+                        @endif
 
                         <!-- Car Details -->
                         <div>
-                            <h2 class="text-xl font-bold mb-2">{{ $car->make }} {{ $car->model }}</h2>
-                            <p class="text-gray-600 flex justify-between">
+                            <h2 class="text-xl font-bold mb-4">{{ $car->make }} {{ $car->model }}</h2>
+                            <p class="text-gray-600 flex justify-between mb-2">
                                 <span>{{ $car->year }}</span>
                                 <span><strong>{{ $car->price }} €</strong></span>
                             </p>
