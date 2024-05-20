@@ -72,8 +72,16 @@ class CarController extends Controller
                 $userCities[$car->id] = 'Unknown';
             }
         }
+        $images = [];
 
-        return view('Guest/searchCars', compact('cars', 'request','userCities'));
+        foreach ($cars as $car) {
+            $image = Image::where('car_id', $car->id)->first();
+            if ($image) {
+                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+            }
+        }
+
+        return view('Guest/searchCars', compact('cars', 'request','userCities','images'));
 
     }
 

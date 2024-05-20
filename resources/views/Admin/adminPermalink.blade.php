@@ -16,7 +16,6 @@
                                     <div class="swiper-slide h-full flex items-center justify-center"> <!-- Ensure the swiper-slide and its parent have full height -->
                                         <img src="{{ asset('images/' . $image->path) }}" alt="Car Image" class="object-contain w-full h-full max-w-full max-h-full">
                                     </div>
-
                                 @endforeach
                             </div>
                             <!-- Add Navigation Buttons -->
@@ -26,9 +25,9 @@
                     </div>
                 </div>
             </div>
-            <div class="flex mb-3">
+            <div class="flex overflow-hidden mb-3">
                 @foreach($images as $image)
-                    <div class="image-box">
+                    <div class="image-box hidden md:block">
                         <img src="{{ asset('images/' . $image->path) }}" alt="Car Image" class="object-cover w-full h-full">
                     </div>
                 @endforeach
@@ -139,15 +138,9 @@
                     <a href="{{route('admin.delete', $car)}}" class="text-white font-semibold text-lg hover:text-red-600 px-6 py-3">Delete</a>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
 </div>
-
-<!-- Main Content -->
 <style>
 
     .image-box{
@@ -220,7 +213,7 @@
     }
     .image-box {
         margin-top: 10px;
-        width: 90px;
+        width: 100px;
         height: 90px; /* Adjust the height as needed */
         overflow: hidden;
     }
@@ -239,6 +232,4 @@
         object-fit: cover;
     }
 </style>
-
-
 @include('Layouts.footer')

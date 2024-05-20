@@ -176,7 +176,7 @@
         const models = modelsByBrand[selectedBrand] || [];
 
         // Clear existing options
-        carModelSelect.innerHTML = '';
+
 
         // Add new options
         models.forEach(model => {

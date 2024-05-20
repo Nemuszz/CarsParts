@@ -91,8 +91,12 @@
                     <a href="{{route('car.permalink', $car)}}">
                     <div class="mx-auto bg-white rounded-lg shadow-md p-8 mt-2 flex flex-col md:flex-row relative justify-center">
                         <!-- Left side - Image of car -->
-                        <div class=" w-80 md:w-1/2 md:h-52 mb-8 md:mr-8 md:mb-0 o">
-                            <img src="{{ route('car.yours', ['id' => $car->id]) }}" alt="Car Image" class=" w-80 h-52 bg-blue-500">
+                        <div class=" w-80 md:w-1/2 md:h-52 mb-8 md:mr-8 md:mb-0">
+                            @if(isset($images[$car->id]))
+                                <img class="h-full w-full object-cover rounded" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                            @else
+                                <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
+                            @endif
                         </div>
                         <!-- Right side - Info for car -->
                         <div class="w-full md:w-1/2">
