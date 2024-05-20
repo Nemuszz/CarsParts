@@ -45,21 +45,23 @@
 
                     </div>
                     <!-- Right side - Info for car -->
-                    <div class="w-1/2">
-                        <h2 class="text-xl font-bold mb-4">Car Information</h2>
+                    <div class="w-full md:w-1/2 text-left relative" >
+                        <h2 class="text-xl font-bold mb-8">{{$car->make}} {{$car->model}}</h2>
+                        <p class="text-xl font-bold text-left mb-8">{{$car->price}} €</p>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
-                                <p><strong>Make:</strong> {{$car->make}}</p>
-                                <p><strong>Model:</strong> {{$car->model}}</p>
                                 <p><strong>Year:</strong> {{$car->year}}</p>
+                                <p><strong>Body:</strong> {{$car->body_type}}</p>
+
+
                             </div>
                             <div>
+                                <p><strong>Fuel:</strong> {{$car->fuel_type}}</p>
                                 <p><strong>Mileage:</strong> {{$car->mileage}}</p>
-                                <p><strong>Price:</strong> {{$car->price}}</p>
 
                             </div>
-
                         </div>
+
                     </div>
 
                 </div>
