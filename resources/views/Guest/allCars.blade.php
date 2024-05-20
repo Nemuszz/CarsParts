@@ -74,7 +74,7 @@
                     <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full ">
                         <!-- Car Image -->
                         @if(isset($images[$car->id]))
-                            <img class="max-h-25 rounded mb-2 w-full h-full" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                            <img class="max-h-25  rounded mb-2 w-full h-full" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
                         @else
                             <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image">
                         @endif
