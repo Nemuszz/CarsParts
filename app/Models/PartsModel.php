@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class PartsModel extends Model
 {
     use HasFactory;
+
+    protected $table = 'parts';
+    protected $fillable = [
+        'make',
+        'model',
+        'name',
+        'description',
+        'images'
+
+    ];
 }

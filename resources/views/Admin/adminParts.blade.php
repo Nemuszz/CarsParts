@@ -8,7 +8,7 @@
             <nav class=" flex">
                 <a href="{{route('admin.page')}}" class="p-2 md:p-4 hover:bg-gray-700">Car requests</a>
                 <a href="{{route('admin.users')}}" class="p-2 md:p-4 hover:bg-gray-700">Users</a>
-                <a href="{{route('admin.add.parts')}}" class="p-2 md:p-4 hover:bg-gray-700">Add parts</a>
+                <a href="{{route('admin.parts.add')}}" class="p-2 md:p-4 hover:bg-gray-700">Add parts</a>
                 <a href="" class="p-2 md:p-4 hover:bg-gray-700">Orders</a>
                 <a href="{{route('admin.messages')}}" class="p-2 md:p-4 hover:bg-gray-700">Messages</a>
             </nav>
@@ -21,15 +21,15 @@
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Add parts</h2>
 
                 </div>
-                <form class="mt-8 space-y-6 form-horizontal" action="{{route('car.insert')}}" method="POST" enctype="multipart/form-data">
+                <form class="mt-8 space-y-6 form-horizontal" action="{{route('admin.parts.insert')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div id="imageInputs">
-                            <label for="images">Images:</label>
+                            <label for="images">Image:</label>
 
-                            <input required type="file" name="images[]" class="imageInput" accept="image/*">
+                            <input required type="file" name="images" class="imageInput" >
                         </div>
-                        <button type="button" id="addImageInput">Add Image</button>
+
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
                             <select required  id='car_brand' name="make" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Name</label>
-                            <select required  name="make" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <select required  name="name" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
 
                                 @foreach(partsName() as $label => $value)
                                     <option value="{{ $value }}">{{ $label }}</option>
@@ -58,7 +58,20 @@
                             <label for="description" class="">Description</label>
                             <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description"></textarea>
                         </div>
-
+                        <div class="flex items-center justify-center">
+                            <button  type="submit" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Add part
+                            </button>
+                        </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger text-red">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
 
 
@@ -73,11 +86,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#addImageInput').click(function() {
-            $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
-        });
-    });
+
 
     const modelsByBrand = {
         'Abarth': ['124 Spider', '595', '695'],

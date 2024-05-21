@@ -58,7 +58,8 @@ Route::controller(AdminController::class)->middleware([AdminMiddleware::class])-
     Route::get('/delete/{car}','adminDelete')->name('admin.delete');
     Route::get('/check/{car}','adminCheck')->name('admin.check');
     Route::get('/messages','adminMessages')->name('admin.messages');
-    Route::get('/add/parts','adminAddParts')->name('admin.add.parts');
+    Route::get('/parts/add','adminPartsAdd')->name('admin.parts.add');
+    Route::post('/parts/insert','adminPartsInsert')->name('admin.parts.insert');
 
 
 });

@@ -93,7 +93,7 @@ if (!function_exists('partsName')) {
     function partsName()
     {
         return [
-
+            'cooler' => 'cooler',
         ];
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\CarsModel;
 use App\Models\ContactUsModel;
 use App\Models\Image;
+use App\Models\PartsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -36,10 +38,6 @@ class AdminController extends Controller
                 $images[$car->id] = $image; // Store the first image in an array with car ID as key
             }
         }
-
-
-
-
 
         return view('Admin/adminHome', compact('cars', 'userCities','images') );
 
@@ -101,11 +99,30 @@ class AdminController extends Controller
 
         return view('Admin/adminMessages',compact('messages','number') );
     }
-    public function adminAddParts()
+    public function adminPartsAdd()
     {
-
-
         return view('Admin/adminParts' );
     }
 
+    public function adminPartsInsert(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'images'=>'image|mimes:jpeg,png,jpg|max:2048',
+            'make' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        PartsModel::create($request->all());
+
+
+
+        return redirect()->back()->with('success', 'Car deleted successfully!');
+    }
 }
