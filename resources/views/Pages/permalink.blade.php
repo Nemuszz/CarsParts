@@ -188,8 +188,6 @@
                 </ul>
                 <a href="/cars" class="text-blue-500 hover:underline">Read More Tips</a>
             </div>
-
-
         </div>
     </div>
 

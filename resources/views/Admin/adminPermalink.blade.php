@@ -173,6 +173,7 @@
                 </ul>
                 <a href="/cars" class="text-blue-500 hover:underline">Read More Tips</a>
             </div>
+
             <div class="flex bg-white rounded-lg shadow-md p-8 mt-8">
                 <div class="w-1/2 bg-green-400 rounded-l-lg flex justify-center items-center">
                     <a href="{{route('admin.check', $car)}}" class="text-white font-semibold text-lg hover:text-green-600 px-6 py-3">Check</a>
@@ -181,6 +182,7 @@
                     <a href="{{route('admin.delete', $car)}}" class="text-white font-semibold text-lg hover:text-red-600 px-6 py-3">Delete</a>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
