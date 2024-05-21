@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="flex flex-col space-y-2 mx-4">
                                     <label class="text-black-400">Year</label>
-                                    <select required name="year" class="px-4 py-2 rounded-lg  border-2 border-black bg-white focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    <select required name="year" class="px-4 py-2 rounded-lg border-2 border-black bg-white focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         <option value="">Select Year</option>
                                         <option value="{{$year}}">{{$year}}</option>
                                         @for($i = 0; $i < 50 ;$i++)
@@ -97,7 +97,7 @@
                                     </select>
 
                                     <label class="text-black-400">Gear</label>
-                                    <select required name="gear" class="px-4 py-2 rounded-lg border-2 border-black bg-white focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    <select required name="gear" class="px-4 py-2 rounded-lg  border-2 border-black bg-white focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         @foreach(carGears() as $label => $value)
                                             <option value="{{ $value }}">{{ $label }}</option>
                                         @endforeach
@@ -114,28 +114,28 @@
                                         <label for="description" class="">Description</label>
                                         <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description"></textarea>
                                     </div>
-                        </div>
-                        <input  id="phone" name="user_car_id" type="hidden"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="{{auth()->user()->id}}">
-                        @if ($errors->any())
-                            <div class="alert alert-danger text-red">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+                                </div>
+                                <input  id="phone" name="user_car_id" type="hidden"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="{{auth()->user()->id}}">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger text-red">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
-                        @endif
-                    </div>
 
 
 
-                    <div class="flex items-center justify-center">
-                        <button  type="submit" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Add your car
-                        </button>
-                    </div>
+                            <div class="flex items-center justify-center">
+                                <button  type="submit" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Add your car
+                                </button>
+                            </div>
                         </div>
-                        </div>
+                    </div>
                 </form>
 
             </div>

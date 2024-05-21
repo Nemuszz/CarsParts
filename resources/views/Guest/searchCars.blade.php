@@ -66,23 +66,15 @@
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400 invisible">Condition</label>
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Search</button>
-
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400 invisible">Condition</label>
                         <button id="emptyField" class="px-4 py-2 bg-gray-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Empty</button>
-
                     </div>
                 </div>
             </div>
         </form>
-
     </header>
-
-
-
-
-
     <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
         <div class="flex gap-8">
