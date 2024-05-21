@@ -9,6 +9,7 @@
             <nav class=" flex">
                 <a href="{{route('admin.page')}}" class="p-2 md:p-4 hover:bg-gray-700">Car requests</a>
                 <a href="{{route('admin.users')}}" class="p-2 md:p-4 hover:bg-gray-700">Users</a>
+                <a href="{{route('admin.add.parts')}}" class="p-2 md:p-4 hover:bg-gray-700">Add parts</a>
                 <a href="" class="p-2 md:p-4 hover:bg-gray-700">Orders</a>
                 <a href="{{route('admin.messages')}}" class="p-2 md:p-4 hover:bg-gray-700">Messages</a>
             </nav>

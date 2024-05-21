@@ -89,6 +89,15 @@ if (!function_exists('carPowers')) {
     }
 }
 
+if (!function_exists('partsName')) {
+    function partsName()
+    {
+        return [
+
+        ];
+    }
+}
+
 if (!function_exists('carGears')) {
     function carGears()
     {

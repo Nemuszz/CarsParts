@@ -11,7 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('parts', function (Blueprint $table) {
+            $table->id();
+            $table->string('make');
+            $table->string('model');
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table ->string('images')->default('default_image.jpg');
+            $table->timestamps();
+        });
     }
 
     /**

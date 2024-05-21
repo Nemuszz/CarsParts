@@ -101,4 +101,11 @@ class AdminController extends Controller
 
         return view('Admin/adminMessages',compact('messages','number') );
     }
+    public function adminAddParts()
+    {
+
+
+        return view('Admin/adminParts' );
+    }
+
 }
