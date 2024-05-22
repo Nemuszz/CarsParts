@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('parts_images', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('part_id');
+            $table->string('path');
             $table->timestamps();
+            $table->foreign('part_id')->references('id')->on('parts')->onDelete('cascade');
         });
     }
 

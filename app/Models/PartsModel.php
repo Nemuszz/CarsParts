@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartsModel extends Model
 {
+    public function parts_images()
+    {
+        return $this->hasMany(PartsModel::class);
+    }
     use HasFactory;
 
     protected $table = 'parts';
