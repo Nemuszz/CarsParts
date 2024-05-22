@@ -121,9 +121,12 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
+        $highestPart = PartsModel::orderBy('part_code', 'desc')->first();
+        $partCode = $highestPart ? $highestPart->part_code + 1 : 1;
 
 
         $partData = $request->except('images');
+        $partData['part_code'] = $partCode;
         $part = PartsModel::create($partData);
 
         if ($request->hasFile('images')) {
@@ -137,6 +140,7 @@ class AdminController extends Controller
                 $imageModel->save();
             }
         }
+
 
         return redirect()->back()->with('success', 'Part added successfully!');
     }

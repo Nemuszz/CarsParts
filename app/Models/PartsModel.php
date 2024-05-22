@@ -21,7 +21,9 @@ class PartsModel extends Model
         'name',
         'price',
         'description',
-        'images'
+        'images',
+        'amount',
+        'part_code'
 
     ];
 }
