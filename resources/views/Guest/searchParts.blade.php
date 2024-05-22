@@ -50,6 +50,10 @@
                         <label class="text-gray-400 invisible">Condition</label>
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Search</button>
                     </div>
+                    <div class="flex flex-col space-y-2 mx-4">
+                        <label class="text-gray-400 invisible">Condition</label>
+                        <button id="emptyField" class="px-4 py-2 bg-gray-500 text-white rounded-lg focus:outline-none focus:bg-blue-600">Empty</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -238,6 +242,38 @@
                 partName.appendChild(option);
             });
         }
+    });
+
+    const emptyField = document.getElementById('emptyField')
+    emptyField.addEventListener('click', function (){
+        carBrandSelect.value = '';
+        carModelSelect.value = '';
+        partName.value = '';
+        partSelection.value = '';
+
+    })
+
+
+    document.getElementById('scrollTopButton').addEventListener('click', function() {
+
+        const scrollPosition = window.scrollY;
+        const distance = scrollPosition;
+        const duration = 1000; // 2 seconds
+        const increment = 20; // 20 milliseconds
+        const frames = duration / increment;
+        const distancePerFrame = distance / frames;
+
+        function scrollToTop(currentScrollPosition, distanceToMove, framesLeft) {
+            if (currentScrollPosition > 0 && framesLeft > 0) {
+                const newScrollPosition = currentScrollPosition - distanceToMove;
+                window.scroll(0, newScrollPosition);
+                requestAnimationFrame(function() {
+
+                    scrollToTop(newScrollPosition, distanceToMove, framesLeft - 1);
+                });
+            }
+        }
+        scrollToTop(scrollPosition, distancePerFrame, frames);
     });
 </script>
 @include('Layouts.footer')
