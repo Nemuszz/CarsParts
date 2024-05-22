@@ -26,6 +26,7 @@ Route::get('/login', function () {
 Route::get('/cars',[CarController::class, 'index'])->name('cars');
 Route::get('/search',[CarController::class, 'search'])->name('search');
 Route::get('/parts',[PartsController::class, 'parts'])->name('parts');
+Route::get('/parts/search',[PartsController::class, 'partSearch'])->name('parts.search');
 
 
 
@@ -34,6 +35,10 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/register', 'register')->name('user.register');
 
 });
+
+
+
+
 Route::controller(UserController::class)->middleware(AuthMiddleware::class)->prefix('/user')->group(function () {
     Route::get('/logout', 'logout')->name('user.logout');
     Route::get('/profile/{id}', 'profile')->name('user.profile');

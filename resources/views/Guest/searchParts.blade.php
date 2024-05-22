@@ -13,7 +13,7 @@
                         <select id='car_brand' name="make" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select Make</option>
                             @foreach(allMakes() as $label => $value)
-                                <option value="{{ $value }}">{{ $label }}</option>
+                                <option value="{{ $value }}"{{$request->input('make') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
                             <!-- Add more options for make -->
                         </select>
@@ -32,7 +32,7 @@
                         <select  id="part-selection" name="section" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select section</option>
                             @foreach(partsSection() as $label => $value)
-                                <option value="{{ $value }}">{{ $label }}</option>
+                                <option value="{{ $value }}"{{$request->input('section') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
                             <!-- Add more options for make -->
                         </select>

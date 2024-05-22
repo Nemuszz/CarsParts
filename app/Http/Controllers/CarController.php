@@ -33,8 +33,6 @@ class CarController extends Controller
     public function search(Request $request)
     {
 
-
-
         $query = CarsModel::where('checked_out', 'checked');
         if ($request->filled('year')) {
             $query->where('year', $request->year);
@@ -52,8 +50,6 @@ class CarController extends Controller
         if ($request->filled('price')) {
             $query->where('price','<', $request->price);
         }
-
-
 
         $cars = $query->get();
 
