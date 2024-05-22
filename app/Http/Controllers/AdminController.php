@@ -101,8 +101,11 @@ class AdminController extends Controller
         return view('Admin/adminMessages',compact('messages','number') );
     }
     public function adminPartsAdd()
+
     {
-        return view('Admin/adminParts' );
+        $parts = PartsModel::all();
+
+        return view('Admin/adminParts',compact('parts') );
     }
 
     public function adminPartsInsert(Request $request)

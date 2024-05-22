@@ -27,6 +27,7 @@ Route::get('/cars',[CarController::class, 'index'])->name('cars');
 Route::get('/search',[CarController::class, 'search'])->name('search');
 Route::get('/parts',[PartsController::class, 'parts'])->name('parts');
 Route::get('/parts/search',[PartsController::class, 'partSearch'])->name('parts.search');
+Route::get('/parts/delete{part}',[PartsController::class, 'partDelete'])->name('parts.delete');
 
 
 

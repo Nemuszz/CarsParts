@@ -81,6 +81,49 @@
                     </div>
 
                 </form>
+
+
+                <div class="flex-1">
+                    <div class="mx-auto bg-white rounded-lg shadow-md p-4 md:p-8">
+                        <div>
+                            <h2 class="mt-6 mb-4 text-center text-lg md:text-3xl font-extrabold text-gray-900 border-b-2 border-gray-300 pb-2">Messages</h2>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-800">
+                                <tr>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Make</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Model</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Section</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Name</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Amount</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Price</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Part code</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Add amount</th>
+                                    <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                @foreach($parts as $part)
+                                    <tr>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->make}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->model}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->section}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->name}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->amount}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->price}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap">{{$part->part_code}}</td>
+                                        <td class="px-2 py-1 whitespace-nowrap"><a>Add amount</a></td>
+                                        <td class="px-2 py-1 whitespace-nowrap"><a class="text-red-600" href="{{route('parts.delete',$part)}}">Delete</a></td>
+
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
     </div>
         </div>
 </div>

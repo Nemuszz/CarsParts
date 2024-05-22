@@ -26,6 +26,7 @@ class PartsController extends Controller
         }
 
 
+
         return view('Guest/parts',compact('parts', 'images') );
     }
 
@@ -62,4 +63,13 @@ class PartsController extends Controller
         return view('Guest.searchParts', compact('parts','request',  'images'));
 
     }
+
+    public function partDelete($part){
+
+        $singlePart = PartsModel::where(['id' => $part])->first();
+        $singlePart->delete();
+
+        return redirect()->route('admin.parts.add')->with('success', 'Part successfully deleted!');
+    }
+
 }
