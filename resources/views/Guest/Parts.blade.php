@@ -55,30 +55,41 @@
         </form>
     </header>
 
-    <section class="container mx-auto my-8">
-        <!-- Part Listings -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            @foreach($parts as $part)
-                <a href="#" class="flex items-stretch">
-                    <div class="bg-white rounded shadow-md p-8 car-card flex flex-col justify-between w-full sm:w-64 md:w-56" style="padding-bottom: 2.5rem;">
-                        <!-- Part Image -->
-                        @if(isset($images[$part->id]))
-                            <img class="max-h-48 rounded mb-4 w-full h-full object-cover" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
-                        @else
-                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Part Image">
-                        @endif
-
-                        <!-- Car Details -->
-                        <div>
-                            <h2 class="text-lg font-bold mb-2">{{ $part->make }} {{ $part->model }}</h2>
-                            <p class="text-gray-600 flex justify-between">
-                                <span>{{ $part->name }}</span>
-                                <span><strong>{{ $part->price }} €</strong></span>
-                            </p>
+    <section class="container mx-auto my-12 max-w-screen-xl">
+        <!-- Car Listings -->
+        <div class="flex gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                @foreach($parts as $part)
+                    <a href="#" class="w-full">
+                        <div class="mx-auto bg-white rounded-lg shadow-md p-4 flex flex-col md:flex-row justify-center items-center">
+                            <!-- Left side - Image of car -->
+                            <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">
+                                @if(isset($images[$part->id]))
+                                    <img class="h-full w-full object-cover rounded" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
+                                @else
+                                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
+                                @endif
+                            </div>
+                            <!-- Right side - Info for car -->
+                            <div class="flex flex-col justify-center">
+                                <h2 class="text-lg font-bold mb-2">{{ $part->make }} {{ $part->model }}</h2>
+                                <p class="text-gray-600"><strong>{{ $part->name }}</strong></p>
+                                <p class="text-gray-600"><strong>{{ $part->price }} €</strong></p>
+                            </div>
                         </div>
+                    </a>
+                @endforeach
+            </div>
+            <div class="hidden md:w-72 md:block min-h-screen">
+                <div class="w-full">
+                    <img class="w-48 md:w-full mb-6" alt="banner" src="{{asset('images/banneradd.png')}}">
+                    <div class="flex justify-center">
+                        <button id="scrollTopButton" class="px-4 py-2 bg-gray-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300">
+                            To Top
+                        </button>
                     </div>
-                </a>
-            @endforeach
+                </div>
+            </div>
         </div>
     </section>
 
