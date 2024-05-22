@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CarsModel;
 use App\Models\ContactUsModel;
 use App\Models\Image;
+use App\Models\PartsImagesModel;
 use App\Models\PartsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -107,22 +108,36 @@ class AdminController extends Controller
     public function adminPartsInsert(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'images'=>'image|mimes:jpeg,png,jpg|max:2048',
             'make' => 'required|string|max:255',
             'model' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
             'name' => 'required|string|max:255',
+            'price' => 'required|string|max:255',
             'description' => 'required|string|max:255',
-
+            'images' => 'required|array|min:1',
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        PartsModel::create($request->all());
 
+        $partData = $request->except('images');
+        $part = PartsModel::create($partData);
 
+        if ($request->hasFile('images')) {
 
-        return redirect()->back()->with('success', 'Car deleted successfully!');
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('partsImages'), $imageName);
+                $imageModel = new PartsImagesModel();
+                $imageModel->path = $imageName;
+                $imageModel->part_id = $part->id;
+                $imageModel->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Part added successfully!');
     }
 }

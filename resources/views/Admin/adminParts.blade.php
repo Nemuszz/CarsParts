@@ -14,11 +14,11 @@
                     {{csrf_field()}}
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div id="imageInputs">
-                            <label for="images">Image:</label>
+                            <label for="images">Images:</label>
 
-                            <input required type="file" name="images" class="imageInput" >
+                            <input required type="file" name="images[]" class="imageInput" accept="image/*">
                         </div>
-
+                        <button type="button" id="addImageInput">Add Image</button>
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
                             <select required  id='car_brand' name="make" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
@@ -89,7 +89,11 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
+    $(document).ready(function() {
+        $('#addImageInput').click(function() {
+            $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
+        });
+    });
 
     const modelsByBrand = {
         'Abarth': ['124 Spider', '595', '695'],

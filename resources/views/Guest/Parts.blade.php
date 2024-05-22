@@ -29,7 +29,7 @@
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Section</label>
-                        <select name="section" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                        <select  id="part-selection" name="section" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select section</option>
                             @foreach(partsSection() as $label => $value)
                                 <option value="{{ $value }}">{{ $label }}</option>
@@ -39,12 +39,9 @@
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Name</label>
-                        <select name="name" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                            <option value="">Select Make</option>
-                            @foreach(partsName() as $label => $value)
-                                <option value="{{ $value }}">{{ $label }}</option>
-                            @endforeach
-                            <!-- Add more options for make -->
+                        <select id="part-name" name="name" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                            <option value="">Select name</option>
+
                         </select>
                     </div>
 
@@ -58,20 +55,27 @@
         </form>
     </header>
 
-    <section class="container mx-auto my-12">
-        <!-- Car Listings -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        @foreach($parts as $part)
+    <section class="container mx-auto my-8">
+        <!-- Part Listings -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            @foreach($parts as $part)
                 <a href="#" class="flex items-stretch">
-                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full">
-                        <!-- Car Image -->
-                        <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image">
+                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full sm:w-64 md:w-56" style="padding-bottom: 1.5rem;">
+                        <!-- Part Image -->
+                        @if(isset($images[$part->id]))
+                            <img class="max-h-28 rounded mb-2 w-full h-full" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
+                        @else
+                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Part Image">
+                        @endif
 
                         <!-- Car Details -->
                         <div>
-                            <h2 class="text-xl font-bold mb-4">{{ $part->make }} {{ $part->model }}</h2>
+                            <h2 class="text-lg font-bold mb-2">{{ $part->make }} {{ $part->model }}</h2>
+                            <p class="text-gray-600 flex justify-between">
+                                <span>{{ $part->name }}</span>
+                                <span><strong>{{ $part->price }} €</strong></span>
+                            </p>
                         </div>
-
                     </div>
                 </a>
             @endforeach
@@ -168,6 +172,60 @@
             option.text = model;
             carModelSelect.appendChild(option);
         });
+    });
+
+
+
+
+
+
+
+
+
+
+    const partsBySection = {
+        'Engine': ['Piston', 'Cylinder Head', 'Crankshaft', 'Camshaft', 'Connecting Rod', 'Engine Block', 'Timing Belt', 'Timing Chain', 'Valve', 'Valve Cover', 'Oil Pump', 'Oil Pan', 'Turbocharger', 'Supercharger', 'Fuel Injector', 'Throttle Body', 'Intake Manifold', 'Exhaust Manifold'],
+        'Suspension': ['Shock Absorber', 'Strut Assembly', 'Control Arm', 'Ball Joint', 'Tie Rod', 'Sway Bar', 'Stabilizer Bar', 'Leaf Spring', 'Coil Spring', 'Control Arm Bushing', 'Bushing', 'Strut Mount', 'Control Arm Bushing', 'Shock Mount', 'Suspension Bushing', 'Suspension Link', 'Trailing Arm', 'Panhard Rod'],
+        'Brake': ['Brake Pads', 'Brake Rotors', 'Brake Calipers', 'Brake Drum', 'Brake Shoes', 'Brake Lines', 'Brake Master Cylinder', 'Brake Booster', 'Brake Fluid Reservoir', 'Parking Brake Cable', 'Brake Hardware Kit', 'Brake Disc', 'Brake Fluid'],
+        'Electrical': ['Battery', 'Alternator', 'Starter Motor', 'Ignition Coil', 'Spark Plug', 'Distributor', 'Ignition Switch', 'Ignition Module', 'Ignition Control Unit', 'Ignition Wire Set', 'Glow Plug', 'Voltage Regulator', 'Battery Cable', 'Battery Terminal', 'Headlight', 'Tail Light', 'Turn Signal Light', 'Fog Light'],
+        'Interior': ['Seats', 'Dashboard', 'Steering Wheel', 'Door Panel', 'Console', 'Cup Holder', 'Center Armrest', 'Glove Box', 'Floor Mats', 'Carpet', 'Headliner', 'Sun Visor', 'Seat Belt', 'Seat Cover', 'Trim Panel', 'Pedal', 'Shift Knob', 'Mirror'],
+        'Exterior': ['Bumper', 'Grille', 'Fender', 'Hood', 'Trunk Lid', 'Quarter Panel', 'Roof', 'Windshield', 'Side Mirror', 'Door Handle', 'Window Regulator', 'Door', 'Spoiler', 'Molding', 'Emblem', 'Trim', 'Weatherstripping', 'Sunroof', 'Running Board'],
+        'Transmission': ['Transmission Fluid', 'Transmission Filter', 'Transmission Mount', 'Clutch', 'Clutch Master Cylinder', 'Clutch Slave Cylinder', 'Flywheel', 'Torque Converter', 'Shift Cable', 'Shift Linkage', 'Transmission Pan', 'Transmission Control Module', 'Transmission Valve Body', 'Transmission Solenoid', 'Transmission Sensor', 'Transmission Cooler'],
+        'Wheel': ['Tire', 'Wheel Hub', 'Wheel Bearing', 'Wheel Seal', 'Wheel Stud', 'Wheel Spacer', 'Wheel Bolt', 'Wheel Nut', 'Wheel Cover', 'Wheel Center Cap', 'Wheel Valve Stem', 'Tire Pressure Sensor', 'Tire Pressure Monitor', 'Tire Valve', 'Tire Patch Kit', 'Tire Iron', 'Wheel Alignment Kit'],
+        'Exhaust': ['Muffler', 'Catalytic Converter', 'Exhaust Pipe', 'Exhaust Manifold', 'Exhaust Gasket', 'Exhaust Hanger', 'Exhaust Flange', 'Exhaust Tip', 'Exhaust Clamp', 'Oxygen Sensor', 'EGR Valve', 'PCV Valve', 'Resonator', 'Tailpipe'],
+        'Cooling': ['Radiator', 'Water Pump', 'Thermostat', 'Coolant Temperature Sensor', 'Cooling Fan', 'Cooling Hose', 'Expansion Tank', 'Coolant Reservoir Cap', 'Coolant Reservoir', 'Heater Core', 'Heater Hose', 'Oil Cooler', 'Intercooler', 'Fan Clutch', 'Fan Blade'],
+        'Fuel': ['Fuel Pump', 'Fuel Filter', 'Fuel Injector', 'Fuel Pressure Regulator', 'Fuel Tank', 'Fuel Filler Neck', 'Fuel Line', 'Fuel Hose', 'Fuel Pressure Sensor', 'Fuel Rail', 'Gas Cap', 'Carburetor', 'Throttle Position Sensor', 'Idle Air Control Valve'],
+        'Body': ['Door', 'Trunk', 'Hood', 'Fender', 'Bumper', 'Quarter Panel', 'Roof', 'Windshield', 'Side Mirror', 'Window', 'Sunroof', 'Grille', 'Molding', 'Emblem', 'Trim', 'Weatherstrip', 'Rock Panel', 'Running Board', 'Frame'],
+        'Ignition': ['Spark Plug', 'Ignition Coil', 'Distributor', 'Ignition Control Module', 'Ignition Switch', 'Ignition Lock Cylinder', 'Spark Plug Wire Set', 'Ignition Rotor', 'Ignition Cap', 'Ignition Condenser', 'Ignition Points', 'Ignition Module', 'Glow Plug'],
+        'Emission': ['Oxygen Sensor', 'EGR Valve', 'PCV Valve', 'Catalytic Converter', 'Evaporative Emission Control Valve', 'Evaporative Emission Canister', 'Evaporative Emission Purge Solenoid', 'Secondary Air Injection Pump', 'Secondary Air Injection Valve', 'Exhaust Gas Recirculation Temperature Sensor', 'Exhaust Gas Recirculation Pressure Sensor', 'Evaporative Emission Control Pressure Sensor'],
+        'Steering': ['Power Steering Pump', 'Power Steering Hose', 'Power Steering Rack', 'Steering Column', 'Steering Wheel', 'Steering Shaft', 'Steering Gearbox', 'Steering Knuckle', 'Steering Linkage', 'Steering Damper', 'Steering Stabilizer', 'Pitman Arm', 'Idler Arm']
+
+    }
+
+    const partSelection = document.getElementById('part-selection');
+    const partName = document.getElementById('part-name');
+
+    partSelection.addEventListener('change', function() {
+
+        const selectedPart = this.value;
+        const parts = partsBySection[selectedPart] || [];
+
+        // Clear existing options
+
+
+        if (parts.length === 0) {
+            const option = document.createElement('option');
+            option.value = '';
+            option.text = 'Select Section';
+            partName.appendChild(option);
+        } else {
+            parts.forEach(part => {
+                const option = document.createElement('option');
+                option.value = part;
+                option.text = part;
+                partName.appendChild(option);
+            });
+        }
     });
 </script>
 @include('Layouts.footer')
