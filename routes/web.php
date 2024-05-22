@@ -25,10 +25,15 @@ Route::get('/login', function () {
 
 Route::get('/cars',[CarController::class, 'index'])->name('cars');
 Route::get('/search',[CarController::class, 'search'])->name('search');
-Route::get('/parts',[PartsController::class, 'parts'])->name('parts');
-Route::get('/parts/search',[PartsController::class, 'partSearch'])->name('parts.search');
-Route::get('/parts/delete{part}',[PartsController::class, 'partDelete'])->name('parts.delete');
 
+Route::controller(PartsController::class)->prefix('/parts')->group(function () {
+
+    Route::get('/', 'parts')->name('parts');
+    Route::get('/search', 'partSearch')->name('parts.search');
+    Route::get('/delete/{part}', 'partDelete')->name('parts.delete');
+    Route::post('/amount/{part}', 'partAmount')->name('parts.amount.insert');
+
+});
 
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {

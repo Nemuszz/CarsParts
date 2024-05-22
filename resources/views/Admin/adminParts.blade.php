@@ -1,4 +1,5 @@
 @include('Layouts.nav')
+
 <div class="mx-auto max-w-screen-xl min-h-screen bg-white p-4 md:p-8 rounded-lg shadow-md">
     <!-- Main Content -->
     @include('Layouts.adminNav')
@@ -86,7 +87,7 @@
                 <div class="flex-1">
                     <div class="mx-auto bg-white rounded-lg shadow-md p-4 md:p-8">
                         <div>
-                            <h2 class="mt-6 mb-4 text-center text-lg md:text-3xl font-extrabold text-gray-900 border-b-2 border-gray-300 pb-2">Messages</h2>
+                            <h2 class="mt-6 mb-4 text-center text-lg md:text-3xl font-extrabold text-gray-900 border-b-2 border-gray-300 pb-2">Parts</h2>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full divide-y divide-gray-200">
@@ -113,10 +114,27 @@
                                         <td class="px-2 py-1 whitespace-nowrap">{{$part->amount}}</td>
                                         <td class="px-2 py-1 whitespace-nowrap">{{$part->price}}</td>
                                         <td class="px-2 py-1 whitespace-nowrap">{{$part->part_code}}</td>
-                                        <td class="px-2 py-1 whitespace-nowrap"><a>Add amount</a></td>
+                                        <td class="px-2 py-1 whitespace-nowrap"><a onclick="toggleForm({{ $part->id }})">Add amount</a></td>
                                         <td class="px-2 py-1 whitespace-nowrap"><a class="text-red-600" href="{{route('parts.delete',$part)}}">Delete</a></td>
 
+
+
                                     </tr>
+
+                                    <div id="modal{{ $part->id }}" class="modal-overlay hidden fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+                                        <div class="modal-content bg-white rounded-lg p-8">
+                                            <form action="{{route('parts.amount.insert',['part'=> $part])}}" method="POST" class="flex flex-col space-y-4 items-center">
+                                                {{csrf_field()}}
+                                                <h4 class="text-lg font-semibold mb-2 text-center">Add amount to: <strong>{{ $part->make }} {{ $part->model }}</strong></h4>
+                                                <p class="text-gray-600 text-center">{{ $part->section }} {{ $part->name }}</p>
+                                                <input type="number" name='amount' class="border border-gray-300 rounded-md mb-4 px-3 py-2 focus:outline-none focus:border-blue-400" placeholder="Enter amount">
+                                                <div class="flex flex-col items-center">
+                                                    <button type="submit" class="bg-blue-500 text-white font-semibold py-2 w-20 rounded-md hover:bg-blue-600 transition-colors duration-300">Add</button>
+                                                    <button type="button" onclick="toggleForm({{ $part->id }})" class="bg-gray-300 text-gray-600 font-semibold py-2 w-20 mt-2 rounded-md hover:bg-gray-400 transition-colors duration-300">Cancel</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 @endforeach
 
                                 </tbody>
@@ -124,6 +142,8 @@
                         </div>
                     </div>
                 </div>
+
+
     </div>
         </div>
 </div>
@@ -274,5 +294,16 @@
             });
         }
     });
+
+
+
+    function toggleForm(partId) {
+        var modal = document.getElementById('modal' + partId);
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+        } else {
+            modal.classList.add('hidden');
+        }
+    }
 </script>
 @include('Layouts.footer')

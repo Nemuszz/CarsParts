@@ -8,6 +8,7 @@ use App\Models\PartsImagesModel;
 use App\Models\PartsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PartsController extends Controller
 {
@@ -70,6 +71,27 @@ class PartsController extends Controller
         $singlePart->delete();
 
         return redirect()->route('admin.parts.add')->with('success', 'Part successfully deleted!');
+    }
+
+
+
+    public function partAmount(Request $request, $part){
+
+        $validator = Validator::make($request->all(), [
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+
+
+        $singlePart = PartsModel::findOrFail($part);
+        $newAmount = $singlePart->amount + $request->input('amount');
+        $singlePart->update(['amount' => $newAmount]);
+
+        return redirect()->route('admin.parts.add')->with('success', 'Amount successfully increased!');
     }
 
 }
