@@ -55,13 +55,14 @@
         </form>
     </header>
 
+
     <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
         <div class="flex gap-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-rows-4 grid-cols-3 sm:align-middle sm:grid-cols-3 lg:grid-cols-3 gap-4">
                 @foreach($parts as $part)
-                    <a href="#" class="w-full">
-                        <div class="mx-auto bg-white rounded-lg shadow-md p-4 flex flex-col md:flex-row justify-center items-center">
+                    <a href="#" class="w-full max-h-48">
+                        <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
                             <!-- Left side - Image of car -->
                             <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">
                                 @if(isset($images[$part->id]))
@@ -80,7 +81,7 @@
                     </a>
                 @endforeach
             </div>
-            <div class="hidden md:w-72 md:block min-h-screen">
+            <div class="hidden  md:w-72 md:block min-h-screen">
                 <div class="w-full">
                     <img class="w-48 md:w-full mb-6" alt="banner" src="{{asset('images/banneradd.png')}}">
                     <div class="flex justify-center">
