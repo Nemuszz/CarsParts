@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('make');
             $table->string('model');
+            $table->string('section');
             $table->string('name');
+            $table->string('price');
             $table->string('description')->nullable();
             $table ->string('images')->default('default_image.jpg');
             $table->timestamps();

@@ -117,6 +117,7 @@ class CarController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+
         $carData = $request->except('images');
         $car = CarsModel::create($carData);
 

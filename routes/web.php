@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\PartsController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
@@ -24,6 +25,8 @@ Route::get('/login', function () {
 
 Route::get('/cars',[CarController::class, 'index'])->name('cars');
 Route::get('/search',[CarController::class, 'search'])->name('search');
+Route::get('/parts',[PartsController::class, 'parts'])->name('parts');
+
 
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {

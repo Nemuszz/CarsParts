@@ -35,6 +35,15 @@
                             </select>
                         </div>
                         <div class="flex flex-col space-y-2 mx-4">
+                            <label class="text-black-400">Section</label>
+                            <select required  name="section" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+
+                                @foreach(partsSection() as $label => $value)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Name</label>
                             <select required  name="name" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
 
@@ -42,6 +51,11 @@
                                     <option value="{{ $value }}">{{ $label }}</option>
                                 @endforeach
                             </select>
+                        </div>
+
+                        <div class="flex flex-col space-y-2 mx-4">
+                            <label for="price" class="">Price</label>
+                            <input id="price" name="price" type="number" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500" placeholder="Price in euros" >
                         </div>
                         <div>
                             <label for="description" class="">Description</label>

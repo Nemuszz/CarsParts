@@ -97,6 +97,14 @@ if (!function_exists('partsName')) {
         ];
     }
 }
+if (!function_exists('partsSection')) {
+    function partsSection()
+    {
+        return [
+            'air' => 'air',
+        ];
+    }
+}
 
 if (!function_exists('carGears')) {
     function carGears()

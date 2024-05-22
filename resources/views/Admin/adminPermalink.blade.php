@@ -1,6 +1,13 @@
 @include('Layouts.nav')
 <!-- CSS to position navigation buttons -->
 <style>
+    .image-box{
+        height: 100px;
+        border: 1px solid black;
+        width: 100px;
+        margin-left: 10px;
+
+    }
     .swiper-button-prev, .swiper-button-next {
         position: absolute;
         top: 50%;
@@ -182,20 +189,9 @@
                     <a href="{{route('admin.delete', $car)}}" class="text-white font-semibold text-lg hover:text-red-600 px-6 py-3">Delete</a>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
-<style>
-
-    .image-box{
-        height: 100px;
-        border: 1px solid black;
-        width: 100px;
-        margin-left: 10px;
-
-    }
-</style>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 <!-- Initialize Parent Swiper -->
@@ -215,9 +211,6 @@
         },
     });
 
-
-</script>
-<script>
     const swiper = new Swiper('.swiper-container', {
         navigation: {
             nextEl: '.swiper-button-next',

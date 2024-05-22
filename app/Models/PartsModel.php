@@ -13,7 +13,9 @@ class PartsModel extends Model
     protected $fillable = [
         'make',
         'model',
+        'section',
         'name',
+        'price',
         'description',
         'images'
 
