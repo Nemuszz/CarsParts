@@ -60,10 +60,10 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             @foreach($parts as $part)
                 <a href="#" class="flex items-stretch">
-                    <div class="bg-white rounded shadow-md p-4 car-card flex flex-col justify-between w-full sm:w-64 md:w-56" style="padding-bottom: 1.5rem;">
+                    <div class="bg-white rounded shadow-md p-8 car-card flex flex-col justify-between w-full sm:w-64 md:w-56" style="padding-bottom: 2.5rem;">
                         <!-- Part Image -->
                         @if(isset($images[$part->id]))
-                            <img class="max-h-28 rounded mb-2 w-full h-full" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
+                            <img class="max-h-48 rounded mb-4 w-full h-full object-cover" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
                         @else
                             <img src="{{ asset('images/placeholder.jpg') }}" alt="Part Image">
                         @endif
