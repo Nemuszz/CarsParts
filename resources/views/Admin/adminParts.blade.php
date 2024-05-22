@@ -56,6 +56,10 @@
                             <label for="price" class="">Price</label>
                             <input id="price" name="price" type="number" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500" placeholder="Price in euros" >
                         </div>
+                        <div class="flex flex-col space-y-2 mx-4">
+                            <label for="amount" class="">Amount</label>
+                            <input id="amount" name="amount" type="number" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500" placeholder="Price in euros" >
+                        </div>
                         <div class="">
                             <label for="description" class="">Description</label>
                             <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description"></textarea>
