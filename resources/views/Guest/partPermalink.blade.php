@@ -99,7 +99,7 @@
                 <p class="text-sm text-green-600">&#10004; In Stock</p>
                 <p class="text-sm text-green-600">&#10004; FREE Standard delivery available</p>
                 <p class="text-sm text-green-600">&#10004; Next day delivery available (Order before 4pm Mon-Thur)</p>
-                <form action="#" type="POST">
+                <form action="{{route('cart.add')}}" method="POST">
                     {{csrf_field()}}
                 <div class="flex items-center mt-4">
 
@@ -109,6 +109,7 @@
                         </svg>
                     </button>
                     <input name="amount" class="w-16 h-10 text-center bg-gray-100 border border-gray-300 focus:outline-none" value="1" min="1" type="number">
+                    <input name="partId" value="{{$singePart->id}}" type="hidden">
                     <button class="flex items-center justify-center w-10 h-10 bg-gray-200 text-gray-600 rounded-r focus:outline-none focus:bg-gray-300 hover:bg-gray-300">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>

@@ -53,8 +53,34 @@
                 </li>
                 <li class="relative">
                     <a href="#" id="cart_link" class="hover:text-gray-300">Cart</a>
-                    <div id="cart_div" class="hidden absolute top-full -left-24 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        Cart Content
+                    <div id="cart_div" class="hidden absolute top-full -left-24 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        <div>
+                            <h2>Your Cart</h2>
+                            @php
+                                $cart = session('cart', []);
+                            @endphp
+                            @if(count($cart) > 0)
+                                <ul>
+                                    @foreach($cart as $partId => $part)
+                                        <li class="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <p class="text-base font-semibold text-black">{{$part['make']}} {{$part['model']}}</p>
+                                                    <p class="text-sm text-gray-500">{{$part['section']}} {{$part['name']}}</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class="text-base text-black">Amount: {{$part['amount']}}</p>
+                                                <a href="{{ route('cart.remove', ['partId' => $partId]) }}" class="text-sm text-gray-500 hover:text-red-600">Remove</a>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>Your cart is empty.</p>
+                            @endif
+                        </div>
+
                     </div>
                 </li>
             @else

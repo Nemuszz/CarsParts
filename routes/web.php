@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PartsController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
@@ -34,7 +35,8 @@ Route::controller(PartsController::class)->prefix('/parts')->group(function () {
     Route::get('/permalink/{part}','partPermalink')->name('parts.permalink');
 
 });
-
+Route::post('/cart/add',[CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/remove/{partId}',[CartController::class, 'removeToCart'])->name('cart.remove');
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/login', 'login')->name('user.login');
