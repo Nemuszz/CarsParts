@@ -35,10 +35,6 @@
                             <label class="text-black-400" for="car_model">Select Model:</label>
                             <select  required name="model" id="car_model" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
                                 <option value="">Change</option>
-                                @foreach (carModel() as $label => $values)
-                                    @foreach(array($values) as $value) @endforeach
-                                    <option {{ $car->model == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
                             </select>
                             <div>
 

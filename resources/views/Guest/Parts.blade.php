@@ -61,7 +61,7 @@
         <div class="flex gap-8">
             <div class="grid grid-rows-4 grid-cols-3 sm:align-middle sm:grid-cols-3 lg:grid-cols-3 gap-4">
                 @foreach($parts as $part)
-                    <a href="#" class="w-full max-h-48">
+                    <a href="{{route('parts.permalink',$part)}}" class="w-full max-h-48">
                         <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
                             <!-- Left side - Image of car -->
                             <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">

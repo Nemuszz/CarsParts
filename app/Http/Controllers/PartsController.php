@@ -94,4 +94,13 @@ class PartsController extends Controller
         return redirect()->route('admin.parts.add')->with('success', 'Amount successfully increased!');
     }
 
+    public function partPermalink($part){
+
+        $singePart = PartsModel::where(['id' => $part])->first();
+        $images = PartsImagesModel::where(['part_id' => $part])->get();
+
+
+        return view('Guest.partPermalink', compact('part','images','singePart'));
+    }
+
 }
