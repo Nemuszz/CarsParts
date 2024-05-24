@@ -53,7 +53,7 @@
                 </li>
                 <li class="relative">
                     <a id="cart_link" class="hover:text-gray-300">Cart</a>
-                    <div id="cart_div" class="hidden absolute top-full -left-56 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div id="cart_div" class="absolute top-full -left-56 z-50 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div>
                             @php
                                 $cart = session('cart', []);
