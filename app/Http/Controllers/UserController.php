@@ -120,5 +120,13 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Message sent successfully, thanks!');
     }
+    public function userCart()
+    {
+
+
+
+
+        return view('Pages/profileCart');
+    }
 
 }

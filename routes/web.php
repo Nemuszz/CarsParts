@@ -53,6 +53,7 @@ Route::controller(UserController::class)->middleware(AuthMiddleware::class)->pre
     Route::post('/profile/edit/{id}', 'edit')->name('user.edit');
     Route::get('/contact/{id}', 'contact')->name('user.contact');
     Route::post('/message/{id}', 'message')->name('user.message');
+    Route::get('/cart', 'userCart')->name('user.cart');
 });
 
 
