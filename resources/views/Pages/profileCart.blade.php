@@ -66,3 +66,4 @@
         </div>
     </div>
 </div>
+@include('Layouts.footer')

@@ -36,7 +36,7 @@
                 <li>
                     <div class="relative inline-block text-left">
                         <div>
-                            <a id="drop_btn" class="hover:text-gray-300">
+                            <a id="drop_btn" class="hover:text-gray-300 cursor-pointer">
                                 {{ auth()->user()->name }}
                             </a>
                         </div>
@@ -52,8 +52,8 @@
                     </div>
                 </li>
                 <li class="relative">
-                    <a id="cart_link" class="hover:text-gray-300">Cart</a>
-                    <div id="cart_div" class="absolute top-full -left-56 z-50 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <a id="cart_link" class="hover:text-gray-300 cursor-pointer">Cart</a>
+                    <div id="cart_div" class="absolute top-full -left-56 z-50 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
                         <div>
                             @php
                                 $cart = session('cart', []);
