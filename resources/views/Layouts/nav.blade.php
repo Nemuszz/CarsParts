@@ -88,11 +88,11 @@
                                     @endforeach
                                 </ul>
                                 <div class="flex justify-center border-1 border-black">
-                                    <h2 class="text-black text-lg">Sum of price: {{$totalPrice}} €</h2>
+                                    <h2 class="text-black text-lg">Sum of price: <strong>{{$totalPrice}} €</strong></h2>
                                 </div>
 
                                 <div class="flex justify-center mt-2 mb-2">
-                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"><a href="#">View Cart</a></button>
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"><a href="{{route('user.cart')}}">View Cart</a></button>
                                     <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><a href="#">Checkout</a></button>
                                 </div>
 
