@@ -52,32 +52,49 @@
                     </div>
                 </li>
                 <li class="relative">
-                    <a href="#" id="cart_link" class="hover:text-gray-300">Cart</a>
-                    <div id="cart_div" class="hidden absolute top-full -left-24 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <a id="cart_link" class="hover:text-gray-300">Cart</a>
+                    <div id="cart_div" class="hidden absolute top-full -left-56 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                         <div>
-                            <h2>Your Cart</h2>
                             @php
                                 $cart = session('cart', []);
+                                $totalPrice = 0;
                             @endphp
+                            <div class="flex justify-center border-1 border-black">
+                                <h2 class="text-black text-lg">Your cart has: {{ count($cart) }} parts</h2>
+                            </div>
+
                             @if(count($cart) > 0)
                                 <ul>
                                     @foreach($cart as $partId => $part)
-                                        <li class="flex items-center justify-between border-b border-gray-200 px-4 py-3">
-                                            <div class="flex items-center">
+                                        @php
+                                            $totalPrice += $part['price'] * $part['amount'];
+                                        @endphp
+                                        <li class="flex items-center justify-between border-b px-4 py-3 border-2 border-gray-400">
+                                            <div class=" flex items-center">
                                                 <div>
                                                     <p class="text-base font-semibold text-black">{{$part['make']}} {{$part['model']}}</p>
                                                     <p class="text-sm text-gray-500">{{$part['section']}} {{$part['name']}}</p>
+                                                    <p class="text-sm text-gray-500"><strong>{{$part['price']}} €</strong></p>
                                                 </div>
                                             </div>
                                             <div>
                                                 <p class="text-base text-black">Amount: {{$part['amount']}}</p>
-                                                <a href="{{ route('cart.remove', ['partId' => $partId]) }}" class="text-sm text-gray-500 hover:text-red-600">Remove</a>
+                                                <a href="{{ route('cart.remove', ['partId' => $partId]) }}" class="text-sm text-red-600 hover:text-red-600">Remove</a>
                                             </div>
                                         </li>
                                     @endforeach
                                 </ul>
+                                <div class="flex justify-center border-1 border-black">
+                                    <h2 class="text-black text-lg">Sum of price: {{$totalPrice}} €</h2>
+                                </div>
+
+                                <div class="flex justify-center mt-2 mb-2">
+                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"><a href="#">View Cart</a></button>
+                                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><a href="#">Checkout</a></button>
+                                </div>
+
                             @else
-                                <p>Your cart is empty.</p>
+                                <p class="text-black">Your cart is empty.</p>
                             @endif
                         </div>
 

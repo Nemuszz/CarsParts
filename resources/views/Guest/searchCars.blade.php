@@ -23,7 +23,7 @@
                                 <option value="{{ $value }}"{{$request->input('mileage') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
 
-                            <!-- Add more options for mileage -->
+
                         </select>
                     </div>
 
@@ -36,7 +36,7 @@
                             @foreach(carYear() as $label => $value)
                                 <option value="{{ $value }}"{{$request->input('year') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
-                            <!-- Add more options for years -->
+
                         </select>
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
@@ -46,7 +46,7 @@
                             @foreach(allMakes() as $label => $value)
                                 <option value="{{ $value }}"{{$request->input('make') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
-                            <!-- Add more options for make -->
+
                         </select>
                     </div>
 
@@ -56,7 +56,7 @@
                         <select  name="model" id="car_model" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select Model</option>
 
-                            <!-- Add more options for model -->
+
                         </select>
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
@@ -121,7 +121,6 @@
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -134,6 +133,11 @@
             $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
         });
     });
+
+
+
+
+
 
     const modelsByBrand = {
         'Abarth': ['124 Spider', '595', '695'],
@@ -198,6 +202,11 @@
         'Volvo': ['S60', 'S90', 'V60', 'V90', 'XC40', 'XC60', 'XC90']
     }
 
+
+
+
+
+
     const carBrandSelect = document.getElementById('car_brand');
     const carMileage = document.getElementById('mileage');
     const carModelSelect = document.getElementById('car_model');
@@ -205,15 +214,14 @@
     const carYear= document.getElementById('year');
 
 
+
+
+
     carBrandSelect.addEventListener('change', function() {
 
         const selectedBrand = this.value;
         const models = modelsByBrand[selectedBrand] || [];
 
-        // Clear existing options
-
-
-        // Add new options
         models.forEach(model => {
             const option = document.createElement('option');
             option.value = model;
@@ -222,6 +230,11 @@
         });
     });
 
+
+
+
+
+
     const emptyField = document.getElementById('emptyField')
     emptyField.addEventListener('click', function (){
         carBrandSelect.value = '';
@@ -229,18 +242,15 @@
         carYear.value = '';
         carMileage.value = '';
         carPrice.value = '';
-
     })
-
-
 
 
     document.getElementById('scrollTopButton').addEventListener('click', function() {
 
         const scrollPosition = window.scrollY;
         const distance = scrollPosition;
-        const duration = 1000; // 2 seconds
-        const increment = 20; // 20 milliseconds
+        const duration = 1000;
+        const increment = 20;
         const frames = duration / increment;
         const distancePerFrame = distance / frames;
 
