@@ -15,10 +15,13 @@ class CartController extends Controller
         $part = PartsModel::where('id', $partId)->first();
         $partImage = PartsImagesModel::where('part_id', $partId)->first();
 
-        $cart = session()->get('cart',[]);
+        $cart = session()->get('cart', []);
+
+
+        $imagePath = $partImage ? $partImage->path : null;
 
         $cart[$partId] = [
-            'image' => $partImage,
+            'image' => $imagePath, // Use the 'image' attribute of $partImage or null if $partImage is null
             'make' => $part->make,
             'model' => $part->model,
             'section' => $part->section,
@@ -29,6 +32,7 @@ class CartController extends Controller
         session()->put('cart', $cart);
 
         return redirect()->back();
+
 
     }
     public function removeToCart(Request $request, $partId)

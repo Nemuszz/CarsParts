@@ -69,17 +69,20 @@
                                         @php
                                             $totalPrice += $part['price'] * $part['amount'];
                                         @endphp
-                                        <li class="flex items-center justify-between border-b px-4 py-3 border-2 border-gray-400">
-                                            <div class=" flex items-center">
+                                        <li class="flex items-center justify-between border-b border-gray-400 px-4 py-3">
+                                            <div class="flex items-center">
+                                                <div class="max-h-12 mr-4">
+                                                    <img alt="part" src="{{ asset('partsImages/' . $part['image']) }}" class="max-h-full rounded-lg shadow-md">
+                                                </div>
                                                 <div>
-                                                    <p class="text-base font-semibold text-black">{{$part['make']}} {{$part['model']}}</p>
-                                                    <p class="text-sm text-gray-500">{{$part['section']}} {{$part['name']}}</p>
-                                                    <p class="text-sm text-gray-500"><strong>{{$part['price']}} €</strong></p>
+                                                    <p class="text-base font-semibold text-gray-800">{{$part['make']}} {{$part['model']}}</p>
+                                                    <p class="text-sm text-gray-600">{{$part['section']}} {{$part['name']}}</p>
+                                                    <p class="text-sm text-gray-600"><strong>{{$part['price']}} €</strong></p>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <p class="text-base text-black">Amount: {{$part['amount']}}</p>
-                                                <a href="{{ route('cart.remove', ['partId' => $partId]) }}" class="text-sm text-red-600 hover:text-red-600">Remove</a>
+                                            <div class="flex flex-col items-end">
+                                                <p class="text-base text-gray-800 text-center">Amount:<strong> {{$part['amount']}}</strong></p>
+                                                <a href="{{ route('cart.remove', ['partId' => $partId]) }}" class="text-sm mt-20 text-red-600 hover:text-red-600">Remove</a>
                                             </div>
                                         </li>
                                     @endforeach
