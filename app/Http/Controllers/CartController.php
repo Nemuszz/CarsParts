@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartModel;
 use App\Models\PartsImagesModel;
 use App\Models\PartsModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -21,7 +23,7 @@ class CartController extends Controller
         $imagePath = $partImage ? $partImage->path : null;
 
         $cart[$partId] = [
-            'image' => $imagePath, // Use the 'image' attribute of $partImage or null if $partImage is null
+            'image' => $imagePath,
             'make' => $part->make,
             'model' => $part->model,
             'section' => $part->section,
@@ -52,7 +54,31 @@ class CartController extends Controller
         // Return a response
         return redirect()->back();
     }
+    public function purchaseToCart(Request $request){
+        $cartItems = $request->session()->get('cart', []);
+        $user = Auth::user();
 
+        foreach ($cartItems as $partId => $part) {
+
+            $cart = new CartModel();
+
+            $cart->user_id = $user->id;
+            $cart->part_id = $partId;
+            $cart->make = $part['make'];
+            $cart->model = $part['model'];
+            $cart->section = $part['section'];
+            $cart->name = $part['name'];
+            $cart->price = $part['price'];
+            $cart->amount = $part['amount'];
+
+
+            $cart->save();
+        }
+
+
+        $request->session()->forget('cart');
+        return redirect()->back()->with('success', 'Your order has been successfully placed!');
+    }
 
 
 }

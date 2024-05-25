@@ -37,6 +37,7 @@ Route::controller(PartsController::class)->middleware(AuthMiddleware::class)->pr
 });
 Route::post('/cart/add',[CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart/remove/{partId}',[CartController::class, 'removeToCart'])->name('cart.remove');
+Route::post('/cart/purchase',[CartController::class, 'purchaseToCart'])->name('cart.purchase');
 
 Route::controller(UserController::class)->prefix('/user')->group(function () {
    Route::post('/login', 'login')->name('user.login');

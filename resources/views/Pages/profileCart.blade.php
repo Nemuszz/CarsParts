@@ -21,13 +21,21 @@
                         <div class="flex justify-center border-1 border-black">
                             <h2 class="text-black text-lg">Your cart has: {{ count($cart) }} parts</h2>
                         </div>
-
+                        <form action="{{ route('cart.purchase') }}" method="POST">
+                            {{csrf_field()}}
                         @if(count($cart) > 0)
                             <ul>
                                 @foreach($cart as $partId => $part)
                                     @php
                                         $totalPrice += $part['price'] * $part['amount'];
                                     @endphp
+
+                                    <input type="hidden" name="cart[{{ $partId }}][make]" value="{{ $part['make'] }}">
+                                    <input type="hidden" name="cart[{{ $partId }}][model]" value="{{ $part['model'] }}">
+                                    <input type="hidden" name="cart[{{ $partId }}][section]" value="{{ $part['section'] }}">
+                                    <input type="hidden" name="cart[{{ $partId }}][name]" value="{{ $part['name'] }}">
+                                    <input type="hidden" name="cart[{{ $partId }}][price]" value="{{ $part['price'] }}">
+                                    <input type="hidden" name="cart[{{ $partId }}][amount]" value="{{ $part['amount'] }}">
                                     <li class="flex items-center justify-between border-b border-gray-400 px-4 py-3">
                                         <div class="flex items-center">
                                             <div class="max-h-12 mr-4">
@@ -45,18 +53,20 @@
                                         </div>
                                     </li>
                                 @endforeach
+
                             </ul>
                             <div class="flex justify-center border-1 border-black">
                                 <h2 class="text-black text-lg">Sum of price: <strong>{{$totalPrice}} €</strong></h2>
                             </div>
 
                             <div class="flex justify-center mt-2 mb-2">
-                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><a href="#">Checkout</a></button>
+                                <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Checkout</button>
                             </div>
 
                         @else
                             <p class="text-black">Your cart is empty.</p>
                         @endif
+                        </form>
                     </div>
 
                 </div>
