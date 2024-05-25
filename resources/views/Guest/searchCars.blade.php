@@ -78,7 +78,7 @@
     <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
         <div class="flex gap-8">
-            <div class=" w-full md:2/3">
+            <div class=" w-full md:w-2/3">
                 @foreach($cars as $car)
                     <a href="{{route('car.permalink', $car)}}">
                     <div class=" mx-auto bg-white rounded-lg shadow-md p-8 mt-2 flex flex-col md:flex-row relative justify-center">

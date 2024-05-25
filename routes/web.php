@@ -45,8 +45,6 @@ Route::controller(UserController::class)->prefix('/user')->group(function () {
 });
 
 
-
-
 Route::controller(UserController::class)->middleware(AuthMiddleware::class)->prefix('/user')->group(function () {
     Route::get('/logout', 'logout')->name('user.logout');
     Route::get('/profile/{id}', 'profile')->name('user.profile');

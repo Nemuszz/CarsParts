@@ -63,35 +63,50 @@
     <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
         <div class="flex gap-8">
-            <div class="grid grid-rows-4 grid-cols-3 sm:align-middle sm:grid-cols-3 lg:grid-cols-3 gap-4">
-                @foreach($parts as $part)
-                    <a href="#" class="w-full max-h-48">
-                        <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
-                            <!-- Left side - Image of car -->
-                            <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">
-                                @if(isset($images[$part->id]))
-                                    <img class="h-full w-full object-cover rounded" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
-                                @else
-                                    <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
-                                @endif
-                            </div>
-                            <!-- Right side - Info for car -->
-                            <div class="flex flex-col justify-center">
-                                <h2 class="text-lg font-bold mb-2">{{ $part->make }} {{ $part->model }}</h2>
-                                <p class="text-gray-600"><strong>{{ $part->name }}</strong></p>
-                                <p class="text-gray-600"><strong>{{ $part->price }} €</strong></p>
+            <div class=" w-full md:w-2/3">
+                <div class="grid grid-rows-4 grid-cols-3 sm:align-middle sm:grid-cols-3 lg:grid-cols-3 gap-4">
+
+                    @if($parts->isEmpty())
+                        <div class="absolute w-2/4 ml-6 h-20 bg-gray-300 rounded-lg shadow-md">
+                            <div class="flex justify-center items-center h-full">
+                                <p class="text-black text-sm font-semibold">Currently, there are no parts in stock</p>
                             </div>
                         </div>
-                    </a>
-                @endforeach
+                    @else
+                        @foreach($parts as $part)
+
+                            <a href="{{route('parts.permalink',['part'=>$part])}}" class="w-full max-h-48">
+                                <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
+                                    <!-- Left side - Image of car -->
+                                    <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">
+                                        @if(isset($images[$part->id]))
+                                            <img class="h-full w-full object-cover rounded" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
+                                        @else
+                                            <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
+                                        @endif
+                                    </div>
+                                    <!-- Right side - Info for car -->
+                                    <div class="flex flex-col justify-center">
+                                        <h2 class="text-lg font-bold mb-2">{{ $part->make }} {{ $part->model }}</h2>
+                                        <p class="text-gray-600"><strong>{{ $part->name }}</strong></p>
+                                        <p class="text-gray-600"><strong>{{ $part->price }} €</strong></p>
+                                    </div>
+                                </div>
+                            </a>
+                        @endforeach
+                    @endif
+
+                </div>
             </div>
-            <div class="hidden  md:w-72 md:block min-h-screen">
-                <div class="w-full">
-                    <img class="w-48 md:w-full mb-6" alt="banner" src="{{asset('images/banneradd.png')}}">
-                    <div class="flex justify-center">
-                        <button id="scrollTopButton" class="px-4 py-2 bg-gray-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300">
-                            To Top
-                        </button>
+            <div class="hidden md:w-1/3 md:block min-h-screen ">
+                <div class="flex justify-end">
+                    <div class="w-64">
+                        <img class="w-48 md:w-full mb-6" alt="banner" src="{{asset('images/banneradd.png')}}">
+                        <div class="flex justify-center">
+                            <button id="scrollTopButton" class="px-4 py-2 bg-gray-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300">
+                                To Top
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
