@@ -28,6 +28,7 @@ class CartController extends Controller
             'name' => $part->name,
             'price' => $part->price,
             'amount' => $request->amount,
+
         ];
         session()->put('cart', $cart);
 
