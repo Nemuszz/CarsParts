@@ -7,6 +7,7 @@ use App\Models\PartsImagesModel;
 use App\Models\PartsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isEmpty;
 
 class CartController extends Controller
 {
@@ -58,6 +59,7 @@ class CartController extends Controller
         $cartItems = $request->session()->get('cart', []);
         $user = Auth::user();
 
+
         foreach ($cartItems as $partId => $part) {
 
             $cart = new CartModel();
@@ -74,6 +76,7 @@ class CartController extends Controller
 
             $cart->save();
         }
+
 
 
         $request->session()->forget('cart');
