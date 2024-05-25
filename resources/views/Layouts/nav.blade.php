@@ -71,8 +71,8 @@
                                         @endphp
                                         <li class="flex items-center justify-between border-b border-gray-400 px-4 py-3">
                                             <div class="flex items-center">
-                                                <div class="max-h-12 mr-4">
-                                                    <img alt="part" src="{{ asset('partsImages/' . $part['image']) }}" class="max-h-full rounded-lg shadow-md">
+                                                <div class="max-h-16 max-w-16 mr-4 overflow-hidden">
+                                                    <img alt="part" src="{{ asset('partsImages/' . $part['image']) }}" class="w-16 h-16 object-cover rounded-lg shadow-md">
                                                 </div>
                                                 <div>
                                                     <p class="text-base font-semibold text-gray-800">{{$part['make']}} {{$part['model']}}</p>
