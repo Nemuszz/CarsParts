@@ -60,15 +60,18 @@ class CartController extends Controller
         // Return a response
         return redirect()->back();
     }
+
+
     public function purchaseToCart(Request $request){
         $cartItems = $request->session()->get('cart', []);
         $user = Auth::user();
 
 
+
         foreach ($cartItems as $partId => $part) {
 
-            $cart = new CartModel();
 
+            $cart = new CartModel();
             $cart->user_id = $user->id;
             $cart->part_id = $partId;
             $cart->make = $part['make'];
@@ -80,6 +83,12 @@ class CartController extends Controller
 
 
             $cart->save();
+
+            $singlePart = PartsModel::where(['id' => $partId])->first();
+            $singlePart->amount -= $part['amount'];
+            $singlePart->save();
+
+
         }
 
 
