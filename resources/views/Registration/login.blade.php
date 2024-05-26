@@ -20,21 +20,27 @@
             <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <input type="password" id="password" name="password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-lg px-4 py-3">
         </div>
+        @if(session('error'))
+            <div class="alert alert-danger text-red">
+                <span class="text-red-600">{{ session('error') }}</span>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger text-red">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="text-red-600">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <div class="my-3 text-right border-1">
             <a href="/register">Make new account</a>
         </div>
         <button type="submit" class="w-full py-3 px-6 border border-transparent rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >Login</button>
-        @if ($errors->any())
-            <div class="alert alert-danger text-red">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
     </form>
 </div>
 </body>

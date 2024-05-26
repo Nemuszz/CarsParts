@@ -31,19 +31,20 @@
             <label for="confirm_password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
             <input type="password" id="confirm_password" name="confirm_password" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-lg px-4 py-3">
         </div>
-        <div class="my-3 text-right border-1">
-            <a class="hover:text-red-950" href="/login">Already have an acc</a>
-        </div>
-        <button type="submit" class="w-full py-3 px-6 border border-transparent rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
         @if ($errors->any())
             <div class="alert alert-danger text-red">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li class="text-red-600">{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
         @endif
+        <div class="my-3 text-right border-1">
+            <a class="hover:text-red-950" href="/login">Already have an acc</a>
+        </div>
+        <button type="submit" class="w-full py-3 px-6 border border-transparent rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Register</button>
+
     </form>
 </div>
 </body>

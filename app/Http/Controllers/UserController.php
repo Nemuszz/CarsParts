@@ -15,10 +15,14 @@ class UserController extends Controller
 {
     public function login(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|string|email',
             'password' => 'required|string|min:6',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
        $credentials = $request->only('email', 'password');
        if (Auth::attempt($credentials)) {
@@ -32,13 +36,17 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|min:5|max:20',
             'email' => 'required|string|email',
             'password' => 'required|string|min:6',
             'confirm_password' => 'required|string|min:6|same:password',
 
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
              $user = User::create([
                 'name'=> $request->name,
                 'email'=> $request->email,
