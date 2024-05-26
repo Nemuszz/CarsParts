@@ -56,7 +56,7 @@
     }
 
 </style>
-<div class="mx-auto max-w-screen-xl bg-gray-400-100 p-8 min-h-screen rounded-lg shadow-md">
+<div class=" relative mx-auto max-w-screen-xl bg-gray-400-100 p-8 min-h-screen rounded-lg shadow-md">
     <!-- 2/3 of flex -->
     <div class="flex">
         <!-- 2/3 of flex -->
@@ -89,6 +89,13 @@
                         <img src="{{ asset('partsImages/' . $image->path) }}" alt="Car Image" class="object-cover w-full h-full">
                     </div>
                 @endforeach
+            </div>
+
+            <div class="w-full bg-white rounded-lg shadow-md p-8 mt-8 whitespace-pre-line">
+                <h4 class="text-lg font-bold mb-2">Description</h4>
+                <div class="max-w-full" style="overflow-wrap: break-word; word-wrap: break-word; overflow: hidden;">
+                    {{$singePart->description}}
+                </div>
             </div>
 
         </div>
@@ -127,6 +134,7 @@
                     </div>
                 </form>
 
+
             @else
                 <p class="text-sm text-red-600 mt-4">&#215; Not In Stock</p>
                 <p class="text-sm  mt-4">If u want to order this product u can contact us here:<a class="text-blue-500" href="{{route('user.contact', ['id' => auth()->user()->id])}}"> Message</a>  with number of product and amount of it, you will be contacted vie email.</p>
@@ -152,6 +160,7 @@
             </div>
         </div>
     </div>
+
 
 
 </div>
