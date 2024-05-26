@@ -29,18 +29,18 @@
     <div class="container mx-auto flex justify-between items-center">
         <a href="#" class="text-xl font-bold">Cars&Parts</a>
         <ul class="flex space-x-4">
-            <li><a href="/" class="hover:text-gray-300">Home</a></li>
-            <li><a href="/cars" class="hover:text-gray-300">Cars</a></li>
-            <li><a href="/parts" class="hover:text-gray-300">Parts</a></li>
+            <li><a href="/" class="flex items-center justify-center h-full hover:text-gray-300">Home</a></li>
+            <li><a href="/cars" class="flex items-center justify-center h-full hover:text-gray-300">Cars</a></li>
+            <li><a href="/parts" class="flex items-center justify-center h-full hover:text-gray-300">Parts</a></li>
             @if(auth()->user())
-                <li>
+                <li class="relative">
                     <div class="relative inline-block text-left">
-                        <div>
-                            <a id="drop_btn" class="hover:text-gray-300 cursor-pointer">
+                        <div class="mt-2">
+                            <a id="drop_btn" class="flex items-center justify-center h-full hover:text-gray-300 cursor-pointer">
                                 {{ auth()->user()->name }}
                             </a>
                         </div>
-                        <div id="drop_menu" class="display absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 ">
+                        <div id="drop_menu" class="display absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
                                 <a href="{{ route('user.profile', ['id'=> auth()->user()->id]) }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
                                 @if(auth()->user()->role == 'admin')
@@ -52,13 +52,25 @@
                     </div>
                 </li>
                 <li class="relative">
-                    <a id="cart_link" class="hover:text-gray-300 cursor-pointer">Cart</a>
+                    <a id="cart_link" class="cursor-pointer">
+                        @php
+                            $cart = session('cart', []);
+                            $totalPrice = 0;
+                        @endphp
+                        <button class="relative flex items-center justify-center h-10 w-10 text-white rounded-full focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out" aria-label="Cart">
+                            <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span class="absolute inset-0 object-right-top -mr-6">
+                            <div class="inline-flex items-center justify-center h-4 w-4 bg-red-500 text-white text-xs font-semibold leading-4 rounded-full">
+                                {{count($cart)}}
+                            </div>
+                        </span>
+                        </button>
+                    </a>
                     <div id="cart_div" class="absolute top-full -left-56 z-50 w-64 h-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden">
                         <div>
-                            @php
-                                $cart = session('cart', []);
-                                $totalPrice = 0;
-                            @endphp
+
                             <div class="flex justify-center border-1 border-black">
                                 <h2 class="text-black text-lg">Your cart has: {{ count($cart) }} parts</h2>
                             </div>
