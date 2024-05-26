@@ -18,31 +18,36 @@ class CartController extends Controller
         $part = PartsModel::where('id', $partId)->first();
         $partImage = PartsImagesModel::where('part_id', $partId)->first();
 
-        $cart = session()->get('cart', []);
 
 
-        $imagePath = $partImage ? $partImage->path : null;
+        if($request->amount > $part->amount){
+            return redirect()->back()->with('error','too high');
+        }
+        else{
+            $cart = session()->get('cart', []);
+            $imagePath = $partImage ? $partImage->path : null;
 
-        $cart[$partId] = [
-            'image' => $imagePath,
-            'make' => $part->make,
-            'model' => $part->model,
-            'section' => $part->section,
-            'name' => $part->name,
-            'price' => $part->price,
-            'amount' => $request->amount,
+            $cart[$partId] = [
+                'image' => $imagePath,
+                'make' => $part->make,
+                'model' => $part->model,
+                'section' => $part->section,
+                'name' => $part->name,
+                'price' => $part->price,
+                'amount' => $request->amount,
 
-        ];
-        session()->put('cart', $cart);
+            ];
+            session()->put('cart', $cart);
 
-        return redirect()->back();
+            return redirect()->back();
+        }
+
+
 
 
     }
     public function removeToCart(Request $request, $partId)
     {
-
-
         // Get the current cart from the user's session
         $cart = $request->session()->get('cart', []);
 
