@@ -69,7 +69,6 @@ class CartController extends Controller
 
         foreach ($cartItems as $partId => $part) {
 
-
             $cart = new CartModel();
             $cart->user_id = $user->id;
             $cart->part_id = $partId;
@@ -80,7 +79,6 @@ class CartController extends Controller
             $cart->price = $part['price'];
             $cart->amount = $part['amount'];
             $cart->part_code = $part['part_code'];
-
 
             $cart->save();
 

@@ -27,8 +27,6 @@ class PartsController extends Controller
             }
         }
 
-
-
         return view('Guest/parts',compact('parts', 'images') );
     }
 
@@ -86,8 +84,6 @@ class PartsController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
-
         $singlePart = PartsModel::findOrFail($part);
         $newAmount = $singlePart->amount + $request->input('amount');
         $singlePart->update(['amount' => $newAmount]);
@@ -99,7 +95,6 @@ class PartsController extends Controller
 
         $singePart = PartsModel::where(['id' => $part])->first();
         $images = PartsImagesModel::where(['part_id' => $part])->get();
-
 
         return view('Guest.partPermalink', compact('part','images','singePart'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ContactUsModel;
 use App\Models\User;
+use App\Repositories\UsermessageRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+    private $contactUsRepo;
+    public function __construct()
+    {
+        $this->contactUsRepo = new UsermessageRepository();
+
+
+    }
+
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -30,8 +39,6 @@ class UserController extends Controller
        }
        return redirect("login")->with('error', 'Invalid Email or Password');
 
-
-
     }
     public function register(Request $request)
     {
@@ -46,7 +53,6 @@ class UserController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
              $user = User::create([
                 'name'=> $request->name,
                 'email'=> $request->email,
@@ -56,9 +62,7 @@ class UserController extends Controller
                  return Redirect::to('/login')->with('error','Register details are not valid');
              }
 
-
         return Redirect::to('/login');
-
     }
     public function logout(){
         Session::flush();
@@ -81,7 +85,6 @@ class UserController extends Controller
             'address' => 'string|max:255|nullable',
             'phone' => 'integer|nullable',
             'postcode' => 'integer|nullable',
-
         ]);
 
         if ($validator->fails()) {
@@ -107,8 +110,6 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'subject' => 'required|string|max:30',
             'message' => 'required|string|max:225',
-
-
         ]);
 
         if ($validator->fails()) {
@@ -117,24 +118,15 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 
-        ContactUsModel::create([
-            'subject'=> $request->subject,
-            'message'=> $request->message,
-            'name'=> $user->name,
-            'email'=> $user->email,
-            'phone'=> $user->phone,
-        ]);
+        $this->contactUsRepo->createMessage($request, $user);
 
 
         return redirect()->back()->with('success', 'Message sent successfully, thanks!');
     }
     public function userCart()
     {
-
-
-
-
         return view('Pages/profileCart');
     }
 
 }
+

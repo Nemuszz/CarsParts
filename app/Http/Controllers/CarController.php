@@ -8,8 +8,7 @@ use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
+
 
 class CarController extends Controller
 {
@@ -23,7 +22,7 @@ class CarController extends Controller
         foreach ($cars as $car) {
             $image = Image::where('car_id', $car->id)->first();
             if ($image) {
-                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+                $images[$car->id] = $image;
             }
         }
 
@@ -37,7 +36,6 @@ class CarController extends Controller
         if ($request->filled('year')) {
             $query->where('year', $request->year);
         }
-
         if ($request->filled('make')) {
             $query->where('make', $request->make);
         }
@@ -75,9 +73,7 @@ class CarController extends Controller
                 $images[$car->id] = $image;
             }
         }
-
         return view('Guest/searchCars', compact('cars', 'request','userCities','images'));
-
     }
 
 
@@ -86,7 +82,6 @@ class CarController extends Controller
         $year = 2024;
 
         return view('Pages/Cars',compact('year'));
-
     }
 
     public function insert(AddCarRequest $request){
@@ -96,7 +91,6 @@ class CarController extends Controller
             return redirect()->route('user.profile', ['id' => $user->id])->withErrors('Fill all informations about you');
         }
         else {
-
 
             $carData = $request->except('images');
             $car = CarsModel::create($carData);
@@ -112,7 +106,6 @@ class CarController extends Controller
                     $imageModel->save();
                 }
             }
-
             return redirect()->route('user.profile', ['id' => auth()->user()->id])->with('success', 'Car added successfully!');
         }
     }
@@ -139,7 +132,6 @@ class CarController extends Controller
         $images = Image::where(['car_id' => $car->id])->get();
 
         return view('Pages/permalink', compact( 'car','user', 'images'));
-
     }
     public function delete($car)
     {
@@ -148,7 +140,6 @@ class CarController extends Controller
         $singleCar->delete();
 
         return redirect()->back()->with('success', 'Car deleted successfully!');
-
     }
     public function changeCar($car)
     {
@@ -159,7 +150,6 @@ class CarController extends Controller
         $year = 2024;
 
         return view('Pages/changeCar', compact( 'car','user', 'year'));
-
     }
     public function update(Request $request, $car)
     {
@@ -170,5 +160,4 @@ class CarController extends Controller
         return redirect()->back()->with('success', 'Car updated successfully!');
 
     }
-
 }

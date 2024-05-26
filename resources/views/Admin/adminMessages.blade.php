@@ -4,9 +4,6 @@
     @include('Layouts.adminNav')
         <!-- Table -->
         <div class="flex-1">
-
-
-
             <div class="mx-auto bg-white rounded-lg shadow-md p-4 md:p-8">
                 <div>
                     <h2 class="mt-6 mb-4 text-center text-lg md:text-3xl font-extrabold text-gray-900 border-b-2 border-gray-300 pb-2">Messages</h2>

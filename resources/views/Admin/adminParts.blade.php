@@ -97,6 +97,7 @@
                         <div>
                             <h2 class="mt-6 mb-4 text-center text-lg md:text-3xl font-extrabold text-gray-900 border-b-2 border-gray-300 pb-2">Parts</h2>
                         </div>
+
                         <div class="overflow-x-auto">
                             <table class="w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-800">
@@ -111,6 +112,7 @@
                                     <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Add amount</th>
                                     <th scope="col" class="px-2 py-1 text-left text-xs font-medium text-white uppercase tracking-wider">Delete</th>
                                 </tr>
+
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                 @foreach($parts as $part)
@@ -124,8 +126,6 @@
                                         <td class="px-2 py-1 whitespace-nowrap">{{$part->part_code}}</td>
                                         <td class="px-2 py-1 whitespace-nowrap"><a onclick="toggleForm({{ $part->id }})">Add amount</a></td>
                                         <td class="px-2 py-1 whitespace-nowrap"><a class="text-red-600" href="{{route('parts.delete',$part)}}">Delete</a></td>
-
-
 
                                     </tr>
 
@@ -144,7 +144,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -154,9 +153,6 @@
         </div>
 </div>
 </div>
-
-
-
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

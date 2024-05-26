@@ -18,4 +18,5 @@ class ContactUsModel extends Model
         'phone'
 
     ];
+
 }
