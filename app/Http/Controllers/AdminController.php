@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarsModel;
+use App\Models\CartModel;
 use App\Models\ContactUsModel;
 use App\Models\Image;
 use App\Models\PartsImagesModel;
 use App\Models\PartsModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -149,6 +151,8 @@ class AdminController extends Controller
     }
     public function adminOrders()
     {
-        return view('Admin/adminOrder');
+        $parts = CartModel::all();
+
+        return view('Admin/adminOrder', compact('parts') );
     }
 }
