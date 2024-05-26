@@ -156,12 +156,9 @@ class CarController extends Controller
     }
     public function permalink($car)
     {
-
         $car = CarsModel::where(['id' => $car])->first();
         $user = User::where(['id' => $car->user_car_id])->first();
         $images = Image::where(['car_id' => $car->id])->get();
-
-
 
         return view('Pages/permalink', compact( 'car','user', 'images'));
 
@@ -169,19 +166,14 @@ class CarController extends Controller
     public function delete($car)
     {
 
-
         $singleCar = CarsModel::where(['id' => $car])->first();
         $singleCar->delete();
-
-
-
 
         return redirect()->back()->with('success', 'Car deleted successfully!');
 
     }
     public function changeCar($car)
     {
-
 
         $car = CarsModel::where(['id' => $car])->first();
         $user = User::where(['id' => $car->user_car_id])->first();
@@ -190,20 +182,12 @@ class CarController extends Controller
 
         return view('Pages/changeCar', compact( 'car','user', 'year'));
 
-
-
-
-
     }
     public function update(Request $request, $car)
     {
 
-
         $singleCar = CarsModel::where(['id' => $car])->first();
         $singleCar->update($request->all());
-
-
-
 
         return redirect()->back()->with('success', 'Car updated successfully!');
 

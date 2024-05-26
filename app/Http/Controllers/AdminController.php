@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AdminPartsRequest;
 use App\Models\CarsModel;
 use App\Models\CartModel;
 use App\Models\ContactUsModel;
@@ -110,22 +111,11 @@ class AdminController extends Controller
         return view('Admin/adminParts',compact('parts') );
     }
 
-    public function adminPartsInsert(Request $request)
+    public function adminPartsInsert(AdminPartsRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'make' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'section' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'price' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'images' => 'required|array|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        if ($request->validated()) {
+
         $highestPart = PartsModel::orderBy('part_code', 'desc')->first();
         $partCode = $highestPart ? $highestPart->part_code + 1 : 1;
 
@@ -144,6 +134,7 @@ class AdminController extends Controller
                 $imageModel->part_id = $part->id;
                 $imageModel->save();
             }
+        }
         }
 
 
