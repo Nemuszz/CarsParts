@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddCarRequest;
 use App\Models\CarsModel;
 use App\Models\Image;
 use App\Models\User;
@@ -25,7 +26,6 @@ class CarController extends Controller
                 $images[$car->id] = $image; // Store the first image in an array with car ID as key
             }
         }
-
 
         return view('Guest/allCars', compact('cars', 'year','images'));
 
@@ -55,16 +55,15 @@ class CarController extends Controller
 
         $userCities = [];
 
-        // Loop through each car to fetch the city of the corresponding user
+
         foreach ($cars as $car) {
-            // Retrieve the user associated with the car
+
             $user = User::find($car->user_car_id);
 
-            // If user found, get the city and store it in the array
             if ($user) {
                 $userCities[$car->id] = $user->city;
             } else {
-                // If user not found, store a placeholder value
+
                 $userCities[$car->id] = 'Unknown';
             }
         }
@@ -73,7 +72,7 @@ class CarController extends Controller
         foreach ($cars as $car) {
             $image = Image::where('car_id', $car->id)->first();
             if ($image) {
-                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+                $images[$car->id] = $image;
             }
         }
 
@@ -86,34 +85,13 @@ class CarController extends Controller
     {
         $year = 2024;
 
-
         return view('Pages/Cars',compact('year'));
 
     }
 
-    public function insert(Request $request){
+    public function insert(AddCarRequest $request){
         $user = Auth::user();
 
-        $validator = Validator::make($request->all(), [
-            'make' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'year' => 'integer',
-            'mileage' => 'integer',
-            'price' => 'integer',
-            'body_type' => 'string',
-            'fuel_type' => 'string',
-            'power' => 'integer',
-            'gear' => 'string',
-            'number_of_doors' => 'integer',
-            'description' => 'string',
-            'user_car_id' => 'integer',
-            'images' => 'required|array|min:1',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
         if(empty($user->country) || empty($user->city) || empty($user->postcode) || empty($user->address)){
             return redirect()->route('user.profile', ['id' => $user->id])->withErrors('Fill all informations about you');
         }
@@ -192,6 +170,5 @@ class CarController extends Controller
         return redirect()->back()->with('success', 'Car updated successfully!');
 
     }
-
 
 }

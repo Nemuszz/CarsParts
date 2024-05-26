@@ -30,7 +30,7 @@
                             <select required  id='car_brand' name="make" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                 <option value="">Select make</option>
                                 @foreach(allMakes() as $label => $value)
-                                    <option value="{{ $value }}">{{ $label }}</option>
+                                    <option value="{{ $value }}" {{old('make') == $value? 'selected': ''}}>{{ $label }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -50,30 +50,30 @@
                                         <option value="">Select Year</option>
                                         <option value="{{$year}}">{{$year}}</option>
                                         @for($i = 0; $i < 50 ;$i++)
-                                            <option value="{{$year-= 1}}">{{$year}}</option>
+                                            <option value="{{$year-= 1}}"{{old('year') == $year? 'selected': ''}}>{{$year}}</option>
                                         @endfor
 
                                     </select>
                                 </div>
                                 <div class="flex flex-col space-y-2 mx-4">
                                     <label for="mileage" class="">Mileage</label>
-                                    <input id="mileage" name="mileage" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Mileage" value="">
+                                    <input id="mileage" name="mileage" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Mileage" value="{{old('mileage')}}">
                                 </div>
                                 <div class="flex flex-col space-y-2 mx-4">
                                     <label for="price" class="">Price</label>
-                                    <input id="price" name="price" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Price in euros" value="">
+                                    <input id="price" name="price" type="number" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Price in euros" value="{{old('price')}}">
                                 </div>
                                 <div class="flex flex-col space-y-2 mx-4">
                                     <label class="text-black-400">Body type</label>
                                     <select required name="body_type" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         @foreach(bodyType() as $label => $value)
-                                            <option value="{{ $value }}">{{ $label }}</option>
+                                            <option value="{{ $value }}" {{old('body_type') == $value? 'selected': ''}}>{{ $label }}</option>
                                         @endforeach
                                     </select>
                                     <label class="text-black-400">Fuel type</label>
                                     <select required name="fuel_type" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         @foreach(fuelType() as $label => $value)
-                                            <option value="{{ $value }}">{{ $label }}</option>
+                                            <option value="{{ $value }}"{{old('fuel_type') == $value? 'selected': ''}} >{{ $label }}</option>
                                         @endforeach
 
                                     </select>
@@ -82,7 +82,7 @@
                                     <label class="text-black-400">Power</label>
                                     <select required name="power" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         @foreach(carPowers() as $label => $value)
-                                            <option value="{{ $value }}">{{ $label }}</option>
+                                            <option value="{{ $value }}" {{old('power') == $value? 'selected': ''}}>{{ $label }}</option>
                                         @endforeach
 
                                     </select>
@@ -90,20 +90,20 @@
                                     <label class="text-black-400">Gear</label>
                                     <select required name="gear" class="px-4 py-2 rounded-lg  border-2 border-black bg-white focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         @foreach(carGears() as $label => $value)
-                                            <option value="{{ $value }}">{{ $label }}</option>
+                                            <option value="{{ $value }}"{{old('gear') == $value? 'selected': ''}}>{{ $label }}</option>
                                         @endforeach
                                     </select>
 
                                     <label class="text-black-400">Number of doors</label>
                                     <select required name="number_of_doors" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                                         @foreach(doorNumber() as $label => $value)
-                                            <option value="{{ $value }}">{{ $label }}</option>
+                                            <option value="{{ $value }}" {{old('number_of_doors') == $value? 'selected': ''}}>{{ $label }}</option>
                                         @endforeach
 
                                     </select>
                                     <div>
                                         <label for="description" class="">Description</label>
-                                        <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description"></textarea>
+                                        <textarea name="description" class="appearance-none rounded-none relative block w-full px-3 py-2 border-2 border-black bg-white placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Description">{{old('description')}}</textarea>
                                     </div>
                                 </div>
                                 <input  id="phone" name="user_car_id" type="hidden"  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Phone number" value="{{auth()->user()->id}}">
