@@ -6,6 +6,11 @@
         <!-- Main Content -->
         <div class="flex-1 p-10 ">
             <div class="w-15 mx-auto bg-white rounded-lg shadow-md p-8">
+                @if(session('success'))
+                    <div class="bg-green-200 text-green-800 p-4 mb-4 rounded" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <div>
 
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Parts</h2>
@@ -145,8 +150,6 @@
                         </div>
                     </div>
                 </div>
-
-
     </div>
         </div>
 </div>
