@@ -78,7 +78,16 @@
     <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
         <div class="flex gap-8">
-            <div class=" w-full md:w-2/3">
+            <div class="w-full md:w-2/3">
+                @if($cars->isEmpty())
+                    <div class="absolute w-2/4 ml-6 h-20 bg-gray-300 rounded-lg shadow-md">
+
+                        <div class="flex justify-center items-center h-full">
+                            <p class="text-black text-sm font-semibold">Currently, there are no those types of cars</p>
+                        </div>
+
+                    </div>
+                @else
                 @foreach($cars as $car)
                     <a href="{{route('car.permalink', $car)}}">
                     <div class=" mx-auto bg-white rounded-lg shadow-md p-8 mt-2 flex flex-col md:flex-row relative justify-center">
@@ -111,14 +120,17 @@
                     </div>
                     </a>
                 @endforeach
+                @endif
             </div>
-            <div class="hidden md:w-1/3 md:block min-h-screen">
-                <div class="w-full">
-                    <img class="w-full mb-6"  alt="banner" src="{{asset('images/banneradd.png')}}">
-                    <div class="flex justify-center">
-                        <button id="scrollTopButton" class="px-4 py-2 bg-gray-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300">
-                            To Top
-                        </button>
+            <div class="hidden md:w-1/3 md:block min-h-screen ">
+                <div class="flex justify-end">
+                    <div class="w-64">
+                        <img class="w-48 md:w-full mb-6" alt="banner" src="{{asset('images/banneradd.png')}}">
+                        <div class="flex justify-center">
+                            <button id="scrollTopButton" class="px-4 py-2 bg-gray-500 hover:bg-blue-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring focus:ring-blue-300">
+                                To Top
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
