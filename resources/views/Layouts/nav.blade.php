@@ -97,7 +97,7 @@
                                 </div>
 
                             @else
-                                <p class="text-black">Your cart is empty.</p>
+                                <p class="text-black mt-2 flex justify-center border-1 border-black">Your cart is empty.</p>
                             @endif
                         </div>
 
