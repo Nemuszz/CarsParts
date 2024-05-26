@@ -76,6 +76,7 @@ Route::controller(AdminController::class)->middleware([AdminMiddleware::class])-
     Route::get('/messages','adminMessages')->name('admin.messages');
     Route::get('/parts/add','adminPartsAdd')->name('admin.parts.add');
     Route::post('/parts/insert','adminPartsInsert')->name('admin.parts.insert');
+    Route::get('/orders','adminOrders')->name('admin.orders.checkout');
 
 
 });

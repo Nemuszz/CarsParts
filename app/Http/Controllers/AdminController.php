@@ -147,4 +147,8 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'Part added successfully!');
     }
+    public function adminOrders()
+    {
+        return view('Admin/adminOrder');
+    }
 }

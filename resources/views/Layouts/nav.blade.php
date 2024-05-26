@@ -93,7 +93,6 @@
 
                                 <div class="flex justify-center mt-2 mb-2">
                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4"><a href="{{route('user.cart')}}">View Cart</a></button>
-                                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><a href="#">Checkout</a></button>
                                 </div>
 
                             @else
