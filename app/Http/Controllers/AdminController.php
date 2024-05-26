@@ -3,43 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AdminPartsRequest;
-use App\Models\CarsModel;
 use App\Models\CartModel;
 use App\Models\ContactUsModel;
-use App\Models\Image;
 use App\Models\PartsImagesModel;
-use App\Models\PartsModel;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use App\Repositories\CarsRepository;
+use App\Repositories\ImagesRepository;
+use App\Repositories\PartRepository;
+use App\Repositories\UserRepository;
 
 class AdminController extends Controller
 {
+    private $carModel;
+    private $userModel;
+    private $imagesModel;
+    private $partsModel;
+    public function __construct()
+    {
+        $this->carModel = new CarsRepository();
+        $this->userModel = new UserRepository();
+        $this->imagesModel = new ImagesRepository();
+        $this->partsModel = new PartRepository();
+    }
     public function adminHome(){
-        $cars = CarsModel::where(['checked_out' => 'unchecked'])->get();
+        $cars = $this->carModel->unCheckedCars();
 
         $userCities = [];
 
-        // Loop through each car to fetch the city of the corresponding user
         foreach ($cars as $car) {
-            // Retrieve the user associated with the car
-            $user = User::find($car->user_car_id);
 
-            // If user found, get the city and store it in the array
+            $user = $this->userModel->userCarById($car);
+
             if ($user) {
                 $userCities[$car->id] = $user->city;
             } else {
-                // If user not found, store a placeholder value
+
                 $userCities[$car->id] = 'Unknown';
             }
         }
         $images = [];
 
         foreach ($cars as $car) {
-            $image = Image::where('car_id', $car->id)->first();
+            $image = $this->imagesModel->imageCar($car);
             if ($image) {
-                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+                $images[$car->id] = $image;
             }
         }
 
@@ -49,21 +55,17 @@ class AdminController extends Controller
     public function adminUsers()
     {
 
-
-        $adminUsers = User::where(['role'=>'admin'])->get();
-        $justUsers = User::where(['role'=>'user'])->get();
-
+        $adminUsers = $this->userModel->userAdmins();
+        $justUsers = $this->userModel->userUsers();
 
         return view('Admin/adminUsers',compact('adminUsers','justUsers'));
     }
     public function adminPermalink($car)
     {
 
-        $car = CarsModel::where(['id' => $car])->first();
-        $user = User::where(['id' => $car->user_car_id])->first();
-        $images = Image::where(['car_id' => $car->id])->get();
-
-
+        $car = $this->carModel->getCarsByID($car);
+        $user = $this->userModel->userCar($car);
+        $images = $this->imagesModel->imageCars($car);
 
 
         return view('Admin/adminPermalink', compact( 'car','user','images'));
@@ -72,11 +74,8 @@ class AdminController extends Controller
     public function adminDelete($car)
     {
 
-
-        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar = $this->carModel->getCarsByID($car);
         $singleCar->delete();
-
-
 
 
         return redirect(route('admin.page'))->with('success', 'Car deleted successfully!');
@@ -85,13 +84,9 @@ class AdminController extends Controller
     public function adminCheck($car)
     {
 
-
-        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar = $this->carModel->getCarsByID($car);
         $singleCar->checked_out = 'checked';
         $singleCar->save();
-
-
-
 
         return redirect(route('admin.page'))->with('success', 'Car checked successfully!');
 
@@ -106,7 +101,7 @@ class AdminController extends Controller
     public function adminPartsAdd()
 
     {
-        $parts = PartsModel::all();
+        $parts = $this->partsModel->partsAll();
 
         return view('Admin/adminParts',compact('parts') );
     }
@@ -116,13 +111,13 @@ class AdminController extends Controller
 
         if ($request->validated()) {
 
-        $highestPart = PartsModel::orderBy('part_code', 'desc')->first();
+        $highestPart = $this->partsModel->partHighest();
         $partCode = $highestPart ? $highestPart->part_code + 1 : 1;
 
 
         $partData = $request->except('images');
         $partData['part_code'] = $partCode;
-        $part = PartsModel::create($partData);
+        $part = $this->partsModel->partCreate($partData);
 
         if ($request->hasFile('images')) {
 

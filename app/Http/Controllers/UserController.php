@@ -19,7 +19,6 @@ class UserController extends Controller
     {
         $this->contactUsRepo = new UsermessageRepository();
 
-
     }
 
     public function login(Request $request)

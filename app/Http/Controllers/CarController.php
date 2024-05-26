@@ -3,24 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCarRequest;
-use App\Models\CarsModel;
 use App\Models\Image;
 use App\Models\User;
+use App\Repositories\CarsRepository;
+use App\Repositories\ImagesRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
 class CarController extends Controller
-{
+{    private $carModel;
+    private $userModel;
+    private $imageModel;
+    public function __construct()
+    {
+        $this->carModel = new CarsRepository();
+        $this->userModel = new UserRepository();
+        $this->imageModel = new ImagesRepository();
+    }
+
 
     public function index()
     {
-        $cars = CarsModel::where(['checked_out'=> 'checked'])->get();
+        $cars = $this->carModel->checkOutCarsAll();
         $year = 2024;
         $images = [];
 
         foreach ($cars as $car) {
-            $image = Image::where('car_id', $car->id)->first();
+            $image = $this->imageModel->imageCar($car);
             if ($image) {
                 $images[$car->id] = $image;
             }
@@ -32,7 +43,7 @@ class CarController extends Controller
     public function search(Request $request)
     {
 
-        $query = CarsModel::where('checked_out', 'checked');
+        $query = $this->carModel->checkOutCar();
         if ($request->filled('year')) {
             $query->where('year', $request->year);
         }
@@ -68,7 +79,7 @@ class CarController extends Controller
         $images = [];
 
         foreach ($cars as $car) {
-            $image = Image::where('car_id', $car->id)->first();
+            $image = $this->imageModel->imageCar($car);
             if ($image) {
                 $images[$car->id] = $image;
             }
@@ -93,7 +104,7 @@ class CarController extends Controller
         else {
 
             $carData = $request->except('images');
-            $car = CarsModel::create($carData);
+            $car = $this->carModel->carCreate($carData);
 
             if ($request->hasFile('images')) {
 
@@ -106,20 +117,20 @@ class CarController extends Controller
                     $imageModel->save();
                 }
             }
-            return redirect()->route('user.profile', ['id' => auth()->user()->id])->with('success', 'Car added successfully!');
+            return redirect()->route('user.profile', ['id' => $user->id])->with('success', 'Car added successfully!');
         }
     }
 
     public function yours($id)
     {
-        $user = User::findOrFail($id);
-        $cars = CarsModel::where('user_car_id', $user->id)->get();
+        $user = $this->userModel->userFind($id);
+        $cars = $this->carModel->userCars($user);
         $images = [];
 
         foreach ($cars as $car) {
-            $image = Image::where('car_id', $car->id)->first();
+            $image =  $this->imageModel->imageCar($car);
             if ($image) {
-                $images[$car->id] = $image; // Store the first image in an array with car ID as key
+                $images[$car->id] = $image;
             }
         }
 
@@ -127,16 +138,16 @@ class CarController extends Controller
     }
     public function permalink($car)
     {
-        $car = CarsModel::where(['id' => $car])->first();
-        $user = User::where(['id' => $car->user_car_id])->first();
-        $images = Image::where(['car_id' => $car->id])->get();
+        $car = $this->carModel->getCarsByID($car);
+        $user = $this->userModel->userCar($car);
+        $images = $this->imageModel->imageCars($car);
 
         return view('Pages/permalink', compact( 'car','user', 'images'));
     }
     public function delete($car)
     {
 
-        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar = $this->carModel->getCarsByID($car);
         $singleCar->delete();
 
         return redirect()->back()->with('success', 'Car deleted successfully!');
@@ -144,8 +155,8 @@ class CarController extends Controller
     public function changeCar($car)
     {
 
-        $car = CarsModel::where(['id' => $car])->first();
-        $user = User::where(['id' => $car->user_car_id])->first();
+        $car = $this->carModel->getCarsByID($car);
+        $user = $this->userModel->userCar($car);
 
         $year = 2024;
 
@@ -154,7 +165,7 @@ class CarController extends Controller
     public function update(Request $request, $car)
     {
 
-        $singleCar = CarsModel::where(['id' => $car])->first();
+        $singleCar = $this->carModel->getCarsByID($car);
         $singleCar->update($request->all());
 
         return redirect()->back()->with('success', 'Car updated successfully!');

@@ -2,28 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarsModel;
-use App\Models\Image;
+
 use App\Models\PartsImagesModel;
-use App\Models\PartsModel;
-use App\Models\User;
+use App\Repositories\PartImagesRepository;
+use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use function PHPUnit\Framework\isEmpty;
+
 
 class PartsController extends Controller
 {
+    private $partModel;
+    private $partImagesModel;
+    public function __construct()
+    {
+        $this->partModel = new PartRepository();
+        $this->partImagesModel = new PartImagesRepository();
+    }
     public function parts()
     {
 
-        $parts = PartsModel::all();
+        $parts = $this->partModel->partsAll();
 
         $images = [];
 
         foreach ($parts as $part) {
-            $image = PartsImagesModel::where('part_id', $part->id)->first();
+            $image = $this->partImagesModel->ImagePart($part);
             if ($image) {
-                $images[$part->id] = $image; // Store the first image in an array with car ID as key
+                $images[$part->id] = $image;
             }
         }
 
@@ -34,7 +40,7 @@ class PartsController extends Controller
     public function partSearch(Request $request)
     {
 
-        $query = PartsModel::query();
+        $query = $this->partModel->query();
 
         if ($request->filled('make')) {
             $query->where('make', $request->make);
@@ -54,9 +60,9 @@ class PartsController extends Controller
         $images = [];
 
         foreach ($parts as $part) {
-            $image = PartsImagesModel::where('part_id', $part->id)->first();
+            $image = $this->partImagesModel->ImagePart($part);
             if ($image) {
-                $images[$part->id] = $image; // Store the first image in an array with part ID as key
+                $images[$part->id] = $image;
             }
         }
 
@@ -66,7 +72,7 @@ class PartsController extends Controller
 
     public function partDelete($part){
 
-        $singlePart = PartsModel::where(['id' => $part])->first();
+        $singlePart = $this->partModel->partId($part);
         $singlePart->delete();
 
         return redirect()->route('admin.parts.add')->with('success', 'Part successfully deleted!');
@@ -84,7 +90,7 @@ class PartsController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $singlePart = PartsModel::findOrFail($part);
+        $singlePart = $this->partModel->partFind($part);
         $newAmount = $singlePart->amount + $request->input('amount');
         $singlePart->update(['amount' => $newAmount]);
 
@@ -93,8 +99,8 @@ class PartsController extends Controller
 
     public function partPermalink($part){
 
-        $singePart = PartsModel::where(['id' => $part])->first();
-        $images = PartsImagesModel::where(['part_id' => $part])->get();
+        $singePart = $this->partModel->partId($part);
+        $images = $this->partImagesModel->imagesOfPart($part);
 
         return view('Guest.partPermalink', compact('part','images','singePart'));
     }

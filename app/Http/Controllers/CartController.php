@@ -3,20 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartModel;
-use App\Models\PartsImagesModel;
-use App\Models\PartsModel;
+use App\Repositories\PartImagesRepository;
+use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use function PHPUnit\Framework\isEmpty;
+
 
 class CartController extends Controller
 {
+    private $partModel;
+    private $partImagesModel;
+    public function __construct()
+    {
+        $this->partModel = new PartRepository();
+        $this->partImagesModel = new PartImagesRepository();
+    }
     public function addToCart(Request $request)
     {
         $partId = $request->input('partId');
-        $part = PartsModel::where('id', $partId)->first();
-        $partImage = PartsImagesModel::where('part_id', $partId)->first();
+        $part = $this->partModel->partById($partId);
+        $partImage = $this->partImagesModel->imagesByPartID($partId);
 
 
 
@@ -46,7 +52,7 @@ class CartController extends Controller
     }
     public function removeToCart(Request $request, $partId)
     {
-        // Get the current cart from the user's session
+
         $cart = $request->session()->get('cart', []);
 
         unset($cart[$partId]);
@@ -82,7 +88,7 @@ class CartController extends Controller
 
             $cart->save();
 
-            $singlePart = PartsModel::where(['id' => $partId])->first();
+            $singlePart = $this->partModel->partById($partId);
             $singlePart->amount -= $part['amount'];
             $singlePart->save();
 
