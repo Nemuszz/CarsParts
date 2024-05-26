@@ -35,6 +35,7 @@ class CartController extends Controller
                 'name' => $part->name,
                 'price' => $part->price,
                 'amount' => $request->amount,
+                'part_code' => $part->part_code,
 
             ];
             session()->put('cart', $cart);
@@ -80,6 +81,7 @@ class CartController extends Controller
             $cart->name = $part['name'];
             $cart->price = $part['price'];
             $cart->amount = $part['amount'];
+            $cart->part_code = $part['part_code'];
 
 
             $cart->save();
