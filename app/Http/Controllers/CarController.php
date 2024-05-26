@@ -92,6 +92,8 @@ class CarController extends Controller
     }
 
     public function insert(Request $request){
+        $user = Auth::user();
+
         $validator = Validator::make($request->all(), [
             'make' => 'required|string|max:255',
             'model' => 'required|string|max:255',
@@ -112,24 +114,29 @@ class CarController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-
-        $carData = $request->except('images');
-        $car = CarsModel::create($carData);
-
-        if ($request->hasFile('images')) {
-
-            foreach ($request->file('images') as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('images'), $imageName);
-                $imageModel = new Image();
-                $imageModel->path = $imageName;
-                $imageModel->car_id = $car->id;
-                $imageModel->save();
-            }
+        if(empty($user->country) || empty($user->city) || empty($user->postcode) || empty($user->address)){
+            return redirect()->route('user.profile', ['id' => $user->id])->withErrors('Fill all informations about you');
         }
+        else {
 
-        return redirect()->route('user.profile', ['id' => auth()->user()->id])->with('success', 'Car added successfully!');
+
+            $carData = $request->except('images');
+            $car = CarsModel::create($carData);
+
+            if ($request->hasFile('images')) {
+
+                foreach ($request->file('images') as $image) {
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    $image->move(public_path('images'), $imageName);
+                    $imageModel = new Image();
+                    $imageModel->path = $imageName;
+                    $imageModel->car_id = $car->id;
+                    $imageModel->save();
+                }
+            }
+
+            return redirect()->route('user.profile', ['id' => auth()->user()->id])->with('success', 'Car added successfully!');
+        }
     }
 
     public function yours($id)

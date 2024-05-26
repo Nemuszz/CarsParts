@@ -7,24 +7,23 @@
         <div class="flex-1 p-10 ">
             <div class="mx-auto bg-white rounded-lg shadow-md p-8">
                 <div>
-
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Add car</h2>
-
-
                 </div>
                 <form class="mt-8 space-y-6 form-horizontal" action="{{route('car.insert')}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
-                    <div class="rounded-md shadow-sm -space-y-px">
-                        <div id="imageInputs">
-                            <label for="images">Images:</label>
+                    <div id="imageInputs">
+                        <label for="images">Images:</label>
+                        <button type="button" onclick="addImageInput()" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Add Image
+                        </button>
+                    </div>
 
-                            <input required type="file" name="images[]" class="imageInput" accept="image/*">
-                        </div>
-                        <button type="button" id="addImageInput">Add Image</button>
+                    <div id="imagePreview" class="inline-block"></div>
+
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
                             <select required  id='car_brand' name="make" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                <option value="Abarth">Abarth</option>
+                                <option value="">Select make</option>
                                 @foreach(allMakes() as $label => $value)
                                     <option value="{{ $value }}">{{ $label }}</option>
                                 @endforeach
@@ -220,5 +219,82 @@
             carModelSelect.appendChild(option);
         });
     });
+
+    function addImageInput() {
+        const imageInputsContainer = document.getElementById('imageInputs');
+
+        // Create the file input element
+        const newInput = document.createElement('input');
+        newInput.type = 'file';
+        newInput.name = 'images[]';
+        newInput.className = 'imageInput visuallyHidden'; // Apply CSS class to hide the input field
+        newInput.accept = 'image/*';
+        newInput.multiple = true;
+        imageInputsContainer.appendChild(newInput);
+
+        // Add event listener to the new input field
+        newInput.addEventListener('change', function() {
+            displayImagePreview(this);
+        });
+
+        // Trigger file input when button is clicked
+        newInput.click();
+    }
+
+
+
+    function displayImagePreview(input) {
+        const previewContainer = document.getElementById('imagePreview');
+
+        const files = input.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('inline-block'); // Add Tailwind CSS class
+                imgContainer.classList.add('p-2'); // Add padding for spacing
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = file.name;
+                img.classList.add('w-32', 'h-32', 'object-cover', 'rounded'); // Apply Tailwind CSS classes for image size and styling
+
+                // Make the image clickable
+                img.addEventListener('click', function() {
+                    // Open the image in a new tab or modal
+                    window.open(img.src, '_blank');
+                });
+
+                // Create a remove button
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'x';
+                removeButton.type = 'button';
+                removeButton.classList.add('removeButton', 'ml-2'); // Apply Tailwind CSS class for margin-left
+
+                removeButton.addEventListener('click', function() {
+                    // Remove the corresponding input field and image container
+                    input.parentNode.removeChild(input);
+                    previewContainer.removeChild(imgContainer);
+                });
+
+                // Append the image and remove button to the image container
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(removeButton);
+                previewContainer.appendChild(imgContainer);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+
 </script>
+<style>
+    .visuallyHidden {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        visibility: hidden;
+    }
+</style>
 @include('Layouts.footer')
