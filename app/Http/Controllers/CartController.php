@@ -7,6 +7,7 @@ use App\Models\PartsImagesModel;
 use App\Models\PartsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use function PHPUnit\Framework\isEmpty;
 
 class CartController extends Controller
@@ -63,11 +64,15 @@ class CartController extends Controller
     }
 
 
-    public function purchaseToCart(Request $request){
+    public function purchaseToCart(Request $request)
+    {
         $cartItems = $request->session()->get('cart', []);
         $user = Auth::user();
 
-
+        if(empty($user->country) || empty($user->city) || empty($user->postcode) || empty($user->address)){
+            return redirect()->route('user.profile', ['id' => $user->id])->withErrors('Fill all informations about you');
+        }
+        else{
 
         foreach ($cartItems as $partId => $part) {
 
@@ -93,10 +98,9 @@ class CartController extends Controller
 
         }
 
-
-
         $request->session()->forget('cart');
         return redirect()->back()->with('success', 'Your order has been successfully placed!');
+        }
     }
 
 
