@@ -21,25 +21,38 @@
                 <form class="mt-8 space-y-6 form-horizontal" action="{{route('car.update', $car)}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="rounded-md shadow-sm -space-y-px">
+
+
+
+
+
+
                         <div id="imageInputs">
                             <label for="images">Images:</label>
-                            <button type="button" onclick="addImageInput()" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <button type="button" onclick="addImageInput()"
+                                    class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                 Add Image
                             </button>
                         </div>
-                        <div id="imagePreview" class="inline-block"></div>
-                        <div class="flex flex-col space-y-2 mx-4">
-                            <label class="text-black-400">Make</label>
-                            <select required  id='car_make' name="make" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
-                                @foreach (carMake() as $label => $value)
-                                    <option value="{{ $value }}" {{ $car->make == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
+
+                        <div id="imagePreview" class="inline-block">
+
                         </div>
 
                         <div class="flex flex-col space-y-2 mx-4">
+                            <div class="flex flex-col space-y-2 mx-4">
+                                <label class="text-black-400">Make</label>
+                                <select required  id='car_brand' name="make" class="px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
+                                    <option value="">Select make</option>
+                                    @foreach(allMakes() as $label => $value)
+                                        <option value="{{ $value }}" {{ $car->make == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                        <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400" for="car_model">Select Model:</label>
-                            <select  required name="model" id="car_model" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
+                            <select  required name="model" id="car_model" class=" min-w-36 px-4 py-2 rounded-lg border-2 border-black bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500 ">
                                 <option value="">Change</option>
                             </select>
                             <div>
@@ -120,17 +133,12 @@
                         @endif
                     </div>
 
-
-
                     <div class="flex items-center justify-center">
                         <button  type="submit" class="group relative flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                             Add your car
                         </button>
                     </div>
-
-
                 </form>
-
             </div>
         </div>
     </div>
@@ -258,13 +266,12 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const imgContainer = document.createElement('div');
-                imgContainer.classList.add('inline-block');
-                imgContainer.classList.add('p-2');
+                imgContainer.classList.add('inline-block', 'p-2', 'relative', 'group');
 
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.alt = file.name;
-                img.classList.add('w-32', 'h-32', 'object-cover', 'rounded');
+                img.classList.add('w-32', 'h-32', 'object-cover', 'rounded', 'cursor-pointer', 'group-hover:opacity-75');
 
 
                 img.addEventListener('click', function() {
@@ -274,16 +281,15 @@
 
 
                 const removeButton = document.createElement('button');
-                removeButton.textContent = 'x';
+                removeButton.innerHTML = '&times;';
                 removeButton.type = 'button';
-                removeButton.classList.add('removeButton', 'ml-2');
+                removeButton.classList.add('removeButton', 'absolute', 'top-0', 'right-0', 'p-1', 'bg-white', 'text-gray-500', 'rounded', 'hover:bg-gray-100', 'focus:outline-none'); // Apply Tailwind CSS classes for button styling
 
                 removeButton.addEventListener('click', function() {
 
                     input.parentNode.removeChild(input);
                     previewContainer.removeChild(imgContainer);
                 });
-
 
                 imgContainer.appendChild(img);
                 imgContainer.appendChild(removeButton);
@@ -303,5 +309,4 @@
         visibility: hidden;
     }
 </style>
-
 @include('Layouts.footer')

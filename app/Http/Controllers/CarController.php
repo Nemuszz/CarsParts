@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCarRequest;
 use App\Models\Image;
-use App\Models\PartsModel;
 use App\Repositories\CarsRepository;
 use App\Repositories\ImagesRepository;
 use App\Repositories\UserRepository;
@@ -134,10 +133,12 @@ class CarController extends Controller
 
         $car = $this->carModel->getCarsByID($car);
         $user = $this->userModel->userCar($car);
+        $images = Image::where(['car_id'=> $car->id])->get();
+
 
         $year = 2024;
 
-        return view('Pages/changeCar', compact( 'car','user', 'year'));
+        return view('Pages/changeCar', compact( 'car','user', 'year','images'));
     }
     public function update(Request $request, $car)
     {

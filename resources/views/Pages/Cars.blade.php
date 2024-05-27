@@ -23,7 +23,9 @@
                         </button>
                     </div>
 
-                    <div id="imagePreview" class="inline-block"></div>
+                    <div id="imagePreview" class="inline-block">
+
+                    </div>
 
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
@@ -257,13 +259,12 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const imgContainer = document.createElement('div');
-                imgContainer.classList.add('inline-block'); // Add Tailwind CSS class
-                imgContainer.classList.add('p-2'); // Add padding for spacing
+                imgContainer.classList.add('inline-block', 'p-2', 'relative', 'group'); // Apply Tailwind CSS classes
 
                 const img = document.createElement('img');
                 img.src = e.target.result;
                 img.alt = file.name;
-                img.classList.add('w-32', 'h-32', 'object-cover', 'rounded'); // Apply Tailwind CSS classes for image size and styling
+                img.classList.add('w-32', 'h-32', 'object-cover', 'rounded', 'cursor-pointer', 'group-hover:opacity-75'); // Apply Tailwind CSS classes for image size and styling
 
                 // Make the image clickable
                 img.addEventListener('click', function() {
@@ -273,9 +274,9 @@
 
                 // Create a remove button
                 const removeButton = document.createElement('button');
-                removeButton.textContent = 'x';
+                removeButton.innerHTML = '&times;'; // Use HTML entity for 'x'
                 removeButton.type = 'button';
-                removeButton.classList.add('removeButton', 'ml-2'); // Apply Tailwind CSS class for margin-left
+                removeButton.classList.add('removeButton', 'absolute', 'top-0', 'right-0', 'p-1', 'bg-white', 'text-gray-500', 'rounded', 'hover:bg-gray-100', 'focus:outline-none'); // Apply Tailwind CSS classes for button styling
 
                 removeButton.addEventListener('click', function() {
                     // Remove the corresponding input field and image container
