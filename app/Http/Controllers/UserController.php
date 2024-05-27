@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContactUsModel;
 use App\Models\User;
 use App\Repositories\UsermessageRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,9 +16,11 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     private $contactUsRepo;
+    private $userModel;
     public function __construct()
     {
         $this->contactUsRepo = new UsermessageRepository();
+        $this->userModel = new UserRepository();
 
     }
 
@@ -70,7 +73,7 @@ class UserController extends Controller
     }
 
     public function profile($id){
-        $user = User::findOrFail($id);
+        $user = $this->userModel->userFind($id);
 
         return view('Pages/Profile', ['user' => $user]);
     }
@@ -90,7 +93,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = User::findOrFail($id);
+        $user = $this->userModel->userFind($id);
 
         $user->update($request->all());
 
@@ -99,7 +102,7 @@ class UserController extends Controller
     public function contact($id)
     {
 
-        $user = User::findOrFail($id);
+        $user = $this->userModel->userFind($id);
 
 
         return view('Pages/Contact');
@@ -115,7 +118,7 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = User::findOrFail($id);
+        $user = $this->userModel->userFind($id);
 
         $this->contactUsRepo->createMessage($request, $user);
 

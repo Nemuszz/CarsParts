@@ -93,8 +93,8 @@
                     <div class=" mx-auto bg-white rounded-lg shadow-md p-8 mt-2 flex flex-col md:flex-row relative justify-center">
                         <!-- Left side - Image of car -->
                         <div class=" w-80 md:w-1/2 md:h-52 mb-8 md:mr-8 md:mb-0">
-                            @if(isset($images[$car->id]))
-                                <img class="h-full w-full object-cover rounded" src="{{ asset('images/' . $images[$car->id]->path) }}" alt="Car Image">
+                            @if($car->imagesRelation != null)
+                                <img class="h-full w-full object-cover rounded" src="{{ asset('images/' . $car->imagesRelation[0]->path) }}" alt="Car Image">
                             @else
                                 <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
                             @endif
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                             <div class="absolute bottom-2 right-2">
-                                {{ $userCities[$car->id] ?? 'Unknown' }}
+                                {{ $car->user->city ?? 'Unknown' }}
                             </div>
                         </div>
                     </div>

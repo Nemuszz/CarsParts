@@ -56,7 +56,6 @@ class CartController extends Controller
         $cart = $request->session()->get('cart', []);
 
         unset($cart[$partId]);
-
         $request->session()->put('cart', $cart);
 
         return redirect()->back();

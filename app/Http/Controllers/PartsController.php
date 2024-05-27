@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\AmountRequest;
 use App\Models\PartsImagesModel;
 use App\Repositories\PartImagesRepository;
 use App\Repositories\PartRepository;
@@ -80,15 +81,8 @@ class PartsController extends Controller
 
 
 
-    public function partAmount(Request $request, $part){
+    public function partAmount(AmountRequest $request, $part){
 
-        $validator = Validator::make($request->all(), [
-            'amount' => 'required|integer|min:1',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         $singlePart = $this->partModel->partFind($part);
         $newAmount = $singlePart->amount + $request->input('amount');

@@ -9,11 +9,11 @@ class CarsModel extends Model
 {
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_car_id', 'id');
     }
-    public function images()
+    public function imagesRelation()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(Image::class, 'car_id', 'id');
     }
     use HasFactory;
 

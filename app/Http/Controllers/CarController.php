@@ -60,31 +60,9 @@ class CarController extends Controller
             $query->where('price','<', $request->price);
         }
 
-        $cars = $query->get();
+        $cars = $query->with('user', 'imagesRelation')->get();
 
-        $userCities = [];
-
-
-        foreach ($cars as $car) {
-
-            $user = User::find($car->user_car_id);
-
-            if ($user) {
-                $userCities[$car->id] = $user->city;
-            } else {
-
-                $userCities[$car->id] = 'Unknown';
-            }
-        }
-        $images = [];
-
-        foreach ($cars as $car) {
-            $image = $this->imageModel->imageCar($car);
-            if ($image) {
-                $images[$car->id] = $image;
-            }
-        }
-        return view('Guest/searchCars', compact('cars', 'request','userCities','images'));
+       return view('Guest/searchCars', compact('cars', 'request'));
     }
 
 
