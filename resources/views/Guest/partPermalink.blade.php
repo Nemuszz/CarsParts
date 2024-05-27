@@ -146,7 +146,7 @@
 
                         <div class="mt-4">
                             <input type="hidden" name="partId" value="{{ $singePart->id }}">
-                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete from wish list</button>
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Remove from wish list</button>
                         </div>
                     </form>
 

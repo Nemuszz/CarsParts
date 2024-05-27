@@ -6,7 +6,9 @@ use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\LoingRequest;
 use App\Http\Requests\MessageRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\PartsModel;
 use App\Models\User;
+use App\Models\WishListModel;
 use App\Repositories\UsermessageRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -91,9 +93,28 @@ class UserController extends Controller
     }
     public function userCart()
     {
+        $wishListItems = WishListModel::where('user_id', Auth::id())->get();
 
 
-        return view('Pages/profileCart');
+        $allParts = [];
+
+
+        foreach ($wishListItems as $wishListItem) {
+
+            $partDetails = PartsModel::find($wishListItem->part_id);
+
+
+            if ($partDetails) {
+
+                $allParts[] = $partDetails;
+            }
+        }
+
+
+
+
+
+        return view('Pages/profileCart',compact('allParts'));
     }
 
     public function wishList(Request $request)

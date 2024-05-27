@@ -15,7 +15,7 @@ class WishListModel extends Model
 
     public function part()
     {
-        return $this->belongsTo(PartsModel::class); // Assuming you have an Item model
+        return $this->belongsTo(PartsModel::class);
     }
 
     protected $table = 'wishList';
