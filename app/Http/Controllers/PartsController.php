@@ -24,6 +24,8 @@ class PartsController extends Controller
 
         $parts = $this->partModel->partsAll();
 
+
+
         $images = [];
 
         foreach ($parts as $part) {

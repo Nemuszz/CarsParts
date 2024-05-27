@@ -23,10 +23,11 @@
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div id="imageInputs">
                             <label for="images">Images:</label>
-                            <input required type="file" class="form-control" name="image" placeholder="image" multiple accept="image/*">
+                            <button type="button" onclick="addImageInput()" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Add Image
+                            </button>
                         </div>
-                        <button type="button" id="addImageInput">Add Image</button>
-
+                        <div id="imagePreview" class="inline-block"></div>
                         <div class="flex flex-col space-y-2 mx-4">
                             <label class="text-black-400">Make</label>
                             <select required  id='car_make' name="make" class="px-4 py-2 rounded-lg border-2 border-black  bg-white text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
@@ -141,7 +142,6 @@
             $('#imageInputs').append('<input type="file" name="images[]" class="imageInput" accept="image/*"><br>');
         });
     });
-
     const modelsByBrand = {
         'Abarth': ['124 Spider', '595', '695'],
         'Acura': ['ILX', 'MDX', 'NSX', 'RDX', 'RLX', 'TLX'],
@@ -204,17 +204,20 @@
         'Volkswagen': ['Arteon', 'Atlas', 'Beetle', 'Golf', 'ID.3', 'ID.4', 'Jetta', 'Passat', 'Tiguan', 'Touareg', 'Transporter'],
         'Volvo': ['S60', 'S90', 'V60', 'V90', 'XC40', 'XC60', 'XC90']
     }
-    const carBrandSelect = document.getElementById('car_make');
+
+    const carBrandSelect = document.getElementById('car_brand');
     const carModelSelect = document.getElementById('car_model');
 
+
     carBrandSelect.addEventListener('change', function() {
+
         const selectedBrand = this.value;
         const models = modelsByBrand[selectedBrand] || [];
 
-        // Clear existing options
+
         carModelSelect.innerHTML = '';
 
-        // Add new options
+
         models.forEach(model => {
             const option = document.createElement('option');
             option.value = model;
@@ -223,6 +226,82 @@
         });
     });
 
+    function addImageInput() {
+        const imageInputsContainer = document.getElementById('imageInputs');
+
+
+        const newInput = document.createElement('input');
+        newInput.type = 'file';
+        newInput.name = 'images[]';
+        newInput.className = 'imageInput visuallyHidden';
+        newInput.accept = 'image/*';
+        newInput.multiple = true;
+        imageInputsContainer.appendChild(newInput);
+
+
+        newInput.addEventListener('change', function() {
+            displayImagePreview(this);
+        });
+
+
+        newInput.click();
+    }
+
+
+
+    function displayImagePreview(input) {
+        const previewContainer = document.getElementById('imagePreview');
+
+        const files = input.files;
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imgContainer = document.createElement('div');
+                imgContainer.classList.add('inline-block');
+                imgContainer.classList.add('p-2');
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = file.name;
+                img.classList.add('w-32', 'h-32', 'object-cover', 'rounded');
+
+
+                img.addEventListener('click', function() {
+
+                    window.open(img.src, '_blank');
+                });
+
+
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'x';
+                removeButton.type = 'button';
+                removeButton.classList.add('removeButton', 'ml-2');
+
+                removeButton.addEventListener('click', function() {
+
+                    input.parentNode.removeChild(input);
+                    previewContainer.removeChild(imgContainer);
+                });
+
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(removeButton);
+                previewContainer.appendChild(imgContainer);
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+
 </script>
+<style>
+    .visuallyHidden {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        visibility: hidden;
+    }
+</style>
 
 @include('Layouts.footer')

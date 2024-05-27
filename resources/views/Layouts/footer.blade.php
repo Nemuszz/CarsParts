@@ -23,18 +23,6 @@
     </div>
 </footer>
 </div>
-<script>
-    document.getElementById('cart_link').addEventListener('click', function() {
-        var cartDiv = document.getElementById('cart_div');
-        cartDiv.classList.toggle('hidden');
-    });
-</script>
-
-
-
-
-
-
 
 
 <script src="{{ asset('index.js') }}"></script>

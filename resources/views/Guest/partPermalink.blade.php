@@ -1,15 +1,6 @@
 @include('Layouts.nav')
 <!-- CSS to position navigation buttons -->
-<style>
 
-    .image-box{
-        height: 100px;
-        border: 1px solid black;
-        width: 100px;
-        margin-left: 10px;
-
-    }
-</style>
 <style>
     .swiper-button-prev, .swiper-button-next {
         position: absolute;
@@ -54,29 +45,34 @@
     .swiper-wrapper, .swiper-slide {
         height: auto !important;
     }
+    .image-box{
+        height: 100px;
+        border: 1px solid black;
+        width: 100px;
+        margin-left: 10px;
+
+    }
+
+
 
 </style>
 <div class=" relative mx-auto max-w-screen-xl bg-gray-400-100 p-8 min-h-screen rounded-lg shadow-md">
-    <!-- 2/3 of flex -->
-    <div class="flex">
-        <!-- 2/3 of flex -->
-        <div class="w-1/3 p-4">
 
+    <div class="flex">
+        <div class="w-1/3 p-4">
             <div class="swiper-container overflow-hidden parent-swiper">
                 <div class="swiper-wrapper">
-                    <!-- Nested Swiper Container -->
                     <div class="swiper-slide flex items-center justify-center">
                         <div class="swiper-container child-swiper">
-                            <div class="swiper-wrapper h-full"> <!-- Ensure swiper-wrapper has full height -->
-                                <!-- Images Slider -->
+                            <div class="swiper-wrapper h-full">
+
                                 @foreach($images as $image)
-                                    <div class="swiper-slide h-full flex items-center justify-center"> <!-- Ensure the swiper-slide and its parent have full height -->
+                                    <div class="swiper-slide h-full flex items-center justify-center">
                                         <img src="{{ asset('partsImages/' . $image->path) }}" alt="Car Image" class="object-contain w-full h-full max-w-full max-h-full">
                                     </div>
 
                                 @endforeach
                             </div>
-                            <!-- Add Navigation Buttons -->
                             <div class="swiper-button-prev"></div>
                             <div class="swiper-button-next"></div>
                         </div>
@@ -135,9 +131,13 @@
                 </form>
 
 
+
             @else
                 <p class="text-sm text-red-600 mt-4">&#215; Not In Stock</p>
                 <p class="text-sm  mt-4">If u want to order this product u can contact us here:<a class="text-blue-500" href="{{route('user.contact', ['id' => auth()->user()->id])}}"> Message</a>  with number of product and amount of it, you will be contacted vie email.</p>
+                <div class="mt-4">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add to wish list</button>
+                </div>
             @endif
         </div>
         <!-- 1/3 of flex -->
@@ -165,11 +165,11 @@
 
 </div>
 
-<!-- Main Content -->
+
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-<!-- Initialize Parent Swiper -->
+
 <script>
     var parentSwiper = new Swiper('.parent-swiper', {
         loop: true,
