@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AmountRequest extends FormRequest
+class MessageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,15 @@ class AmountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'amount' => 'required|integer|min:1',
+            'subject' => 'required|string|max:30',
+            'message' => 'required|string|max:225',
         ];
     }
-
-        public function messages()
+    public function messages(): array
     {
         return [
-            'amount.required' => 'The amount field is required.',
+            'subject.required' => 'Subject is required',
+            'message.required' => 'Message is required',
         ];
     }
-
 }

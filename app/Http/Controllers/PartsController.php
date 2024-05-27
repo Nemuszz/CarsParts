@@ -83,7 +83,6 @@ class PartsController extends Controller
 
     public function partAmount(AmountRequest $request, $part){
 
-
         $singlePart = $this->partModel->partFind($part);
         $newAmount = $singlePart->amount + $request->input('amount');
         $singlePart->update(['amount' => $newAmount]);

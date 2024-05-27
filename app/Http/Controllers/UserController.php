@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditProfileRequest;
+use App\Http\Requests\LoingRequest;
+use App\Http\Requests\MessageRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\ContactUsModel;
 use App\Models\User;
 use App\Repositories\UsermessageRepository;
@@ -24,16 +28,9 @@ class UserController extends Controller
 
     }
 
-    public function login(Request $request)
+    public function login(LoingRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
-            'password' => 'required|string|min:6',
-        ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
        $credentials = $request->only('email', 'password');
        if (Auth::attempt($credentials)) {
@@ -42,19 +39,9 @@ class UserController extends Controller
        return redirect("login")->with('error', 'Invalid Email or Password');
 
     }
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|min:5|max:20',
-            'email' => 'required|string|email',
-            'password' => 'required|string|min:6',
-            'confirm_password' => 'required|string|min:6|same:password',
-
-        ]);
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
              $user = User::create([
                 'name'=> $request->name,
                 'email'=> $request->email,
@@ -63,7 +50,6 @@ class UserController extends Controller
              if (!$user){
                  return Redirect::to('/login')->with('error','Register details are not valid');
              }
-
         return Redirect::to('/login');
     }
     public function logout(){
@@ -77,21 +63,8 @@ class UserController extends Controller
 
         return view('Pages/Profile', ['user' => $user]);
     }
-    public function edit(Request $request, $id){
+    public function edit(EditProfileRequest $request, $id){
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,'.$id,
-            'country' => 'string|max:255|nullable',
-            'city' => 'string|max:255|nullable',
-            'address' => 'string|max:255|nullable',
-            'phone' => 'integer|nullable',
-            'postcode' => 'integer|nullable',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         $user = $this->userModel->userFind($id);
 
@@ -107,16 +80,8 @@ class UserController extends Controller
 
         return view('Pages/Contact');
     }
-    public function message(Request $request, $id)
+    public function message(MessageRequest $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'subject' => 'required|string|max:30',
-            'message' => 'required|string|max:225',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
 
         $user = $this->userModel->userFind($id);
 
