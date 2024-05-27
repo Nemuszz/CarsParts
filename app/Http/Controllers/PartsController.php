@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AmountRequest;
 use App\Models\PartsModel;
+use App\Models\WishListModel;
 use App\Repositories\PartImagesRepository;
 use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 
 class PartsController extends Controller
@@ -91,11 +92,20 @@ class PartsController extends Controller
     }
 
     public function partPermalink($part){
+        $userId = Auth::id();
 
-        $singePart = $this->partModel->partId($part);
-        $images = $this->partImagesModel->imagesOfPart($part);
+        $isInWishList = WishListModel::where('part_id', $part)
+            ->where('user_id', $userId)
+            ->exists();
 
-        return view('Guest.partPermalink', compact('part','images','singePart'));
+
+
+            $singePart = $this->partModel->partId($part);
+            $images = $this->partImagesModel->imagesOfPart($part);
+
+
+
+        return view('Guest.partPermalink', compact('part','images','singePart','isInWishList'));
     }
 
 }

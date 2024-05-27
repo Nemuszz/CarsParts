@@ -21,6 +21,11 @@
             display: none;
         }
     </style>
+    <style>
+        #drop_menu {
+            z-index: 9999; /* Set a high z-index value to ensure the menu is always on top */
+        }
+    </style>
 </head>
 
 <body class="bg-gray-100 text-gray-900">

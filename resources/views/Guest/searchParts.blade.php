@@ -7,7 +7,6 @@
                 <p class="text-lg mb-8">Browse through our collection of high-quality parts for cars</p>
                 <div class="flex justify-center flex-wrap">
 
-
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Make</label>
                         <select id='car_brand' name="make" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
@@ -15,16 +14,15 @@
                             @foreach(allMakes() as $label => $value)
                                 <option value="{{ $value }}"{{$request->input('make') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
-                            <!-- Add more options for make -->
+
                         </select>
                     </div>
-                    <!-- Model, Price, Search Button -->
+
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400">Model</label>
                         <select  name="model" id="car_model" class="px-4 py-2 rounded-lg border-none bg-gray-300 text-gray-800 focus:outline-none focus:bg-white focus:ring focus:ring-blue-500">
                             <option value="">Select Model</option>
 
-                            <!-- Add more options for model -->
                         </select>
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
@@ -34,7 +32,7 @@
                             @foreach(partsSection() as $label => $value)
                                 <option value="{{ $value }}"{{$request->input('section') == $value ? 'selected': ''}}>{{ $label }}</option>
                             @endforeach
-                            <!-- Add more options for make -->
+
                         </select>
                     </div>
                     <div class="flex flex-col space-y-2 mx-4">
@@ -44,7 +42,6 @@
 
                         </select>
                     </div>
-
 
                     <div class="flex flex-col space-y-2 mx-4">
                         <label class="text-gray-400 invisible">Condition</label>
@@ -61,7 +58,7 @@
 
 
     <section class="container mx-auto my-12 max-w-screen-xl">
-        <!-- Car Listings -->
+
         <div class="flex gap-8">
             <div class=" w-full md:w-2/3">
                 <div class="grid grid-rows-4 grid-cols-3 sm:align-middle sm:grid-cols-3 lg:grid-cols-3 gap-4">
@@ -77,7 +74,7 @@
 
                             <a href=" {{route('parts.permalink',$part)}}" class="w-full max-h-48">
                                 <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
-                                    <!-- Left side - Image of car -->
+
                                     <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">
                                         @if(isset($images[$part->id]))
                                             <img class="h-full w-full object-cover rounded" src="{{ asset('partsImages/' . $images[$part->id]->path) }}" alt="Part Image">
@@ -85,7 +82,7 @@
                                             <img src="{{ asset('images/placeholder.jpg') }}" alt="Car Image" class="h-full w-full object-cover rounded">
                                         @endif
                                     </div>
-                                    <!-- Right side - Info for car -->
+
                                     <div class="flex flex-col justify-center">
                                         <h2 class="text-lg font-bold mb-2">{{ $part->make }} {{ $part->model }}</h2>
                                         <p class="text-gray-600"><strong>{{ $part->name }}</strong></p>
@@ -205,15 +202,6 @@
         });
     });
 
-
-
-
-
-
-
-
-
-
     const partsBySection = {
         'Engine': ['Piston', 'Cylinder Head', 'Crankshaft', 'Camshaft', 'Connecting Rod', 'Engine Block', 'Timing Belt', 'Timing Chain', 'Valve', 'Valve Cover', 'Oil Pump', 'Oil Pan', 'Turbocharger', 'Supercharger', 'Fuel Injector', 'Throttle Body', 'Intake Manifold', 'Exhaust Manifold'],
         'Suspension': ['Shock Absorber', 'Strut Assembly', 'Control Arm', 'Ball Joint', 'Tie Rod', 'Sway Bar', 'Stabilizer Bar', 'Leaf Spring', 'Coil Spring', 'Control Arm Bushing', 'Bushing', 'Strut Mount', 'Control Arm Bushing', 'Shock Mount', 'Suspension Bushing', 'Suspension Link', 'Trailing Arm', 'Panhard Rod'],
@@ -241,7 +229,6 @@
         const selectedPart = this.value;
         const parts = partsBySection[selectedPart] || [];
 
-        // Clear existing options
 
 
         if (parts.length === 0) {

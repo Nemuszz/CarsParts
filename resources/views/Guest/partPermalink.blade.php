@@ -1,5 +1,4 @@
 @include('Layouts.nav')
-<!-- CSS to position navigation buttons -->
 
 <style>
     .swiper-button-prev, .swiper-button-next {
@@ -52,8 +51,16 @@
         margin-left: 10px;
 
     }
-
-
+    .swiper-slide img {
+        transition: transform 0.3s ease;
+    }
+    .swiper-slide:hover img {
+        transform: scale(1.3); /* Adjust the scale factor as needed */
+        z-index: 1;
+        position: relative;
+        top: -10px; /* Adjust the vertical position */
+        left: -10px; /* Adjust the horizontal position */
+    }
 
 </style>
 <div class=" relative mx-auto max-w-screen-xl bg-gray-400-100 p-8 min-h-screen rounded-lg shadow-md">
@@ -65,12 +72,10 @@
                     <div class="swiper-slide flex items-center justify-center">
                         <div class="swiper-container child-swiper">
                             <div class="swiper-wrapper h-full">
-
                                 @foreach($images as $image)
                                     <div class="swiper-slide h-full flex items-center justify-center">
                                         <img src="{{ asset('partsImages/' . $image->path) }}" alt="Car Image" class="object-contain w-full h-full max-w-full max-h-full">
                                     </div>
-
                                 @endforeach
                             </div>
                             <div class="swiper-button-prev"></div>
@@ -135,9 +140,26 @@
             @else
                 <p class="text-sm text-red-600 mt-4">&#215; Not In Stock</p>
                 <p class="text-sm  mt-4">If u want to order this product u can contact us here:<a class="text-blue-500" href="{{route('user.contact', ['id' => auth()->user()->id])}}"> Message</a>  with number of product and amount of it, you will be contacted vie email.</p>
-                <div class="mt-4">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add to wish list</button>
-                </div>
+                @if($isInWishList)
+                    <form method="POST" action="{{ route('user.wishList.delete') }}">
+                        {{csrf_field()}}
+
+                        <div class="mt-4">
+                            <input type="hidden" name="partId" value="{{ $singePart->id }}">
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete from wish list</button>
+                        </div>
+                    </form>
+
+                @else
+                    <form method="POST" action="{{ route('user.wishList') }}">
+                        {{csrf_field()}}
+
+                        <div class="mt-4">
+                            <input type="hidden" name="partId" value="{{ $singePart->id }}">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add to wish list</button>
+                        </div>
+                    </form>
+                @endif
             @endif
         </div>
         <!-- 1/3 of flex -->
@@ -176,7 +198,6 @@
         autoplay: false,
     });
 
-    // Initialize Child Swiper
     var childSwiper = new Swiper('.child-swiper', {
         loop: true,
         autoplay: false,
@@ -184,9 +205,31 @@
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+        loopedSlides: 2,
     });
 
+    function updateLoopedSlides() {
+        childSwiper.params.loopedSlides = parentSwiper.slides.length;
+        childSwiper.update();
+    }
 
+    updateLoopedSlides();
+    parentSwiper.on('update', updateLoopedSlides);
+
+    const swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    const imageBoxes = document.querySelectorAll('.image-box');
+    imageBoxes.forEach(imageBox => {
+        imageBox.addEventListener('click', () => {
+            const index = parseInt(imageBox.dataset.index);
+            swiper.slideTo(index);
+        });
+    });
 </script>
 
 <script>
@@ -215,22 +258,7 @@
     });
 
 </script>
-<script>
-    const swiper = new Swiper('.swiper-container', {
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
 
-    const imageBoxes = document.querySelectorAll('.image-box');
-    imageBoxes.forEach(imageBox => {
-        imageBox.addEventListener('click', () => {
-            const index = parseInt(imageBox.dataset.index);
-            swiper.slideTo(index);
-        });
-    });
-</script>
 
 
 

@@ -19,8 +19,6 @@ Route::get('/register', function () {return view('Registration/register');
 Route::get('/login', function () {return view('Registration/login');
 });
 
-
-
 Route::controller(UserController::class)->prefix('/user')->group(function () {
     Route::post('/login', 'login')->name('user.login');
     Route::post('/register', 'register')->name('user.register');
@@ -34,6 +32,8 @@ Route::controller(UserController::class)->middleware(AuthMiddleware::class)->pre
     Route::get('/contact/{id}', 'contact')->name('user.contact');
     Route::post('/message/{id}', 'message')->name('user.message');
     Route::get('/cart', 'userCart')->name('user.cart');
+    Route::post('/wishlist', 'wishList')->name('user.wishList');
+    Route::post('/wishlist/delete', 'removeFromWishList')->name('user.wishList.delete');
 });
 
 Route::controller(AdminController::class)->middleware([AdminMiddleware::class])->prefix('/admin')->group(function () {

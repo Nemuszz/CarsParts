@@ -9,6 +9,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Repositories\UsermessageRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -90,7 +91,27 @@ class UserController extends Controller
     }
     public function userCart()
     {
+
+
         return view('Pages/profileCart');
+    }
+
+    public function wishList(Request $request)
+    {
+       $user = auth()->user();
+       $partId = $request->input('partId');
+       $user->wishListItems()->create(['part_id' => $partId]);
+
+       return redirect()->back()->with('success','item added to wish list');
+    }
+    public function removeFromWishList(Request $request)
+    {
+        $user = auth()->user();
+        $partId = $request->input('partId');
+
+        $user->wishListItems()->where('part_id', $partId)->delete();
+
+        return redirect()->back()->with('success', 'Part removed from wish list successfully.');
     }
 
 }

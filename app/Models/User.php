@@ -19,6 +19,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(CarsModel::class);
     }
+    public function wishListItems()
+    {
+        return $this->hasMany(WishListModel::class);
+    }
     public function images()
     {
         return $this->hasManyThrough(Image::class, CarsModel::class);
