@@ -75,7 +75,7 @@
                     @else
                         @foreach($parts as $part)
 
-                            <a href="{{route('parts.permalink',['part'=>$part])}}" class="w-full max-h-48">
+                            <a href=" {{route('parts.permalink',$part)}}" class="w-full max-h-48">
                                 <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
                                     <!-- Left side - Image of car -->
                                     <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">

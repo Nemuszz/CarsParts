@@ -6,16 +6,14 @@ use App\Http\Requests\EditProfileRequest;
 use App\Http\Requests\LoingRequest;
 use App\Http\Requests\MessageRequest;
 use App\Http\Requests\RegisterRequest;
-use App\Models\ContactUsModel;
 use App\Models\User;
 use App\Repositories\UsermessageRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {

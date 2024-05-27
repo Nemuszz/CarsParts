@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Requests\AmountRequest;
-use App\Models\PartsImagesModel;
+use App\Models\PartsModel;
 use App\Repositories\PartImagesRepository;
 use App\Repositories\PartRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+
 
 
 class PartsController extends Controller
@@ -40,8 +39,7 @@ class PartsController extends Controller
 
     public function partSearch(Request $request)
     {
-
-        $query = $this->partModel->query();
+        $query = PartsModel::query();
 
         if ($request->filled('make')) {
             $query->where('make', $request->make);

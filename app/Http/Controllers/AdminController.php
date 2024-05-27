@@ -67,7 +67,6 @@ class AdminController extends Controller
         $user = $this->userModel->userCar($car);
         $images = $this->imagesModel->imageCars($car);
 
-
         return view('Admin/adminPermalink', compact( 'car','user','images'));
 
     }
@@ -76,7 +75,6 @@ class AdminController extends Controller
 
         $singleCar = $this->carModel->getCarsByID($car);
         $singleCar->delete();
-
 
         return redirect(route('admin.page'))->with('success', 'Car deleted successfully!');
 
@@ -109,29 +107,28 @@ class AdminController extends Controller
     public function adminPartsInsert(AdminPartsRequest $request)
     {
 
-        if ($request->validated()) {
+            if ($request->validated()) {
 
-        $highestPart = $this->partsModel->partHighest();
-        $partCode = $highestPart ? $highestPart->part_code + 1 : 1;
+            $highestPart = $this->partsModel->partHighest();
+            $partCode = $highestPart ? $highestPart->part_code + 1 : 1;
 
 
-        $partData = $request->except('images');
-        $partData['part_code'] = $partCode;
-        $part = $this->partsModel->partCreate($partData);
+            $partData = $request->except('images');
+            $partData['part_code'] = $partCode;
+            $part = $this->partsModel->partCreate($partData);
 
-        if ($request->hasFile('images')) {
+            if ($request->hasFile('images')) {
 
-            foreach ($request->file('images') as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('partsImages'), $imageName);
-                $imageModel = new PartsImagesModel();
-                $imageModel->path = $imageName;
-                $imageModel->part_id = $part->id;
-                $imageModel->save();
+                foreach ($request->file('images') as $image) {
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    $image->move(public_path('partsImages'), $imageName);
+                    $imageModel = new PartsImagesModel();
+                    $imageModel->path = $imageName;
+                    $imageModel->part_id = $part->id;
+                    $imageModel->save();
+                }
             }
         }
-        }
-
 
         return redirect()->back()->with('success', 'Part added successfully!');
     }

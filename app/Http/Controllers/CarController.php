@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddCarRequest;
 use App\Models\Image;
-use App\Models\User;
+use App\Models\PartsModel;
 use App\Repositories\CarsRepository;
 use App\Repositories\ImagesRepository;
 use App\Repositories\UserRepository;
@@ -22,7 +22,6 @@ class CarController extends Controller
         $this->userModel = new UserRepository();
         $this->imageModel = new ImagesRepository();
     }
-
 
     public function index()
     {
@@ -60,7 +59,7 @@ class CarController extends Controller
             $query->where('price','<', $request->price);
         }
 
-        $cars = $query->with('user', 'imagesRelation')->get();
+        $cars = $query->with('imagesRelation')->get();
 
        return view('Guest/searchCars', compact('cars', 'request'));
     }

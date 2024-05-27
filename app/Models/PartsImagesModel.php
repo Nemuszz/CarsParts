@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartsImagesModel extends Model
 {
-    public function parts()
-    {
-        return $this->belongsTo(PartsImagesModel::class);
-    }
+
     use HasFactory;
+    public function partsModel()
+    {
+        return $this->belongsTo(PartsModel::class);
+    }
 
     protected $table = 'parts_images';
     protected $fillable = [

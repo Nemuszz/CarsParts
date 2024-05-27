@@ -59,7 +59,7 @@
     <section class="container mx-auto my-12 max-w-screen-xl">
         <!-- Car Listings -->
         <div class="flex gap-8">
-            <div class=" ml-6 w-full md:w-2/3">
+            <div class=" w-full md:w-2/3">
                 <div class="grid grid-rows-4 grid-cols-3 sm:align-middle sm:grid-cols-3 lg:grid-cols-3 gap-4">
 
                     @if($parts->isEmpty())
@@ -71,8 +71,8 @@
                     @else
                         @foreach($parts as $part)
 
-                            <a href="{{route('parts.permalink',['part'=>$part])}}" class="w-full max-h-64 ">
-                                <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-64  flex flex-col md:flex-row justify-center items-center">
+                            <a href="{{route('parts.permalink',$part)}}" class="w-full max-h-48">
+                                <div class="mx-auto bg-white rounded-lg shadow-md p-4 sm:p-2 h-48 flex flex-col md:flex-row justify-center items-center">
                                     <!-- Left side - Image of car -->
                                     <div class="w-24 h-24 md:w-32 md:h-32 mb-4 md:mr-4 md:mb-0">
                                         @if(isset($images[$part->id]))

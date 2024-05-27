@@ -1,9 +1,8 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Image;
+
 use App\Models\PartsModel;
-use App\Models\User;
 
 class PartRepository{
 

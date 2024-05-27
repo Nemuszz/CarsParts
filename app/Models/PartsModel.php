@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartsModel extends Model
 {
-    public function parts_images()
+    public function partsRelation()
     {
-        return $this->hasMany(PartsModel::class);
+        return $this->hasMany(PartsImagesModel::class, 'id', 'part_id');
     }
     use HasFactory;
 
