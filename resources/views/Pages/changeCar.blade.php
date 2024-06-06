@@ -16,16 +16,10 @@
 
                     <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Change car</h2>
 
-
                 </div>
                 <form class="mt-8 space-y-6 form-horizontal" action="{{route('car.update', $car)}}" method="POST" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="rounded-md shadow-sm -space-y-px">
-
-
-
-
-
 
                         <div id="imageInputs">
                             <label for="images">Images:</label>
